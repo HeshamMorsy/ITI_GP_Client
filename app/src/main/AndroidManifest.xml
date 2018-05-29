@@ -20,7 +20,8 @@
             android:name=".screens.home.HomeActivity"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".screens.signup.SignUpActivity"/>
+        <activity android:name=".screens.signup.SignUpActivity" />
+        <activity android:name=".screens.forgot_password.ForgotPasswordActivity"></activity>
     </application>
 
 </manifest>
