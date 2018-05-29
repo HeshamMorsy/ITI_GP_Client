@@ -14,6 +14,7 @@ class LoginPresenter : Presenter {
     var mView:View?=null
     var mModel:Model?=null
 
+    // initialize mView and mModel
     override fun initPresenter(view: View) {
         // initializing mView as LoginActivity and mModel as LoginModel
         mView = view

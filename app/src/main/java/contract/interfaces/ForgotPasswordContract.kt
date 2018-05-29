@@ -14,6 +14,7 @@ interface ForgotPasswordContract {
     }
 
     interface Presenter {
+        fun initPresenter(view: View)
 //
     }
 }

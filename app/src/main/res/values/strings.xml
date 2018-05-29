@@ -1,18 +1,21 @@
 <resources>
+    // application name
     <string name="app_name">ITI_GP_Client</string>
-    <string name="title_activity_home">HomeActivity</string>
 
+    // navigation drawer strings
+    <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
-    // Login strings
+
+    // login strings
     <string name="signIn">Sign in</string>
     <string name="forgotPasswor">Forgot my password</string>
     <string name="login">Login</string>
     <string name="noAccount">Don\'t have an account?</string>
     <string name="registerNow">\tregister now</string>
-    //forgot password strings
+
+    // forgot password strings
     <string name="forgot_content">enter the email address associated with your account, and we\'ll email you a link to reset your password</string>
     <string name="sendReset">Send reset link</string>
 </resources>

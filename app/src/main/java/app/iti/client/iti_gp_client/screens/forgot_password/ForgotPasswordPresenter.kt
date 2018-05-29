@@ -6,4 +6,14 @@ import contract.interfaces.ForgotPasswordContract.*
  * Responsible for handling actions from forgot password view and updating UI if required
  */
 class ForgotPasswordPresenter : Presenter {
+    // references to view and model
+    var mView:View? = null
+    var mModel:Model? = null
+
+    // initialize mView and mModel
+    override fun initPresenter(view: View) {
+        // initialize mView as ForgotPasswordActivity and mModel as ForgotPasswordModel
+        mView = view
+        mModel = ForgotPasswordModel()
+    }
 }
