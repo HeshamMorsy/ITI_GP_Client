@@ -6,3 +6,4 @@ package app.iti.client.iti_gp_client.entities
  */
 //login data classes
 data class LoginUserData(val email:String,var password:String)
+data class LoginResponse(val auth_token:String)

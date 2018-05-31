@@ -2,6 +2,7 @@ package app.iti.client.iti_gp_client.screens.login
 
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
+import app.iti.client.iti_gp_client.entities.LoginResponse
 import java.util.regex.Pattern
 
 /**
@@ -17,15 +18,17 @@ class LoginPresenter : Presenter {
     override fun initPresenter(view: View) {
         // initializing mView as LoginActivity and mModel as LoginModel
         mView = view
-        mModel= LoginModel()
+        mModel= LoginModel(this)
     }
 
     // send email and password to model to check if the user email and password exists and matches in the login api
     override fun login(email: String, password: String) {
-        if(isEmailValid(email) && password.length>0)
-            (mModel as LoginModel).checkEmailAndPassword(email,password)
-        else
-            Log.i("LoginPresenter","unvalid email or password!!")
+        if(isEmailValid(email) && isPasswordValid(password)) {
+            (mModel as LoginModel).requestToApi(email, password)
+        }
+        else {
+            Log.i("LoginPresenter", "unvalid email or password!!")
+        }
     }
 
     // check regular expression for email
@@ -38,6 +41,16 @@ class LoginPresenter : Presenter {
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
                         + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
+    }
+
+    fun isPasswordValid(pass:String):Boolean{
+        val passwordRegex = "^((?!.*\\s)(?=.*[a-zA-Z])(?=.*\\d)).{6,12}$"
+        return pass.matches(passwordRegex.toRegex())
+    }
+
+    // response from login api model
+    override fun receiveResponse(response: LoginResponse) {
+        Log.i("LoginPresenter Response","my token : "+response.auth_token)
     }
 
 }

@@ -2,15 +2,38 @@ package app.iti.client.iti_gp_client.screens.login
 
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
+import app.iti.client.iti_gp_client.entities.LoginResponse
+import app.iti.client.iti_gp_client.entities.SignUpData
+import app.iti.client.iti_gp_client.services.createLoginRequest
+import app.iti.client.iti_gp_client.services.createSignUpRequest
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 /**
  * Created by Hesham on 5/29/2018.
  * Responsible for checking if the email and password exists and matches together in the login api, if requested from LoginPresenter
  */
-class LoginModel : Model {
+class LoginModel(var presenter: LoginPresenter) : Model {
 
     // check if the user email and password exists and matches in the login api
-    override fun checkEmailAndPassword(email: String, password: String) {
-        Log.i("LoginModel","login succeeded")
+    override fun requestToApi(email: String, password: String) {
+        var loginRequest = createLoginRequest()
+        var options:Map<String, String> = hashMapOf("email" to email, "password" to password)
+
+        loginRequest.getTokin(options)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResponse, this::handleError)
+    }
+
+    private fun handleResponse(response: LoginResponse) {
+        presenter.receiveResponse(response)
+    }
+
+    private fun handleError(error: Throwable) {
+
+        Log.i("error", "error receiving data"+error.localizedMessage)
+
+//        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 }
