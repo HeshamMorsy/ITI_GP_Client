@@ -1,6 +1,6 @@
 package app.iti.client.iti_gp_client.screens.forgot_password
 
-import contract.interfaces.ForgotPasswordContract.*
+import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
 
 /**
  * Created by Hesham on 5/29/2018.

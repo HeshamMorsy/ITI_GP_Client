@@ -1,7 +1,7 @@
 package app.iti.client.iti_gp_client.screens.login
 
 import android.util.Log
-import contract.interfaces.LoginContract.*
+import app.iti.client.iti_gp_client.contracts.LoginContract.*
 
 /**
  * Created by Hesham on 5/29/2018.

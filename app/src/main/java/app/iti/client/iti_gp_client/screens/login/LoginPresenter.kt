@@ -1,8 +1,7 @@
 package app.iti.client.iti_gp_client.screens.login
 
 import android.util.Log
-import android.widget.Toast
-import contract.interfaces.LoginContract.*
+import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import java.util.regex.Pattern
 
 /**

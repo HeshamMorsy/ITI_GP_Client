@@ -7,7 +7,7 @@ import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.screens.forgot_password.ForgotPasswordActivity
 import app.iti.client.iti_gp_client.screens.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
-import contract.interfaces.LoginContract.*
+import app.iti.client.iti_gp_client.contracts.LoginContract.*
 
 /**
  * Displays the login screen

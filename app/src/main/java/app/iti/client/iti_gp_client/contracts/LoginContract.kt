@@ -1,4 +1,4 @@
-package contract.interfaces
+package app.iti.client.iti_gp_client.contracts
 
 /**
  * Created by Hesham on 5/29/2018.
