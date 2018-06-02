@@ -6,15 +6,16 @@ package app.iti.client.iti_gp_client.contracts
  */
 interface ForgotPasswordContract {
     interface Model {
-//
+        fun sendPinCode()
    }
 
     interface View {
-//
+        fun setEmailError(error:String)
     }
 
     interface Presenter {
         fun initPresenter(view: View)
-//
+        fun isEmailValid(email:String)
+        fun sendResetBtnEvent()
     }
 }
