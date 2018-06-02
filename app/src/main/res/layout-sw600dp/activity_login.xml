@@ -73,13 +73,13 @@
     <Button
         android:id="@+id/login_btn"
         android:layout_width="416dp"
-        android:layout_height="65dp"
+        android:layout_height="72dp"
         android:background="@drawable/btns_bg"
         android:onClick="loginBtnEvent"
         android:text="@string/login"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:textColor="@android:color/background_light"
-        android:textSize="22sp"
+        android:textSize="35sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="92dp"
         tools:layout_editor_absoluteY="629dp" />
