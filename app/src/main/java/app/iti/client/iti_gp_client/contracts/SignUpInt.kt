@@ -17,6 +17,8 @@ interface SignUpInt {
         fun phoneError(error:String)
         fun passwordError(error:String)
         fun repasswordError(error:String)
+        fun startLoading(mes:String)
+        fun endLoading()
     }
     interface Presenter{
         fun signUp(phone:String,email:String,pass:String,repass:String)

@@ -1,13 +1,16 @@
 package app.iti.client.iti_gp_client.screens.signup
 
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.EditText
+import android.widget.TextView
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.SignUpInt
+import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 
@@ -17,10 +20,18 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
 
     //creating the presenter for the activity
     var presenter:SignUpInt.Presenter? = null
+
+    var dialouge:AlertDialog? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+        //try navigation drawer
+        imageView2.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            // start your next activity
+            startActivity(intent)
+        }
 
 
         //initializing the presenter
@@ -29,6 +40,7 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
 
         //register the signup button click listner
         signUpButton.setOnClickListener {
+
             signUp()
         }
 
@@ -55,9 +67,6 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         val pass  = userPassword.text.toString()
         val repass = userRepassword.text.toString()
         presenter?.signUp(phone,email,pass, repass)?: Log.i("error","presenter is null")
-    }
-    fun validateEmail(){
-
     }
 
     //handling change focus
@@ -92,6 +101,23 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
     }
     override fun repasswordError(error:String){
         userRepassword.error = error
+    }
+
+    override fun startLoading(mes:String){
+        Log.i("response", "start loading function")
+        val builder = AlertDialog.Builder(this)
+        val dialougeView = layoutInflater.inflate(R.layout.progress_dialouge,null)
+        val message = dialougeView.findViewById<TextView>(R.id.loadingmessage)
+        message.text = mes
+        builder.setView(dialougeView)
+        builder.setCancelable(false)
+        var dialouge:AlertDialog = builder.create()
+        dialouge.show()
+    }
+
+    override fun endLoading(){
+        Log.i("response", "end loading function")
+        dialouge?.dismiss()
     }
 
 

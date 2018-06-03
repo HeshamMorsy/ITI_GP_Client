@@ -22,10 +22,12 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
 
     private fun handleResponse(response: SignUpData) {
+        Log.i("response", "response data"+response)
         presenter.receiveResponse(response)
     }
 
     private fun handleError(error: Throwable) {
+        presenter.view.endLoading()
 
         Log.i("error", "error receiving data"+error.localizedMessage)
 

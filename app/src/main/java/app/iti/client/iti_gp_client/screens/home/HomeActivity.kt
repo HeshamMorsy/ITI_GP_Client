@@ -1,5 +1,6 @@
 package app.iti.client.iti_gp_client.screens.home
 
+import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -30,6 +31,15 @@ class HomeActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        //start the request fragment
+        val firstFragment = RequestFragment.newInstance("hazem","hesham")
+        firstFragment.arguments = intent.extras
+        val transaction = fragmentManager.beginTransaction()
+        transaction.add(R.id.drawer_layout,firstFragment)
+        transaction.commit()
+
+
     }
 
     override fun onBackPressed() {
