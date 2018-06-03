@@ -67,6 +67,7 @@ class LoginPresenter : Presenter {
 
     // response from login api model
     override fun receiveResponse(response: LoginResponse) {
+        mView?.goToHomeScreen()
         Log.i("LoginPresenter Response","my token : "+response.auth_token)
     }
 

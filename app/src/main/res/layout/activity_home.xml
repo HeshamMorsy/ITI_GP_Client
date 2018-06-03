@@ -8,6 +8,12 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainFragment"
+        android:orientation="vertical"/>
+
     <include
         layout="@layout/app_bar_home"
         android:layout_width="match_parent"
@@ -21,13 +27,6 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_home"
         app:menu="@menu/activity_home_drawer" />
-    <fragment
-        android:id="@+id/fragment_one"
-        android:name="app.iti.client.iti_gp_client.screens.home.RequestFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        tools:layout="@layout/fragment_request" />
+
 
 </android.support.v4.widget.DrawerLayout>

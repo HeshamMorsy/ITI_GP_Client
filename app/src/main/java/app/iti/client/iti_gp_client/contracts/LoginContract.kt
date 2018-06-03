@@ -14,6 +14,7 @@ interface LoginContract {
     interface View {
         fun setEmailError(error:String)
         fun setPasswordError(error:String)
+        fun goToHomeScreen()
     }
 
     interface Presenter {

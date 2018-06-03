@@ -8,6 +8,7 @@ import app.iti.client.iti_gp_client.screens.forgot_password.ForgotPasswordActivi
 import app.iti.client.iti_gp_client.screens.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
+import app.iti.client.iti_gp_client.screens.home.HomeActivity
 
 /**
  * Displays the login screen
@@ -32,7 +33,7 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
     // method to handle on click on register now textView and go to SignUpActivity
     fun toRegisterScreen(view:android.view.View){
         val intent = Intent(this, SignUpActivity::class.java)
-        // start your next activity
+        // start your register activity
         startActivity(intent)
         finish()
     }
@@ -40,7 +41,7 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
     // method to handle on click on forgot password textView and go to ForgotPasswordActivity
     fun toForgotPassword(view:android.view.View){
         val intent = Intent(this, ForgotPasswordActivity::class.java)
-        // start your next activity
+        // start your forgot password activity
         startActivity(intent)
     }
 
@@ -49,6 +50,7 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         val email:String = login_emailEditText.text.toString()
         val password:String = login_passwordEditText.text.toString()
         mPresenter?.login(email,password)
+
     }
 
     override fun setEmailError(error:String) {
@@ -67,6 +69,13 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         if(v == login_passwordEditText && hasFocus == false){
             mPresenter?.isPasswordValid(login_passwordEditText.text.toString())
         }
+    }
+
+    override fun goToHomeScreen() {
+        val intent = Intent(this, HomeActivity::class.java)
+        // start home activity
+        startActivity(intent)
+        finish()
     }
 
 }
