@@ -1,5 +1,6 @@
 package app.iti.client.iti_gp_client.screens.forgot_password
 
+import android.util.Log
 import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
 
 /**
@@ -7,4 +8,7 @@ import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
  * Responsible for checking if the email or phone number exists and then send reset link or code to them
  */
 class ForgotPasswordModel : Model {
+    override fun sendPinCode() {
+        Log.i("ForgotPasswordModel" , "From Forgot Password Send Pin method")
+    }
 }

@@ -14,6 +14,10 @@ class LoginPresenter : Presenter {
     var mView:View?=null
     var mModel:Model?=null
 
+    // booleans to check if email and password are valid
+    var checkEmail:Boolean = false
+    var checkPassword:Boolean = false
+
     // initialize mView and mModel
     override fun initPresenter(view: View) {
         // initializing mView as LoginActivity and mModel as LoginModel
@@ -23,8 +27,9 @@ class LoginPresenter : Presenter {
 
     // send email and password to model to check if the user email and password exists and matches in the login api
     override fun login(email: String, password: String) {
-        if(isEmailValid(email) && isPasswordValid(password)) {
-            (mModel as LoginModel).requestToApi(email, password)
+
+        if(checkEmail && checkPassword) {
+            mModel?.requestToApi(email, password)
         }
         else {
             Log.i("LoginPresenter", "unvalid email or password!!")
@@ -32,8 +37,8 @@ class LoginPresenter : Presenter {
     }
 
     // check regular expression for email
-    fun isEmailValid(email: String): Boolean {
-        return Pattern.compile(
+    override fun isEmailValid(email: String){
+        val check:Boolean= Pattern.compile(
                 "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]|[\\w-]{2,}))@"
                         + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
@@ -41,11 +46,23 @@ class LoginPresenter : Presenter {
                         + "[0-9]{1,2}|25[0-5]|2[0-4][0-9]))|"
                         + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$"
         ).matcher(email).matches()
+        if(check){
+            checkEmail = true
+        }else{
+            mView?.setEmailError("Invalid Email")
+            checkEmail = false
+        }
     }
 
-    fun isPasswordValid(pass:String):Boolean{
+    override fun isPasswordValid(pass:String){
         val passwordRegex = "^((?!.*\\s)(?=.*[a-zA-Z])(?=.*\\d)).{6,12}$"
-        return pass.matches(passwordRegex.toRegex())
+        val check:Boolean= pass.matches(passwordRegex.toRegex())
+        if(check){
+            checkPassword = true
+        }else{
+            mView?.setPasswordError("Invalid Password")
+            checkPassword = false
+        }
     }
 
     // response from login api model

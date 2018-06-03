@@ -13,7 +13,7 @@ import app.iti.client.iti_gp_client.contracts.LoginContract.*
  * Displays the login screen
  */
 
-class LoginActivity : AppCompatActivity(),View {
+class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChangeListener {
     // reference to presenter
     var mPresenter:Presenter?=null
 
@@ -22,7 +22,10 @@ class LoginActivity : AppCompatActivity(),View {
         setContentView(R.layout.activity_login)
         // initialize presenter as LoginPresenter
         mPresenter = LoginPresenter()
-        (mPresenter as LoginPresenter).initPresenter(this)
+        mPresenter?.initPresenter(this)
+        // set focus on email and password edit text
+        login_emailEditText.onFocusChangeListener = this
+        login_passwordEditText.onFocusChangeListener= this
 
     }
 
@@ -45,8 +48,25 @@ class LoginActivity : AppCompatActivity(),View {
     fun loginBtnEvent(view:android.view.View){
         val email:String = login_emailEditText.text.toString()
         val password:String = login_passwordEditText.text.toString()
-        (mPresenter as LoginPresenter).login(email,password)
+        mPresenter?.login(email,password)
     }
 
+    override fun setEmailError(error:String) {
+            login_emailEditText.error = error
+    }
+
+    override fun setPasswordError(error:String) {
+            login_passwordEditText.error = error
+    }
+
+    // on focus on edit texts fields
+    override fun onFocusChange(v: android.view.View?, hasFocus: Boolean) {
+        if (v == login_emailEditText && hasFocus == false) {
+            mPresenter?.isEmailValid(login_emailEditText.text.toString())
+        }
+        if(v == login_passwordEditText && hasFocus == false){
+            mPresenter?.isPasswordValid(login_passwordEditText.text.toString())
+        }
+    }
 
 }

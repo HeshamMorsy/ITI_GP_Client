@@ -12,12 +12,15 @@ interface LoginContract {
     }
 
     interface View {
-//
+        fun setEmailError(error:String)
+        fun setPasswordError(error:String)
     }
 
     interface Presenter {
         fun initPresenter(view: View)
         fun login(email: String, password: String)
         fun receiveResponse(response:LoginResponse)
+        fun isEmailValid(email: String)
+        fun isPasswordValid(email: String)
     }
 }
