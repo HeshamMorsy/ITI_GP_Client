@@ -88,6 +88,6 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
     override fun receiveResponse(response: SignUpData){
         view.endLoading()
-        Log.i("error", response.toString())
+        Log.i("response", response.toString())
     }
 }
