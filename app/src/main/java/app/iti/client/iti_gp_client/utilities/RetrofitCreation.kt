@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitCreation {
 
     companion object {
-        private val baseUrl = "https://minamon.herokuapp.com"
+        private val baseUrl = "https://driveo.herokuapp.com"
         private var retrofit:Retrofit? = null
         fun createRetrofit(): Retrofit {
             if(retrofit ==null){

@@ -4,21 +4,19 @@ package app.iti.client.iti_gp_client.screens.home
 import android.annotation.SuppressLint
 import android.app.Fragment
 import android.os.Bundle
-//import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.R.mipmap.ic_search
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.MapsInitializer
-
+import kotlinx.android.synthetic.main.fragment_request.*
 
 
 /**
@@ -32,6 +30,7 @@ class RequestFragment : Fragment(){
     //    var markerPoints: ArrayList<LatLng>? = null
     var googleMap: GoogleMap? = null
     var mMapView: MapView? = null
+    var lastSearches:MutableList<String>? = null
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -43,6 +42,11 @@ class RequestFragment : Fragment(){
             mParam1 = arguments!!.getString(ARG_PARAM1)
             mParam2 = arguments!!.getString(ARG_PARAM2)
         }
+//        searchBarMaps.setHint("enter pickup location")
+//        searchBarMaps.setSpeechMode(false)
+//        searchBarMaps.setSearchIcon(ic_search)
+
+
     }
 
     @SuppressLint("MissingPermission")
