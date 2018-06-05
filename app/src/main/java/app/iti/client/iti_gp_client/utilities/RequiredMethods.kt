@@ -9,7 +9,7 @@ import android.support.v7.app.AlertDialog
  * this file is to prepare the alert dialogs to use it with simple way
  */
 
-fun getAlertWithOneButton( context: Context, title:String, message:String, btnTitle:String){
+fun alertWithOneButton(context: Context, title:String, message:String, btnTitle:String){
     var alert: AlertDialog.Builder = AlertDialog.Builder(context)
     alert.setMessage(message)
     alert.setTitle(title)
@@ -17,4 +17,11 @@ fun getAlertWithOneButton( context: Context, title:String, message:String, btnTi
         alert.setCancelable(true)
     })
     alert.show()
+}
+
+fun getAlertDialog (context: Context, title:String, message:String) : AlertDialog.Builder{
+    var alert: AlertDialog.Builder = AlertDialog.Builder(context)
+    alert.setMessage(message)
+    alert.setTitle(title)
+    return alert
 }

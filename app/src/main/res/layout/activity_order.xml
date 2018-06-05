@@ -11,7 +11,6 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:layout_marginTop="28dp"
         android:text="@string/createRequest"
         android:textColor="@color/header"
@@ -26,7 +25,7 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="9dp"
         android:layout_marginStart="20dp"
         android:text="@string/packageInfo"
         android:textColor="@color/colorPrimary"
@@ -38,11 +37,11 @@
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout9"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="25dp"
+        android:layout_height="67dp"
+        android:layout_marginBottom="51dp"
         android:layout_marginEnd="42dp"
         android:layout_marginStart="42dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintBottom_toTopOf="@+id/order_descriptionEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView9">
@@ -59,20 +58,19 @@
         android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="9dp"
-        android:layout_marginStart="3dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="4dp"
         android:text="@string/description"
         android:textColor="@color/textColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/order_descriptionEditText"
-        app:layout_constraintStart_toStartOf="@+id/order_descriptionEditText"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
+        app:layout_constraintStart_toStartOf="@+id/textInputLayout9" />
 
     <EditText
         android:id="@+id/order_descriptionEditText"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="15dp"
+        android:layout_height="118dp"
+        android:layout_marginBottom="32dp"
         android:layout_marginEnd="48dp"
         android:layout_marginStart="48dp"
         android:background="@drawable/edittext_bg"
@@ -84,33 +82,67 @@
         android:textColor="@color/textColor"
         android:textColorHighlight="@color/textColor"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView11"
+        app:layout_constraintBottom_toTopOf="@+id/order_gridView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/textInputLayout9" />
 
     <TextView
         android:id="@+id/textView11"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="3dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
         android:text="@string/uploadImg"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/order_image"
-        app:layout_constraintStart_toStartOf="@+id/order_image"
+        app:layout_constraintStart_toStartOf="@+id/order_Image"
         app:layout_constraintTop_toBottomOf="@+id/order_descriptionEditText" />
 
     <ImageView
-        android:id="@+id/order_image"
-        android:layout_width="150dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="51dp"
+        android:id="@+id/order_Image"
+        android:layout_width="140dp"
+        android:layout_height="91dp"
+        android:layout_marginBottom="11dp"
+        android:layout_marginEnd="18dp"
         android:layout_marginStart="42dp"
-        android:src="@mipmap/ic_upload_image"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="24dp"
+        android:background="@mipmap/ic_upload_image"
+        android:onClick="getImageToUpload"
+        app:layout_constraintBottom_toBottomOf="@+id/order_gridView"
+        app:layout_constraintEnd_toStartOf="@+id/order_gridView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toTopOf="@+id/textView11"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/order_nextBtn"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginBottom="42dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginStart="64dp"
+        android:background="@drawable/btns_bg"
+        android:text="Button"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textColor="@color/cardview_light_background"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_gridView"
+        tools:text="@string/next" />
+
+    <GridView
+        android:id="@+id/order_gridView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="25dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/order_nextBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/order_Image"
+        app:layout_constraintTop_toBottomOf="@+id/order_descriptionEditText" />
 
 
 </android.support.constraint.ConstraintLayout>
