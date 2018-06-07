@@ -9,6 +9,7 @@ import app.iti.client.iti_gp_client.screens.signup.SignUpActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.screens.home.HomeActivity
+import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
 
 /**
  * Displays the login screen
@@ -27,6 +28,12 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         // set focus on email and password edit text
         login_emailEditText.onFocusChangeListener = this
         login_passwordEditText.onFocusChangeListener= this
+
+        // temporarily go to order activity from the logo in login screen
+        login_logo.setOnClickListener {
+            var myIntent = Intent(this, OrderActivity::class.java)
+            startActivity(myIntent)
+        }
 
     }
 
