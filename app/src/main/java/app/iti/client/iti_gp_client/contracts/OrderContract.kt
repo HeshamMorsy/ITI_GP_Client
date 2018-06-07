@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.contracts
 
 import android.content.Intent
+import android.graphics.Bitmap
 import java.io.File
 
 /**
@@ -13,15 +14,14 @@ interface OrderContract {
     }
 
     interface View {
-        fun updateImageView(data: Intent?)
-        fun getImageFromGallery()
-        fun getImageFromCamera()
-        fun getApplicationPackageName() : String
+        fun updateImageView(image: Bitmap, counter: Int)
     }
 
     interface Presenter {
+        var imageCounter:Int
         fun initPresenter(view:View)
         fun getImageAction()
-        fun getFile() : File?
+        fun convertFilesToBitmap(imageFiles: List<File>)
+        fun decrementCounter()
     }
 }
