@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.entities
 
 import android.graphics.Bitmap
+import java.io.Serializable
 
 
 /**
@@ -11,4 +12,4 @@ import android.graphics.Bitmap
 data class LoginUserData(val email:String,var password:String)
 data class LoginResponse(val auth_token:String)
 data class ForgotPasswordResponse(val pinCode:Int)
-data class Order(val title: String, val description: String, var images: ArrayList<Bitmap>)
+data class Order(val title: String, val description: String, val paths: ArrayList<String>) : Serializable

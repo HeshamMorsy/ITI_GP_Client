@@ -23,10 +23,10 @@ class OrderPresenter : Presenter {
     // references to order model and order view
     private var mModel: Model? = null
     private var mView: View? = null
-    var counter = 0
+    private var counter = 0
     override var imageCounter: Int
         get() = counter
-        set(value) {value}
+        set(value) {}
 
 
     // initialize presenter to start using it
@@ -48,21 +48,7 @@ class OrderPresenter : Presenter {
 
     }
 
-    /*// this method is to create file
-    override fun getFile() : File? {
-        val fileDir = File(Environment.getExternalStorageDirectory().toString()
-                +"/Android/data/"+ mView?.getApplicationPackageName() + "/Files")
-        if(!fileDir.exists()){
-            if(!fileDir.mkdirs()) {
-                return null
-            }
-        }
-
-        val mediaFile = File(fileDir.getPath() + File.separator + "temp$counter.jpg")
-        counter++
-        return mediaFile
-    }*/
-
+    // check READ_EXTERNAL_STORAGE permission
     private fun checkReadGalleryPermission(): Boolean{
         var check = false
         val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
@@ -77,6 +63,7 @@ class OrderPresenter : Presenter {
         return check
     }
 
+    // check WRITE_EXTERNAL_STORAGE permission
     private fun checkWriteStoragePermission(): Boolean{
         var check = false
         val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
@@ -91,6 +78,7 @@ class OrderPresenter : Presenter {
         return check
     }
 
+    // check CAMERA permission
     private fun checkAccessCameraPermission(): Boolean{
         var check = false
         val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
@@ -105,24 +93,16 @@ class OrderPresenter : Presenter {
         return check
     }
 
-//    override fun getBitmapFromData(data: Intent?): ArrayList<Bitmap> {
-//        /*val imageUri = data?.data
-//        val inputStream = (mView as Activity).contentResolver.openInputStream(imageUri)
-//        val selectedImage = BitmapFactory.decodeStream(inputStream)
-//        mView?.updateImageView(selectedImage)*/
-//        val images = data!!.getParcelableArrayListExtra<Image>(Constants.INTENT_EXTRA_IMAGES)
-//        val arrayOfBitmap = convertPathesToBitmap(images)
-//        return arrayOfBitmap
-//    }
-
+    // convert arrayList of files to arrayList of Bitmap
     override fun convertFilesToBitmap(imageFiles: List<File>){
         print("image list size is "+imageFiles.size)
-        var bitmap:Bitmap = BitmapFactory.decodeFile(imageFiles[0].path)
+        val bitmap:Bitmap = BitmapFactory.decodeFile(imageFiles[0].path)
         if(counter<=4)
         counter++
-        mView?.updateImageView(bitmap,counter)
+        mView?.updateImageView(bitmap,imageFiles[0].path ,counter)
     }
 
+    // decrement the counter when removing an image
     override fun decrementCounter() {
         if(counter>0)
         --counter

@@ -1,6 +1,5 @@
 package app.iti.client.iti_gp_client.contracts
 
-import android.content.Intent
 import android.graphics.Bitmap
 import java.io.File
 
@@ -14,7 +13,7 @@ interface OrderContract {
     }
 
     interface View {
-        fun updateImageView(image: Bitmap, counter: Int)
+        fun updateImageView(image: Bitmap,path: String, counter: Int)
     }
 
     interface Presenter {

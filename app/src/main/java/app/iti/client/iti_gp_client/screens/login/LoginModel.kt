@@ -1,11 +1,9 @@
 package app.iti.client.iti_gp_client.screens.login
 
 import android.util.Log
-import app.iti.client.iti_gp_client.contracts.LoginContract.*
+import app.iti.client.iti_gp_client.contracts.LoginContract.Model
 import app.iti.client.iti_gp_client.entities.LoginResponse
-import app.iti.client.iti_gp_client.entities.SignUpData
 import app.iti.client.iti_gp_client.services.createLoginRequest
-import app.iti.client.iti_gp_client.services.createSignUpRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
