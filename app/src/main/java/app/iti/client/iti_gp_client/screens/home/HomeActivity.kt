@@ -117,7 +117,7 @@ class HomeActivity : AppCompatActivity(),
 
 
         //register the spinner
-//        spinnerRegister()
+        spinnerRegister()
 
         // register the navigation viewer toggle button
         val toggle = ActionBarDrawerToggle(
@@ -207,23 +207,23 @@ class HomeActivity : AppCompatActivity(),
     }
 
 
-//    private fun spinnerRegister() {
-//        val carrier1 = SelectCarriers("image1","fedix")
-//        val carrier2 = SelectCarriers("image2","aramix")
-//        val carrier3 = SelectCarriers("image3","TNT")
-//        val options = arrayOf(carrier1,carrier2,carrier3)
-////        paymentSpinner.adapter = ArrayAdapter<SelectCarriers>(this,android.R.layout.simple_list_item_1,options)
-//        paymentSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
-//            override fun onNothingSelected(parent: AdapterView<*>?) {
-//
-//            }
-//
-//            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-//
-//            }
-//
-//        }
-//    }
+    private fun spinnerRegister() {
+        val carrier1 = SelectCarriers("image1","fedix")
+        val carrier2 = SelectCarriers("image2","aramix")
+        val carrier3 = SelectCarriers("image3","TNT")
+        val options = arrayOf(carrier1,carrier2,carrier3)
+        paymentSpinner.adapter = ArrayAdapter<SelectCarriers>(this,android.R.layout.simple_list_item_1,options)
+        paymentSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+            }
+
+        }
+    }
 
     private fun getDateAndTime() {
         val now = Calendar.getInstance()

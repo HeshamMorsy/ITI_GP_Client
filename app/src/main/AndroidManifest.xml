@@ -24,13 +24,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".screens.login.LoginActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".screens.login.LoginActivity" />
         <activity
             android:name=".screens.home.HomeActivity"
             android:label="@string/title_activity_home"
@@ -38,7 +32,13 @@
         <activity android:name=".screens.signup.SignUpActivity" />
         <activity android:name=".screens.forgot_password.ForgotPasswordActivity" />
         <activity android:name=".screens.pin_verification.PinActivity" />
-        <activity android:name=".screens.splash_screen.SplashActivity" />
+        <activity android:name=".screens.splash_screen.SplashActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -54,7 +54,9 @@
         <activity
             android:name=".screens.order_description.OrderActivity"
             android:label="@string/title_activity_order"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme">
+
+        </activity>
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
             android:theme="@style/MultipleImageSelectTheme">
@@ -62,7 +64,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".screens.payment.PaymentActivity"/>
+        <activity android:name=".screens.payment.PaymentActivity"></activity>
     </application>
 
 </manifest>
