@@ -1,26 +1,39 @@
 <resources>
-    // application name
+    <!--application name-->
     <string name="app_name">Driveo</string>
     <string name="driveo">D r i v e o</string>
 
-    // navigation drawer strings
+    <!--navigation drawer strings-->
     <string name="title_activity_home">HomeActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Settings</string>
 
-    // login strings
+    <!--login strings-->
     <string name="signIn">Sign in</string>
     <string name="forgotPasswor">Forgot my password</string>
     <string name="login">Login</string>
     <string name="noAccount">Don\'t have an account?</string>
     <string name="registerNow">\tregister now</string>
 
-    // forgot password strings
+    <!--forgot password strings-->
     <string name="forgot_content">enter the email address associated with your account, and we\'ll email you a link to reset your password</string>
     <string name="sendReset">Send reset link</string>
+
+    <!--create request order-->
+    <string name="createRequest">Create Request</string>
+    <string name="packageInfo">Package information</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="location">Location</string>
+    <string name="typeHere">Type here</string>
+    <string name="uploadImg">Upload Images</string>
+    <string name="next">Next</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_order">OrderActivity</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
 </resources>

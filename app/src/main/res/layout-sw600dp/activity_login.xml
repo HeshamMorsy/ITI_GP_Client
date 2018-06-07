@@ -26,6 +26,7 @@
         android:layout_marginBottom="75dp"
         android:layout_marginEnd="29dp"
         android:gravity="center"
+        android:textColor="@color/header"
         android:text="@string/signIn"
         android:textSize="44sp"
         android:textStyle="bold"
@@ -49,8 +50,11 @@
             android:id="@+id/login_emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="@color/textColor"
+            android:textColor="@color/textColor"
             android:ems="10"
-            android:hint="Email"
+            android:hint="@string/email"
+            android:textSize="22sp"
             android:inputType="textEmailAddress" />
     </android.support.design.widget.TextInputLayout>
 
@@ -71,7 +75,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Password"
+            android:textSize="22sp"
+            android:textColor="@color/textColor"
+            android:textColorHint="@color/textColor"
+            android:hint="@string/password"
             android:inputType="textPassword" />
     </android.support.design.widget.TextInputLayout>
 
@@ -82,7 +89,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="78dp"
         android:layout_marginEnd="13dp"
+        android:textColor="@color/textColor"
         android:gravity="center"
+        android:textSize="19sp"
         android:onClick="toForgotPassword"
         android:text="@string/forgotPasswor"
         app:layout_constraintBottom_toTopOf="@+id/login_btn"
@@ -114,7 +123,9 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="135dp"
         android:layout_marginEnd="4dp"
+        android:textColor="@color/textColor"
         android:layout_marginStart="9dp"
+        android:textSize="19sp"
         android:text="@string/noAccount"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/login_registerNowTextView"
@@ -128,6 +139,7 @@
         android:layout_height="wrap_content"
         android:onClick="toRegisterScreen"
         android:text="@string/registerNow"
+        android:textSize="19sp"
         android:textColor="@color/colorPrimary"
         app:layout_constraintBaseline_toBaselineOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="parent"

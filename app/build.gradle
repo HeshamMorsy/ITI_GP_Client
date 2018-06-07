@@ -21,6 +21,12 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -37,7 +43,7 @@ dependencies {
     //retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    
+
     //rx java & rx android dependencies
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.6'
@@ -45,6 +51,12 @@ dependencies {
 
     //search toolbar
     //implementation 'com.github.mancj:MaterialSearchBar:0.7.6'
+
+    //select multiple images library
+    implementation 'com.github.darsh2:MultipleImageSelect:v0.0.4'
+
+    // select image from camera, gallery and from any document file
+    implementation 'com.github.jkwiecien:EasyImage:2.0.4'
 
     //google services
     implementation 'com.google.android.gms:play-services-location:15.0.1'
