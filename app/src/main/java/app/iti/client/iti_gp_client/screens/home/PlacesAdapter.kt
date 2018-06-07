@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit
 /**
  * Created by Hazem on 6/4/2018.
  */
-class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient: GoogleApiClient,var mBounds:LatLngBounds,var mPlaceFilter: AutocompleteFilter): RecyclerView.Adapter<PlacesAdapter.PredictionHolder>(), Filterable {
+class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient: GoogleApiClient,var mBounds:LatLngBounds,var mPlaceFilter: AutocompleteFilter?): RecyclerView.Adapter<PlacesAdapter.PredictionHolder>(), Filterable {
 
 
 
@@ -36,7 +36,9 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
         return PredictionHolder(convertView)
     }
 
-
+    fun getItem(position: Int): PlaceAutocomplete {
+        return mResultList!![position]
+    }
     override fun getItemCount(): Int {
         return if (mResultList != null)
             mResultList!!.size
@@ -66,7 +68,9 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
 
 
             override fun publishResults(constraint: CharSequence, results: FilterResults?) {
-                if (results != null && results.count > 0) {
+//                && results.count > 0
+                if (results != null ) {
+                    Log.i("googleplaces", "inside publish results" + constraint)
                     // The API returned at least one result, update the data.
                     notifyDataSetChanged()
                 } else {
@@ -90,9 +94,9 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
 
 
     private fun getAutocomplete(constraint: CharSequence): ArrayList<PlaceAutocomplete>? {
-
-        if (mGoogleApiClient.isConnected()) {
-            Log.i("", "Starting autocomplete query for: " + constraint)
+        Log.i("googleplaces", "inside getautocomplete with constraints: "+constraint)
+        if (mGoogleApiClient.isConnected) {
+            Log.i("googleplaces", "Starting autocomplete query for: " + constraint)
 
             // Submit the query to the autocomplete API and retrieve a PendingResult that will
             // contain the results when the query completes.
@@ -115,7 +119,7 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
                 return null
             }
 
-            Log.i("", "Query completed. Received " + autocompletePredictions.count
+            Log.i("googleplaces", "Query completed. Received " + autocompletePredictions.count
                     + " predictions.")
 
             // Copy the results into our own data structure, because we can't hold onto the buffer.
@@ -128,6 +132,8 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
                 // Get the details of this prediction and copy it into a new PlaceAutocomplete object.
                 resultList.add(PlaceAutocomplete(prediction.placeId.toString(),
                         prediction.getFullText(null).toString()))
+                Log.i("googleplaces","placeId: " + prediction.placeId.toString() + "placeTypes" + prediction.placeTypes
+            +"full text"+ prediction.getFullText(null).toString())
             }
 
             // Release the buffer now that all data has been copied.
