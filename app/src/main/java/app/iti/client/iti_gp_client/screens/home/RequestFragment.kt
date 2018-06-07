@@ -2,13 +2,24 @@ package app.iti.client.iti_gp_client.screens.home
 
 
 import android.annotation.SuppressLint
-import android.app.Fragment
+//import android.app.Fragment
+//import android.os.Build
 import android.os.Bundle
+import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
 import app.iti.client.iti_gp_client.R
-import app.iti.client.iti_gp_client.R.mipmap.ic_search
+import com.google.android.gms.common.ConnectionResult
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.location.places.Places
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
@@ -16,7 +27,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapsInitializer
+import com.google.android.gms.maps.model.LatLngBounds
 import kotlinx.android.synthetic.main.fragment_request.*
+//import com.razor.googleplacesautocompletesample.utility.Constants
 
 
 /**
@@ -24,13 +37,37 @@ import kotlinx.android.synthetic.main.fragment_request.*
  * Use the [RequestFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class RequestFragment : Fragment(){
+class RequestFragment : Fragment(), GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, View.OnClickListener{
+    protected var mGoogleApiClient: GoogleApiClient? = null
+    private var mAutoCompleteAdapter: PlacesAdapter? = null
+    private var mLinearLayoutManager:LinearLayoutManager? = null
+
+    private val BOUNDS_INDIA = LatLngBounds(
+            LatLng(-0.0, 0.0), LatLng(0.0, 0.0))
+
+    override fun onConnected(p0: Bundle?) {
+        Log.i("googleplaces","connection Done")
+    }
+
+    override fun onConnectionSuspended(p0: Int) {
+        Log.i("googleplaces","connection suspended")
+    }
+
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        Log.i("googleplaces","connection failed")
+    }
+
+    override fun onClick(p0: View?) {
+
+    }
+
     //    var mMapView: MapView? = null
     //    private val googleMap: GoogleMap? = null
     //    var markerPoints: ArrayList<LatLng>? = null
     var googleMap: GoogleMap? = null
     var mMapView: MapView? = null
     var lastSearches:MutableList<String>? = null
+    var editPlaces:EditText?=null
 
     // TODO: Rename and change types of parameters
     private var mParam1: String? = null
@@ -42,12 +79,12 @@ class RequestFragment : Fragment(){
             mParam1 = arguments!!.getString(ARG_PARAM1)
             mParam2 = arguments!!.getString(ARG_PARAM2)
         }
-//        searchBarMaps.setHint("enter pickup location")
-//        searchBarMaps.setSpeechMode(false)
-//        searchBarMaps.setSearchIcon(ic_search)
+
+        buildGoogleApiClient()
 
 
     }
+
 
     @SuppressLint("MissingPermission")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -55,12 +92,14 @@ class RequestFragment : Fragment(){
         // Inflate the layout for this fragment
         val view: View= inflater.inflate(R.layout.fragment_request, container, false)
         mMapView = view.findViewById(R.id.mapView)
+        editPlaces = view.findViewById(R.id.searchPlaces)
+
         mMapView?.onCreate(savedInstanceState)
 
         mMapView?.onResume() // needed to get the map to display immediately
 
         try {
-            MapsInitializer.initialize(activity.applicationContext)
+            MapsInitializer.initialize(activity!!.applicationContext)
         } catch (e: Exception) {
             e.printStackTrace()
         }
@@ -87,6 +126,64 @@ class RequestFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        searchPlaces1.addTextChangedListener(object : TextWatcher {
+
+            override fun onTextChanged(s: CharSequence, start: Int, before: Int,
+                                       count: Int) {
+                Log.i("googleplaces","inside ontextchanged")
+                if (s.toString() != "" && mGoogleApiClient!!.isConnected) {
+                    Log.i("googleplaces","mgoogleapi is connected")
+                    mAutoCompleteAdapter!!.filter.filter(s.toString())
+                } else if (!mGoogleApiClient!!.isConnected) {
+                    Log.i("googleplaces","mgoogleapi is not connected")
+//                    Toast.makeText(this, SyncStateContract.Constants.API_NOT_CONNECTED, Toast.LENGTH_SHORT).show()
+//                    Log.e(SyncStateContract.Constants.PlacesTag, Constants.API_NOT_CONNECTED)
+                }
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int,
+                                           after: Int) {
+
+            }
+
+            override fun afterTextChanged(s: Editable) {
+
+            }
+        })
+
+
+        mRecyclerView11.addOnItemTouchListener(
+                RecyclerItemClickListener(context, object : RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        val item = mAutoCompleteAdapter!!.getItem(position)
+                        val placeId = item.placeId
+                        Log.i("TAG", "Autocomplete item selected: " + item.description)
+                        /*
+                             Issue a request to the Places Geo Data API to retrieve a Place object with additional details about the place.
+                         */
+
+                        val placeResult = Places.GeoDataApi
+                                .getPlaceById(mGoogleApiClient!!, placeId)
+                        placeResult.setResultCallback { places ->
+                            if (places.count == 1) {
+                                //Do the things here on Click.....
+                                Toast.makeText(context, places.get(0).latLng.toString(), Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(context, Constants.SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT).show()
+                            }
+                        }
+                        Log.i("TAG", "Clicked: " + item.description)
+                        Log.i("TAG", "Called getPlaceById to get Place details for " + item.placeId)
+                    }
+                })
+        );
+
+        mAutoCompleteAdapter = PlacesAdapter(context!!, R.layout.searchview_adapter,
+                mGoogleApiClient!!, BOUNDS_INDIA, null)
+        mLinearLayoutManager = LinearLayoutManager(context)
+        mRecyclerView11.layoutManager = mLinearLayoutManager
+        mRecyclerView11.adapter = mAutoCompleteAdapter
 //        var mapFragment : SupportMapFragment  = childFragmentManager.findFragmentById(R.id.mapView) as SupportMapFragment
 //        mapFragment.getMapAsync(this)
     }
@@ -128,6 +225,10 @@ class RequestFragment : Fragment(){
     override fun onResume() {
         super.onResume()
         mMapView?.onResume()
+        if (!mGoogleApiClient!!.isConnected() && !mGoogleApiClient!!.isConnecting()) {
+            Log.v("Google API", "Connecting")
+            mGoogleApiClient!!.connect()
+        }
     }
 
     override fun onPause() {
@@ -147,4 +248,28 @@ class RequestFragment : Fragment(){
 
 
 
+    internal fun buildGoogleApiClient() {
+
+
+            mGoogleApiClient = GoogleApiClient.Builder(this.context!!)
+
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .build()
+
+//            mGoogleApiClient.connect()
+
+    }
+
+
 }// Required empty public constructor
+
+object Constants {
+    val API_NOT_CONNECTED = "Google API not connected"
+    val SOMETHING_WENT_WRONG = "OOPs!!! Something went wrong..."
+    var PlacesTag = "Google Places Auto Complete"
+}
+
