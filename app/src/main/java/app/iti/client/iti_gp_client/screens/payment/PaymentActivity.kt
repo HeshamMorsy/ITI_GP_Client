@@ -14,10 +14,6 @@ import kotlinx.android.synthetic.main.activity_payment.*
  * Display Payment Screen
  */
 class PaymentActivity : AppCompatActivity(), View {
-    override fun updateImage(photo: Bitmap) {
-        testImg.setImageBitmap(photo)
-    }
-
     // reference to presenter
     var mPresenter:Presenter? = null
     // arrayList of order image paths
@@ -42,4 +38,14 @@ class PaymentActivity : AppCompatActivity(), View {
         var bitmapArrayList = mPresenter?.convertPathsToBitmap(order.paths)!!
         Log.i("not order", "be5")
     }
+
+    // for testing
+    override fun updateImage(photo: Bitmap) {
+//        testImg.setImageBitmap(photo)
+    }
+
+    fun submitBtnAction(view: android.view.View){
+
+    }
+
 }
