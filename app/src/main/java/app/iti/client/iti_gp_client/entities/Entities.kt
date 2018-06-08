@@ -13,3 +13,5 @@ data class LoginUserData(val email:String,var password:String)
 data class LoginResponse(val auth_token:String)
 data class ForgotPasswordResponse(val pinCode:Int)
 data class Order(val title: String, val description: String, val paths: ArrayList<String>) : Serializable
+// for payment list view
+data class Payment(val paymentMethod:String, val status: String, val Rid: Int)
