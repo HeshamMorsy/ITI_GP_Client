@@ -3,6 +3,7 @@ package app.iti.client.iti_gp_client.screens.home
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -21,6 +22,7 @@ import android.view.View
 import android.widget.*
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.entities.SelectCarriers
+import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
@@ -112,6 +114,12 @@ class HomeActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+        //start next request screen
+        order.setOnClickListener {
+            val requestIntent = Intent(this, DropOffActivity::class.java)
+            // start your next activity
+            startActivity(requestIntent)
+        }
         //register the datetime button
         dateTime.setOnClickListener(this)
 

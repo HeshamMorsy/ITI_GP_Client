@@ -53,15 +53,22 @@
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:src="@mipmap/ic_destination_a"/>
+                android:layout_marginLeft="1dp"
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/ic_destination_a" />
+
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="85dp"
-                android:src="@mipmap/ic_destination_line"/>
+                android:layout_height="80dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginTop="1dp"
+                android:src="@mipmap/ic_destination_line" />
+
             <ImageView
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:src="@mipmap/ic_destination_b"/>
+                android:layout_marginTop="3dp"
+                android:src="@mipmap/ic_destination_b" />
         </LinearLayout>
 
         <LinearLayout
@@ -79,6 +86,7 @@
                 android:text="Pick Up Location" />
 
             <TextView
+                android:id="@+id/pickUpName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -92,6 +100,7 @@
                 android:text="DropOffLocation" />
 
             <TextView
+                android:id="@+id/distName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -105,22 +114,25 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/editPickUp"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@mipmap/ic_edit"
-                android:id="@+id/editPickUp"/>
+                app:srcCompat="@mipmap/ic_edit" />
+
             <ImageButton
+                android:id="@+id/editDistination"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
+                android:layout_marginTop="73dp"
                 android:src="@mipmap/ic_edit"
-                android:id="@+id/editDistination"
-                android:layout_marginTop="73dp"/>
+                app:srcCompat="@mipmap/ic_edit" />
         </LinearLayout>
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/requestNext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="28dp"
@@ -128,9 +140,9 @@
         android:layout_marginStart="49dp"
         android:background="@drawable/btns_bg"
         android:text="@string/next"
+        android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:textColor="#FFF"/>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

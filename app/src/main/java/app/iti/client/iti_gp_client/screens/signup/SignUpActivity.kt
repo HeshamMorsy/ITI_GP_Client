@@ -13,6 +13,9 @@ import app.iti.client.iti_gp_client.contracts.SignUpInt
 import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import android.support.design.widget.BottomSheetDialog
+
+
 
 class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeListener {
 
@@ -26,6 +29,10 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+
+
+        //show the button sheet
+//        showVerificationButtonSheet()
         //try navigation drawer
         imageView2.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -120,5 +127,11 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         dialouge?.dismiss()
     }
 
+    fun showVerificationButtonSheet(){
+        val mBottomSheetDialog = BottomSheetDialog(this)
+        val sheetView = this.getLayoutInflater().inflate(R.layout.verification_button_sheet, null)
+        mBottomSheetDialog.setContentView(sheetView)
+        mBottomSheetDialog.show()
+    }
 
 }
