@@ -1,6 +1,10 @@
 package app.iti.client.iti_gp_client.screens.forgot_password
 
+import android.app.Activity
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
+import app.iti.client.iti_gp_client.entities.ForgotPasswordResponse
+import app.iti.client.iti_gp_client.entities.LoginResponse
 import java.util.regex.Pattern
 
 /**
@@ -18,7 +22,7 @@ class ForgotPasswordPresenter : Presenter {
     override fun initPresenter(view: View) {
         // initialize mView as ForgotPasswordActivity and mModel as ForgotPasswordModel
         mView = view
-        mModel = ForgotPasswordModel()
+        mModel = ForgotPasswordModel(this)
     }
 
     override fun isEmailValid(email: String){
@@ -38,13 +42,24 @@ class ForgotPasswordPresenter : Presenter {
         }
     }
 
-    override fun sendResetBtnEvent() {
+    override fun sendResetBtnEvent(email: String) {
+        isEmailValid(email)
         if(checkEmail){
-            mModel?.sendPinCode()
+            mView?.startLoading((mView as Activity).resources.getString(R.string.wait))
+            mModel?.resetPassword(email)
         }else{
             mView?.setEmailError("Invalid Email")
 
         }
     }
+
+    override fun receiveResponse(response: ForgotPasswordResponse) {
+        mView?.endLoading()
+    }
+
+    override fun errorResponse() {
+        mView?.endLoading()
+    }
+
 
 }
