@@ -42,4 +42,8 @@
     <string name="masterCard">Mastercard</string>
     <string name="visa">Visa</string>
     <string name="soon">Soon</string>
+    <string name="error">Error</string>
+    <string name="ok">Ok</string>
+    <string name="invalid">Invalid credentials</string>
+    <string name="wait">Please wait..</string>
 </resources>
