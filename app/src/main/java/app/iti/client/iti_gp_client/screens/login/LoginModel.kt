@@ -15,13 +15,14 @@ class LoginModel(var presenter: LoginPresenter) : Model {
 
     // check if the user email and password exists and matches in the login api
     override fun requestToApi(email: String, password: String) {
-        var loginRequest = createLoginRequest()
-        var options:Map<String, String> = hashMapOf("email" to email, "password" to password)
+        val loginRequest = createLoginRequest()
+        val options:Map<String, String> = hashMapOf("email" to email, "password" to password)
 
-        loginRequest.getTokin(options)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
+            loginRequest.getTokin(options)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse, this::handleError)
+
     }
 
     private fun handleResponse(response: LoginResponse) {
@@ -29,9 +30,8 @@ class LoginModel(var presenter: LoginPresenter) : Model {
     }
 
     private fun handleError(error: Throwable) {
-
-        Log.i("error", "error receiving data"+error.localizedMessage)
-
+        Log.i("error Response", "error receiving data"+error.message)
+        presenter.errorResponse()
 //        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 }

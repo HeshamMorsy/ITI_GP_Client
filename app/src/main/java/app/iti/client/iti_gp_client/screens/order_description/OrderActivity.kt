@@ -321,7 +321,8 @@ class OrderActivity : AppCompatActivity(), View {
                 intent.putExtra("Order", order as Serializable)
                 startActivity(intent)
         }else{
-            Toast.makeText(this,"please enter the full information about your order (title, description and one image at least",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"please enter the full information about" +
+                    " your order (title, description and one image at least)",Toast.LENGTH_LONG).show()
         }
 
     }

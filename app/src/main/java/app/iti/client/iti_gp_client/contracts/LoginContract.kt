@@ -15,13 +15,17 @@ interface LoginContract {
         fun setEmailError(error:String)
         fun setPasswordError(error:String)
         fun goToHomeScreen()
+        fun startLoading(mes:String)
+        fun endLoading()
     }
 
     interface Presenter {
         fun initPresenter(view: View)
         fun login(email: String, password: String)
         fun receiveResponse(response:LoginResponse)
+        fun errorResponse()
         fun isEmailValid(email: String)
         fun isPasswordValid(email: String)
+
     }
 }

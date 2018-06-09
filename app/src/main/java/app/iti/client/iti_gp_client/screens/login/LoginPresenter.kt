@@ -1,8 +1,12 @@
 package app.iti.client.iti_gp_client.screens.login
 
+import android.app.Activity
+import android.content.DialogInterface
 import android.util.Log
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.entities.LoginResponse
+import app.iti.client.iti_gp_client.utilities.getAlertDialog
 import java.util.regex.Pattern
 
 /**
@@ -27,8 +31,10 @@ class LoginPresenter : Presenter {
 
     // send email and password to model to check if the user email and password exists and matches in the login api
     override fun login(email: String, password: String) {
-
+        isEmailValid(email)
+        isPasswordValid(password)
         if(checkEmail && checkPassword) {
+            mView?.startLoading((mView as Activity).resources.getString(R.string.wait))
             mModel?.requestToApi(email, password)
         }
         else {
@@ -67,8 +73,20 @@ class LoginPresenter : Presenter {
 
     // response from login api model
     override fun receiveResponse(response: LoginResponse) {
+        mView?.endLoading()
         mView?.goToHomeScreen()
         Log.i("LoginPresenter Response","my token : "+response.auth_token)
+    }
+
+    override fun errorResponse() {
+        mView?.endLoading()
+        val alert = getAlertDialog(mView!! as Activity, (mView as Activity).resources.getString(R.string.error)
+                ,(mView as Activity).resources.getString(R.string.invalid))
+                alert.setPositiveButton((mView as Activity).resources.getString(R.string.ok)
+                        , DialogInterface.OnClickListener{dialog, which ->
+                    alert.setCancelable(true)
+                 })
+        alert.show()
     }
 
 }

@@ -98,9 +98,10 @@
 
             <TextView
                 android:id="@+id/textView11"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginEnd="8dp"
                 android:text="@string/uploadImg"
                 android:textSize="18sp"
@@ -123,7 +124,8 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginEnd="8dp"
-                        android:layout_marginStart="50dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginStart="48dp"
                         android:layout_gravity="center"
                         android:background="@mipmap/ic_upload_image"
                         android:onClick="getImageToUpload"
@@ -133,6 +135,7 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="center"
                         android:visibility="gone"
                         android:scaleType="fitXY"
@@ -143,6 +146,7 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="center"
                         android:visibility="gone"
                         android:scaleType="fitXY"
@@ -153,6 +157,7 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="center"
                         android:visibility="gone"
                         android:scaleType="fitXY"
@@ -163,6 +168,7 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="center"
                         android:visibility="gone"
                         android:scaleType="fitXY"
@@ -173,6 +179,7 @@
                         android:layout_width="140dp"
                         android:layout_height="100dp"
                         android:layout_marginStart="8dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_gravity="center"
                         android:visibility="gone"
                         android:scaleType="fitXY"
@@ -186,10 +193,9 @@
                 android:id="@+id/order_nextBtn"
                 android:layout_width="256dp"
                 android:layout_height="53dp"
-                android:layout_marginBottom="480dp"
                 android:layout_marginEnd="8dp"
-                android:layout_margin="20dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="30dp"
                 android:background="@drawable/btns_bg"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@color/cardview_light_background"
@@ -198,6 +204,7 @@
                 android:layout_gravity="center"
                 android:text="@string/next"
                 android:onClick="goToPayment"/>
+
 
         </LinearLayout>
 
