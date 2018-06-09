@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.entities
 
 import android.graphics.Bitmap
+import okhttp3.MultipartBody
 import java.io.Serializable
 
 
@@ -15,3 +16,5 @@ data class ForgotPasswordResponse(val message: String, val reset_token: String)
 data class Order(val title: String, val description: String, val paths: ArrayList<String>) : Serializable
 // for payment list view
 data class Payment(val paymentMethod:String, val status: String, val Rid: Int)
+// all order request data entity
+data class FinalOrderRequest(val images: ArrayList<MultipartBody.Part>, val orderData: Order)

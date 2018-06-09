@@ -17,7 +17,7 @@ import kotlinx.android.synthetic.main.activity_forgot_password.*
 class ForgotPasswordActivity : AppCompatActivity(), View{
     // reference to presenter
     var mPresenter:Presenter? = null
-    var dialoge:AlertDialog? = null
+    var dialog:AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,13 +46,13 @@ class ForgotPasswordActivity : AppCompatActivity(), View{
         message.text = mes
         builder.setView(dialougeView)
         builder.setCancelable(false)
-        dialoge = builder.create()
-        dialoge?.show()
+        dialog = builder.create()
+        dialog?.show()
     }
 
     override fun endLoading(){
         Log.i("response", "end loading function")
-        dialoge?.dismiss()
+        dialog?.dismiss()
     }
 
 }

@@ -60,6 +60,4 @@ class ForgotPasswordPresenter : Presenter {
     override fun errorResponse() {
         mView?.endLoading()
     }
-
-
 }

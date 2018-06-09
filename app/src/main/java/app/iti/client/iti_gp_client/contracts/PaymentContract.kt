@@ -1,6 +1,8 @@
 package app.iti.client.iti_gp_client.contracts
 
 import android.graphics.Bitmap
+import app.iti.client.iti_gp_client.entities.FinalOrderRequest
+import app.iti.client.iti_gp_client.entities.Order
 
 /**
  * Created by Hesham on 6/7/2018.
@@ -8,15 +10,19 @@ import android.graphics.Bitmap
  */
 interface PaymentContract {
     interface Model {
-//
+        fun uploadOrderData(finalOrder: FinalOrderRequest)
     }
 
     interface View {
         fun updateImage(photo: Bitmap)
+        fun startLoading(mes:String)
+        fun endLoading()
    }
 
     interface Presenter {
-        fun convertPathsToBitmap(pathList: ArrayList<String>) : ArrayList<Bitmap>
         fun initPresenter(view: View)
+        fun receiveResponse(response: FinalOrderRequest)
+        fun errorResponse(error: Throwable)
+        fun prepareOrderAndSend(order: Order)
     }
 }

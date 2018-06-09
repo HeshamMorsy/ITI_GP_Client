@@ -1,11 +1,13 @@
 package app.iti.client.iti_gp_client.screens.payment
 
+import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.AdapterView
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.PaymentContract.*
@@ -22,6 +24,8 @@ class PaymentActivity : AppCompatActivity(), View {
     var mPresenter:Presenter? = null
     // arrayList of order image paths
     var paymentMethodArray: ArrayList<Payment>? = null
+    // progress dialog
+    var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,7 +65,7 @@ class PaymentActivity : AppCompatActivity(), View {
             Log.i("order image path", path)
         }
         // convert array of paths to array of bitmaps and receive them in arrayList<Bitmap>
-        var bitmapArrayList = mPresenter?.convertPathsToBitmap(order.paths)!!
+//        var bitmapArrayList = mPresenter?.convertPathsToBitmap(order.paths)!!
         Log.i("not order", "test")
     }
 
@@ -72,6 +76,23 @@ class PaymentActivity : AppCompatActivity(), View {
 
     fun submitBtnAction(view: android.view.View) {
 
+    }
+
+    override fun startLoading(mes:String){
+        Log.i("response", "start loading function")
+        val builder = AlertDialog.Builder(this)
+        val dialougeView = layoutInflater.inflate(R.layout.progress_dialouge,null)
+        val message = dialougeView.findViewById<TextView>(R.id.loadingmessage)
+        message.text = mes
+        builder.setView(dialougeView)
+        builder.setCancelable(false)
+        dialog = builder.create()
+        dialog?.show()
+    }
+
+    override fun endLoading(){
+        Log.i("response", "end loading function")
+        dialog?.dismiss()
     }
 
 }

@@ -22,7 +22,7 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
     // reference to presenter
     var mPresenter:Presenter?=null
     // progress dialog
-    var dialoge: AlertDialog? = null
+    var dialog: AlertDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,13 +99,13 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         message.text = mes
         builder.setView(dialougeView)
         builder.setCancelable(false)
-        dialoge = builder.create()
-        dialoge?.show()
+        dialog = builder.create()
+        dialog?.show()
     }
 
     override fun endLoading(){
         Log.i("response", "end loading function")
-        dialoge?.dismiss()
+        dialog?.dismiss()
     }
 
 }
