@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.location.Geocoder
 import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
@@ -27,7 +28,9 @@ import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.location.places.Places
+import com.google.android.gms.location.places.ui.PlacePicker
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
@@ -40,7 +43,20 @@ class HomeActivity : AppCompatActivity(),
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener,
-        OnMapReadyCallback{
+        OnMapReadyCallback,
+        GoogleMap.OnMapClickListener{
+    override fun onMapClick(p0: LatLng?) {
+        Log.i("googleplaces","in map click listner"+p0)
+        var gcd:Geocoder = Geocoder(applicationContext,Locale.getDefault())
+        if(p0 !=null){
+            var addresses = gcd.getFromLocation(p0!!.latitude,p0!!.longitude,1)
+            if(addresses !=null && addresses.size>0){
+                currentPlace.text = addresses.get(0).getAddressLine(0)
+                Log.i("googleplaces",addresses.get(0).toString())
+            }
+        }
+
+    }
 
 
     protected var mGoogleApiClient: GoogleApiClient? = null
@@ -57,9 +73,14 @@ class HomeActivity : AppCompatActivity(),
 
 
     // implement onMapReady interface
+    @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap?) {
         mMapView = p0
-
+        //go to my location
+        getMyLocation()
+        //set onmap click listner
+        mMapView!!.setOnMapClickListener(this)
+//        mMapView!!.isMyLocationEnabled = true
         Log.i("googleplaces","map bacame ready" + mMapView)
 
     }
@@ -96,11 +117,7 @@ class HomeActivity : AppCompatActivity(),
 
             R.id.location -> {
                 Log.i("googleplaces"," location button pressed")
-                var mLastKnownLocation = LocationServices.FusedLocationApi
-                        .getLastLocation(mGoogleApiClient)
 
-                cLattitude = mLastKnownLocation.latitude
-                cLongitude = mLastKnownLocation.longitude
                 getMyLocation()
             }
 
@@ -216,18 +233,20 @@ class HomeActivity : AppCompatActivity(),
 
 
     private fun spinnerRegister() {
-        val carrier1 = SelectCarriers("image1","fedix")
-        val carrier2 = SelectCarriers("image2","aramix")
-        val carrier3 = SelectCarriers("image3","TNT")
-        val options = arrayOf(carrier1,carrier2,carrier3)
-        paymentSpinner.adapter = ArrayAdapter<SelectCarriers>(this,android.R.layout.simple_list_item_1,options)
+        val carrier1 = SelectCarriers("image1","Select Carriers")
+        val carrier2 = SelectCarriers("image2","4.6")
+        val carrier3 = SelectCarriers("image3","4.1")
+        val carrier4 = SelectCarriers("image3","4.9")
+        val options = arrayOf(carrier1,carrier2,carrier3,carrier4)
+//        paymentSpinner.adapter = ArrayAdapter<SelectCarriers>(this,android.R.layout.simple_list_item_1,options)
+        paymentSpinner.adapter = CarriersSpinnerAdapter(this,R.layout.payment_list_row,options.toMutableList())
         paymentSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-
+                //android.R.layout.simple_list_item_1
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-
+                Toast.makeText(applicationContext,options[position].name,Toast.LENGTH_SHORT).show()
             }
 
         }
@@ -322,14 +341,20 @@ class HomeActivity : AppCompatActivity(),
         return true
     }
 
+    @SuppressLint("MissingPermission")
     private fun getMyLocation(){
         if(mMapView != null) {
             mMapView!!.clear()
         }
+        var mLastKnownLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient)
+
+        cLattitude = mLastKnownLocation.latitude
+        cLongitude = mLastKnownLocation.longitude
         var latLng:LatLng = LatLng(cLattitude,cLongitude)
         Log.i("googleplaces","mMap: " + mMapView)
         Log.i("googleplaces","current longitude:" + cLongitude + "current latitude: "+ cLattitude)
-        mMapView!!.addMarker(MarkerOptions().title("here").position(latLng))
+        mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
         var cameraUpdate:CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,18f)
         mMapView!!.animateCamera(cameraUpdate)
 

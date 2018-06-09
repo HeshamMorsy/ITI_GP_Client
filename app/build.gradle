@@ -63,5 +63,11 @@ dependencies {
     implementation 'com.google.android.gms:play-services-maps:15.0.1'
     implementation 'com.google.android.gms:play-services-places:15.0.1'
 //    compile 'com.google.android.gms:play-services:12.0.1'
+
+    //material wiki
+    compile 'com.github.rey5137:material:1.2.2'
+    compile 'com.android.support:appcompat-v7:27.0.0'
+    implementation 'com.android.support:cardview-v7:27.1.1'
+
 }
 
