@@ -19,7 +19,7 @@ class PayListAdapter(val context: Context,val array: ArrayList<Payment>) : BaseA
         var viewHolder: ViewHolder
 //        view = LayoutInflater.from(context).inflate(R.layout.payment_list_row,parent,null)
         if(convertView == null) {
-            view = LayoutInflater.from(context).inflate(R.layout.payment_list_row,parent,false)
+            view = LayoutInflater.from(context).inflate(R.layout.payment_method_list_row,parent,false)
             viewHolder = ViewHolder(view)
             view.tag = viewHolder
         }else{
