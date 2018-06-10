@@ -45,18 +45,6 @@ class HomeActivity : AppCompatActivity(),
         View.OnClickListener,
         OnMapReadyCallback,
         GoogleMap.OnMapClickListener{
-    override fun onMapClick(p0: LatLng?) {
-        Log.i("googleplaces","in map click listner"+p0)
-        var gcd:Geocoder = Geocoder(applicationContext,Locale.getDefault())
-        if(p0 !=null){
-            var addresses = gcd.getFromLocation(p0!!.latitude,p0!!.longitude,1)
-            if(addresses !=null && addresses.size>0){
-                currentPlace.text = addresses.get(0).getAddressLine(0)
-                Log.i("googleplaces",addresses.get(0).toString())
-            }
-        }
-
-    }
 
 
     protected var mGoogleApiClient: GoogleApiClient? = null
@@ -72,59 +60,7 @@ class HomeActivity : AppCompatActivity(),
 
 
 
-    // implement onMapReady interface
-    @SuppressLint("MissingPermission")
-    override fun onMapReady(p0: GoogleMap?) {
-        mMapView = p0
-        //go to my location
-        getMyLocation()
-        //set onmap click listner
-        mMapView!!.setOnMapClickListener(this)
-//        mMapView!!.isMyLocationEnabled = true
-        Log.i("googleplaces","map bacame ready" + mMapView)
-
-    }
-
-
-
-
-    //GoogleApiClient.ConnectionCallbacks
-    override fun onConnected(p0: Bundle?) {
-        Log.i("googleplaces","connection Done")
-        var mapFragment: SupportMapFragment =  getSupportFragmentManager()
-            .findFragmentById(R.id.mMapView) as SupportMapFragment
-            mapFragment.getMapAsync(this)
-    }
-
-
-    override fun onConnectionSuspended(p0: Int) {
-        Log.i("googleplaces","connection suspended")
-    }
-
-
-    //implement GoogleApiClient.OnConnectionFailedListener interface
-    override fun onConnectionFailed(p0: ConnectionResult) {
-        Log.i("googleplaces","connection failed")
-    }
-
-
-    // implement View.OnClickListener interface
-    @SuppressLint("MissingPermission")
-    override fun onClick(v: View?) {
-        when (v!!.id){
-            R.id.dateTime -> getDateAndTime()
-
-
-            R.id.location -> {
-                Log.i("googleplaces"," location button pressed")
-
-                getMyLocation()
-            }
-
-
-        }
-    }
-
+    //activity on create
     @RequiresApi(Build.VERSION_CODES.N)
     @SuppressLint("MissingPermission")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -132,11 +68,8 @@ class HomeActivity : AppCompatActivity(),
         setContentView(R.layout.activity_home)
 
         //start next request screen
-        order.setOnClickListener {
-            val requestIntent = Intent(this, DropOffActivity::class.java)
-            // start your next activity
-            startActivity(requestIntent)
-        }
+        order.setOnClickListener(this)
+
         //register the datetime button
         dateTime.setOnClickListener(this)
 
@@ -360,6 +293,67 @@ class HomeActivity : AppCompatActivity(),
 
     }
 
+    // implement View.OnClickListener interface
+    override fun onClick(v: View?) {
+        when (v!!.id){
+            R.id.dateTime -> getDateAndTime()
+
+            R.id.location -> getMyLocation()
+
+            R.id.order -> orderClicked()
+
+        }
+    }
+
+    private fun orderClicked() {
+        val requestIntent = Intent(this, DropOffActivity::class.java)
+        // start your next activity
+        startActivity(requestIntent)
+    }
+
+    //GoogleApiClient.ConnectionCallbacks
+    override fun onConnected(p0: Bundle?) {
+        Log.i("googleplaces","connection Done")
+        var mapFragment: SupportMapFragment =  getSupportFragmentManager()
+                .findFragmentById(R.id.mMapView) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+
+    override fun onConnectionSuspended(p0: Int) {
+        Log.i("googleplaces","connection suspended")
+    }
+
+
+    //implement GoogleApiClient.OnConnectionFailedListener interface
+    override fun onConnectionFailed(p0: ConnectionResult) {
+        Log.i("googleplaces","connection failed")
+    }
+    // implement onMapReady interface
+    @SuppressLint("MissingPermission")
+    override fun onMapReady(p0: GoogleMap?) {
+        mMapView = p0
+        //go to my location
+        getMyLocation()
+        //set onmap click listner
+        mMapView!!.setOnMapClickListener(this)
+//        mMapView!!.isMyLocationEnabled = true
+        Log.i("googleplaces","map bacame ready" + mMapView)
+
+    }
+    //handle clicks on map
+    override fun onMapClick(p0: LatLng?) {
+        Log.i("googleplaces","in map click listner"+p0)
+        var gcd:Geocoder = Geocoder(applicationContext,Locale.getDefault())
+        if(p0 !=null){
+            var addresses = gcd.getFromLocation(p0!!.latitude,p0!!.longitude,1)
+            if(addresses !=null && addresses.size>0){
+                currentPlace.text = addresses.get(0).getAddressLine(0)
+                Log.i("googleplaces",addresses.get(0).toString())
+            }
+        }
+
+    }
 
 
 }
