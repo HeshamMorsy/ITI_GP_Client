@@ -42,7 +42,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/cancel"
                 android:layout_width="27dp"
                 android:layout_height="20dp"
@@ -51,9 +51,9 @@
                 android:layout_marginTop="32dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                app:srcCompat="@mipmap/ic_close_search" />
+                android:srcCompat="@mipmap/ic_close_search" />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/location"
                 android:layout_width="48dp"
                 android:layout_height="50dp"
@@ -62,7 +62,7 @@
                 android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/searchPlaces"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
-                app:srcCompat="@mipmap/ic_current_location" />
+                android:src="@mipmap/ic_current_location" />
 
             <ImageView
                 android:id="@+id/imageView5"
@@ -86,7 +86,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/searchPlaces"></android.support.v7.widget.RecyclerView>
+                app:layout_constraintTop_toBottomOf="@+id/searchPlaces"/>
 
             <LinearLayout
                 android:id="@+id/linearLayout2"

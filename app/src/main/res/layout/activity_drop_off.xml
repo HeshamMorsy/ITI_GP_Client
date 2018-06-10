@@ -113,20 +113,20 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/editPickUp"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:src="@mipmap/ic_edit"
-                app:srcCompat="@mipmap/ic_edit" />
+                 />
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/editDistination"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginTop="73dp"
                 android:src="@mipmap/ic_edit"
-                app:srcCompat="@mipmap/ic_edit" />
+                />
         </LinearLayout>
 
     </LinearLayout>
