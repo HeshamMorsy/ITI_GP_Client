@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
+import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
 
 /**
  * Displays the login screen
@@ -38,6 +39,11 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         login_logo.setOnClickListener {
             var myIntent = Intent(this, OrderActivity::class.java)
             startActivity(myIntent)
+        }
+
+        signTxt.setOnClickListener{
+            startActivity(Intent(this,TripActivity::class.java
+            ))
         }
 
     }

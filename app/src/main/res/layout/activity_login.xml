@@ -13,14 +13,14 @@
         android:layout_height="0dp"
         android:layout_marginBottom="7dp"
         android:layout_marginTop="61dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toTopOf="@+id/signTxt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/ic_splash" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/signTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="38dp"
@@ -44,7 +44,7 @@
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3">
+        app:layout_constraintTop_toBottomOf="@+id/signTxt">
 
         <EditText
             android:id="@+id/login_emailEditText"
@@ -94,7 +94,7 @@
         android:textColor="@color/textColor"
         app:layout_constraintBottom_toTopOf="@+id/login_btn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
+        app:layout_constraintStart_toStartOf="@+id/signTxt"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout6" />
 
     <Button

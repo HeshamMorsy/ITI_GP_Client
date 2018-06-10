@@ -104,6 +104,20 @@ class OrderActivity : AppCompatActivity(), View {
 
             override fun onImagesPicked(imagesFiles: List<File>, source: EasyImage.ImageSource, type: Int) {
                 //Handle the images
+                /*Log.i("imageFiles Length",imagesFiles.count().toString())
+                Log.i("file usableSpace", "${imagesFiles[0].usableSpace}")
+                Log.i("file length" ,"${imagesFiles[0].length()}")   // this displays the file size
+                Log.i("file totalSpace" ,"${imagesFiles[0].totalSpace}")
+                Log.i("file readBytes" ,"${imagesFiles[0].readBytes()}")
+                Log.i("name image",imagesFiles[0].name)
+                Log.i("path image",imagesFiles[0].path)
+                Log.i("absolutePath image",imagesFiles[0].absolutePath)
+                Log.i("canonicalPath image",imagesFiles[0].canonicalPath)
+                Log.i("parent image",imagesFiles[0].parent)
+                Log.i("extension image",imagesFiles[0].extension)
+                Log.i("invariantPath image",imagesFiles[0].invariantSeparatorsPath)
+                Log.i("nameWithout image",imagesFiles[0].nameWithoutExtension)
+                Log.i("absoluteFile image",imagesFiles[0].absoluteFile.toString())*/
                 mPresenter?.convertFilesToBitmap(imagesFiles)
             }
         })
@@ -115,28 +129,23 @@ class OrderActivity : AppCompatActivity(), View {
             removedImageNumber = 1
             val numOfNullViews = checkImageViewEmpty()
             shiftImages(removedImageNumber!!,numOfNullViews)
-//            order_image1.setImageBitmap(null)
             true }
         order_image2.setOnLongClickListener {
-//            order_image2.setImageBitmap(null)
             removedImageNumber =2
             val numOfNullViews = checkImageViewEmpty()
             shiftImages(removedImageNumber!!,numOfNullViews)
             true }
         order_image3.setOnLongClickListener {
-//            order_image3.setImageBitmap(null)
             removedImageNumber =3
             val numOfNullViews = checkImageViewEmpty()
             shiftImages(removedImageNumber!!,numOfNullViews)
             true }
         order_image4.setOnLongClickListener {
-//            order_image4.setImageBitmap(null)
             removedImageNumber =4
             val numOfNullViews = checkImageViewEmpty()
             shiftImages(removedImageNumber!!,numOfNullViews)
             true }
         order_image5.setOnLongClickListener {
-//            order_image5.setImageBitmap(null)
             removedImageNumber =5
             val numOfNullViews = checkImageViewEmpty()
             shiftImages(removedImageNumber!!,numOfNullViews)
