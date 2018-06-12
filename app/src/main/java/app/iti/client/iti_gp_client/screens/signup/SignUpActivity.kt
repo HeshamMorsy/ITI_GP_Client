@@ -14,7 +14,8 @@ import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import android.support.design.widget.BottomSheetDialog
-
+import android.widget.Toast
+import app.iti.client.iti_gp_client.utilities.alertWithOneButton
 
 
 class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeListener {
@@ -24,15 +25,11 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
     //creating the presenter for the activity
     var presenter:SignUpInt.Presenter? = null
 
-    var dialouge:AlertDialog? = null
+    lateinit var dialouge:AlertDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
-
-
-        //show the button sheet
-//        showVerificationButtonSheet()
         //try navigation drawer
         imageView2.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -78,20 +75,12 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
 
     //handling change focus
     override fun onFocusChange(p0: View?, p1: Boolean) {
-        if (p0==userEmail && p1==true){
-            Log.i("focus","email has focus")
-        }else if(p0==userEmail && p1==false){
+        if(p0==userEmail && p1==false){
             presenter?.validateEmail(userEmail.text.toString())
-        }else if(p0==userPhone && p1==true){
-            Log.i("focus","phone has focus")
         }else if(p0==userPhone && p1==false){
             presenter?.validatePhone(userPhone.text.toString())
-        }else if(p0==userPassword && p1==true){
-            Log.i("focus","password has focus")
         }else if(p0==userPassword && p1==false){
             presenter?.validatePassword(userPassword.text.toString())
-        }else if(p0==userRepassword && p1==true){
-            Log.i("focus","repassword has focus")
         }else if(p0==userRepassword && p1==false){
             presenter?.validateRePassword(userPassword.text.toString(),userRepassword.text.toString())
         }
@@ -118,20 +107,23 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         message.text = mes
         builder.setView(dialougeView)
         builder.setCancelable(false)
-        var dialouge:AlertDialog = builder.create()
+        dialouge = builder.create()
         dialouge.show()
     }
 
     override fun endLoading(){
         Log.i("response", "end loading function")
-        dialouge?.dismiss()
+        dialouge.dismiss()
     }
 
-    fun showVerificationButtonSheet(){
+    override fun showVerificationButtonSheet(){
         val mBottomSheetDialog = BottomSheetDialog(this)
-        val sheetView = this.getLayoutInflater().inflate(R.layout.verification_button_sheet, null)
+        val sheetView = this.layoutInflater.inflate(R.layout.verification_button_sheet, null)
         mBottomSheetDialog.setContentView(sheetView)
         mBottomSheetDialog.show()
     }
-
+    override fun errorResponse(msg:String){
+        alertWithOneButton(this,"Error Message",msg,"Ok")
+//        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+    }
 }

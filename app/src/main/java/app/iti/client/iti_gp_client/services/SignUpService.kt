@@ -12,7 +12,7 @@ import retrofit2.http.QueryMap
  * Created by Hazem on 5/30/2018.
  */
 interface SignUpService {
-    @POST("signup")
+    @POST("authentication/signup")
     fun getTokin(@QueryMap options:Map<String, String> ) : Observable<SignUpData>
 }
 

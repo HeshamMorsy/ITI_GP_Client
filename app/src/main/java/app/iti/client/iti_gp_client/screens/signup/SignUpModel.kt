@@ -11,9 +11,10 @@ import io.reactivex.schedulers.Schedulers
  * Created by Hazem on 5/30/2018.
  */
 class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
+
     override fun signUp(phone:String,email:String,pass:String) {
         var signUpRequest = createSignUpRequest()
-        var options:Map<String, String> = hashMapOf("name" to "hazem","phone" to phone,"password" to pass,"email" to email)
+        var options:Map<String, String> = hashMapOf("phone" to phone,"password" to pass,"email" to email)
 
         signUpRequest.getTokin(options)
                 .observeOn(AndroidSchedulers.mainThread())
@@ -23,11 +24,12 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
 
     private fun handleResponse(response: SignUpData) {
         Log.i("response", "response data"+response)
+
         presenter.receiveResponse(response)
     }
 
     private fun handleError(error: Throwable) {
-        presenter.view.endLoading()
+        presenter.receiveErrorResponse()
 
         Log.i("error", "error receiving data"+error.localizedMessage)
 

@@ -19,6 +19,8 @@ interface SignUpInt {
         fun repasswordError(error:String)
         fun startLoading(mes:String)
         fun endLoading()
+        fun showVerificationButtonSheet()
+        fun errorResponse(msg:String)
     }
     interface Presenter{
         fun signUp(phone:String,email:String,pass:String,repass:String)
@@ -27,5 +29,6 @@ interface SignUpInt {
         fun validatePassword(pass:String)
         fun validatePhone(phone:String)
         fun validateRePassword(pass:String,repass:String)
+        fun receiveErrorResponse()
     }
 }

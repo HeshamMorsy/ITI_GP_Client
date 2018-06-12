@@ -18,7 +18,6 @@ import android.view.ViewGroup
 import app.iti.client.iti_gp_client.R
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_trip.*
-import kotlinx.android.synthetic.main.fragment_trip.view.*
 
 class TripActivity : AppCompatActivity() {
 
@@ -102,33 +101,33 @@ class TripActivity : AppCompatActivity() {
     /**
      * A placeholder fragment containing a simple view.
      */
-    class PlaceholderFragment : Fragment() {
-
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                                  savedInstanceState: Bundle?): View? {
-            val rootView = inflater.inflate(R.layout.fragment_trip, container, false)
-            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
-            return rootView
-        }
-
-        companion object {
-            /**
-             * The fragment argument representing the section number for this
-             * fragment.
-             */
-            private val ARG_SECTION_NUMBER = "section_number"
-
-            /**
-             * Returns a new instance of this fragment for the given section
-             * number.
-             */
-            fun newInstance(sectionNumber: Int): PlaceholderFragment {
-                val fragment = PlaceholderFragment()
-                val args = Bundle()
-                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
-                fragment.arguments = args
-                return fragment
-            }
-        }
-    }
+//    class PlaceholderFragment : Fragment() {
+//
+//        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+//                                  savedInstanceState: Bundle?): View? {
+//            val rootView = inflater.inflate(R.layout.fragment_trip, container, false)
+//            rootView.section_label.text = getString(R.string.section_format, arguments?.getInt(ARG_SECTION_NUMBER))
+//            return rootView
+//        }
+//
+//        companion object {
+//            /**
+//             * The fragment argument representing the section number for this
+//             * fragment.
+//             */
+//            private val ARG_SECTION_NUMBER = "section_number"
+//
+//            /**
+//             * Returns a new instance of this fragment for the given section
+//             * number.
+//             */
+//            fun newInstance(sectionNumber: Int): PlaceholderFragment {
+//                val fragment = PlaceholderFragment()
+//                val args = Bundle()
+//                args.putInt(ARG_SECTION_NUMBER, sectionNumber)
+//                fragment.arguments = args
+//                return fragment
+//            }
+//        }
+//    }
 }

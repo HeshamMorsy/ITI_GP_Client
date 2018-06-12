@@ -73,7 +73,6 @@ class HomeActivity : AppCompatActivity(),
         //register the datetime button
         dateTime.setOnClickListener(this)
 
-
         //register the spinner
         spinnerRegister()
 
