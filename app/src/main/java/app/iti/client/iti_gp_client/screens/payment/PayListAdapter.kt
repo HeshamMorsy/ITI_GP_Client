@@ -1,14 +1,12 @@
 package app.iti.client.iti_gp_client.screens.payment
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.entities.Payment
 
@@ -26,7 +24,7 @@ class PayListAdapter(val context: Context,val array: ArrayList<Payment>) : BaseA
             view = convertView
             viewHolder = view.tag as ViewHolder
         }
-        var payment: Payment = getItem(position) as Payment
+        val payment: Payment = getItem(position) as Payment
         viewHolder.methodTxt.text = payment.paymentMethod
         viewHolder.statusTxt.text = payment.status
         viewHolder.payImageView.setImageDrawable(context.resources.getDrawable(payment.Rid))
@@ -57,7 +55,7 @@ class PayListAdapter(val context: Context,val array: ArrayList<Payment>) : BaseA
         init{
             methodTxt = row!!.findViewById<TextView>(R.id.list_paymentMethodTxt) as TextView
             statusTxt = row.findViewById<TextView>(R.id.list_statusTxt) as TextView
-            payImageView = row.findViewById<ImageView>(R.id.list_img) as ImageView
+            payImageView = row.findViewById<ImageView>(R.id.profile_list_img) as ImageView
             defaultImg = row.findViewById<ImageView>(R.id.list_defaultImg) as ImageView
         }
     }

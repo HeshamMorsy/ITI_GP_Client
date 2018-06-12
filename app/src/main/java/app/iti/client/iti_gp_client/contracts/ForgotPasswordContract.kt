@@ -1,11 +1,12 @@
 package app.iti.client.iti_gp_client.contracts
 
 import app.iti.client.iti_gp_client.entities.ForgotPasswordResponse
-import app.iti.client.iti_gp_client.entities.LoginResponse
+import app.iti.client.iti_gp_client.screens.forgot_password.*
+
 
 /**
  * Created by Hesham on 5/29/2018.
- * define the contract between the view ForgotPasswordActivity, the model ForgotPasswordModel and the presenter ForgotPasswordPresenter
+ * define the contract between the view [ForgotPasswordActivity], the model [ForgotPasswordModel] and the presenter [ForgotPasswordPresenter]
  */
 interface ForgotPasswordContract {
     interface Model {

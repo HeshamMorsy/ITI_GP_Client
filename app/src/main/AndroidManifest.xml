@@ -66,8 +66,9 @@
         <activity
             android:name=".screens.trip_history.TripActivity"
             android:label="@string/title_activity_trip"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity android:name=".screens.payment.PaymentActivity" />
+        <activity android:name=".screens.profile.ProfileActivity"/>
     </application>
 
 </manifest>

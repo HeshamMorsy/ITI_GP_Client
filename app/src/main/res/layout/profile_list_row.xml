@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:gravity="center"
+    android:layout_margin="25dp">
+    <TextView
+        android:layout_alignParentStart="true"
+        android:id="@+id/profile_list_option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textColor="@color/textColor"
+        android:text="@string/editProfile"/>
+
+    <ImageView
+        android:id="@+id/profile_list_arrow"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="3dp"
+        android:layout_alignParentEnd="true"
+        android:src="@mipmap/ic_more"/>
+
+    <TextView
+        android:id="@+id/profile_list_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#c0c0c0"
+        android:textSize="18sp"
+        android:layout_marginEnd="4sp"
+        android:layout_toStartOf="@+id/profile_list_arrow"
+        android:text="English"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>
