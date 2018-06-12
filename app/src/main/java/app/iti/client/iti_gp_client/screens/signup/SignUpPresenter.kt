@@ -22,7 +22,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         if (isNetworkAvailable(view as Context)){
             Log.i("response","signup: "+ emailValidation+ phoneValidation+ passwordValidation + repasswordValidation )
             if (emailValidation && phoneValidation && passwordValidation && repasswordValidation){
-                view.startLoading("sending data!!")
+                view.startLoading("sending signup data!!")
                 model.signUp(phone, email, pass)
             }else if (!emailValidation){
                 validateEmail(email)
@@ -88,6 +88,16 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
     override fun receiveResponse(response: SignUpData){
         view.endLoading()
+        if (response.message.equals("success")){
+            val auth_token = response.auth_token
+        }else{
+            view.errorResponse(response.message)
+        }
         Log.i("response", response.toString())
+    }
+    override fun receiveErrorResponse(){
+        view.endLoading()
+        view.errorResponse("server error")
+        Log.i("response", "presenter error response")
     }
 }
