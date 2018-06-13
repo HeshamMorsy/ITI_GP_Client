@@ -8,7 +8,7 @@ import app.iti.client.iti_gp_client.screens.home.PlacesAdapter
  */
 interface HomeInt {
     interface Model{
-
+        fun getProviders(auth:String)
     }
     interface View{
         fun initRecyclerView(mAutoCompleteAdapter: PlacesAdapter)
@@ -17,4 +17,5 @@ interface HomeInt {
         fun placesInformation(position:Int): PlacesAdapter.PlaceAutocomplete
         fun filterPlaces(s: CharSequence)
     }
+
 }

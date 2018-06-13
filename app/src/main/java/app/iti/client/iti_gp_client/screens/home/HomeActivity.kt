@@ -22,6 +22,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.SelectCarriers
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import com.google.android.gms.common.ConnectionResult
@@ -44,9 +45,14 @@ class HomeActivity : AppCompatActivity(),
         GoogleApiClient.OnConnectionFailedListener,
         View.OnClickListener,
         OnMapReadyCallback,
-        GoogleMap.OnMapClickListener{
+        GoogleMap.OnMapClickListener,HomeInt.View{
 
 
+    override fun initRecyclerView(mAutoCompleteAdapter: PlacesAdapter) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    lateinit var presenter:HomeInt.Presenter
     protected var mGoogleApiClient: GoogleApiClient? = null
     private var mAutoCompleteAdapter: PlacesAdapter? = null
     private var mLinearLayoutManager: LinearLayoutManager? = null
@@ -66,6 +72,10 @@ class HomeActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+
+
+
 
         //start next request screen
         order.setOnClickListener(this)
@@ -287,7 +297,7 @@ class HomeActivity : AppCompatActivity(),
         Log.i("googleplaces","mMap: " + mMapView)
         Log.i("googleplaces","current longitude:" + cLongitude + "current latitude: "+ cLattitude)
         mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
-        var cameraUpdate:CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,18f)
+        var cameraUpdate:CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng,16f)
         mMapView!!.animateCamera(cameraUpdate)
 
     }
@@ -334,6 +344,9 @@ class HomeActivity : AppCompatActivity(),
         mMapView = p0
         //go to my location
         getMyLocation()
+
+        //initialize the presenter
+        presenter = HomePresenter(this,mGoogleApiClient!!)
         //set onmap click listner
         mMapView!!.setOnMapClickListener(this)
 //        mMapView!!.isMyLocationEnabled = true
