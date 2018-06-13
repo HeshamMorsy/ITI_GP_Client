@@ -17,4 +17,32 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <style name="header">
+        <item name="android:textSize">@dimen/header_font</item>
+        <item name="android:textColor">@color/header</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="btn_main">
+        <item name="android:background">@drawable/btns_bg</item>
+        <item name="android:textSize">@dimen/btn_text_size</item>
+        <item name="android:layout_height">@dimen/btn_height</item>
+        <item name="android:layout_width">@dimen/btn_width</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    <style name="sub_header">
+        <item name="android:textColor">@color/header</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:lineSpacingExtra">15.36sp</item>
+    </style>
+    <style name="editText_style">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorHint">@color/hintColor</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/hint_font</item>
+        <item name="android:layout_width">@dimen/edit_width</item>
+        <item name="android:layout_height">@dimen/edit_height</item>
+    </style>
 </resources>

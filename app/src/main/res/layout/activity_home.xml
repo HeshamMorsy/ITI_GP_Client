@@ -123,6 +123,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
                         android:text="Driveo"
+                        style="@style/header"
                         tools:layout_editor_absoluteX="141dp"
                         tools:layout_editor_absoluteY="388dp" />
 
@@ -178,13 +179,14 @@
                         android:text="Order Now"
                         android:textColor="@color/cardview_light_background" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/dateTime"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:background="@drawable/calender_image"
-                        android:src="@mipmap/calendar" />
+                        android:padding="10dp"
+                        android:src="@mipmap/calendar"
+                        android:background="@drawable/calender_image"/>
                 </LinearLayout>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>
