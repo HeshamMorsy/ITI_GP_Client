@@ -43,6 +43,7 @@ class ExpandableListAdapter(val context: Context, val header: ArrayList<ProfileO
         viewHolder.currentLanguage.text = option.language
         if(option.optionTitle == context.resources.getString(R.string.language)) {
             viewHolder.currentLanguage.visibility = View.VISIBLE
+            viewHolder.currentLanguage.text = option.language
         }
         else {
             viewHolder.currentLanguage.visibility = View.GONE

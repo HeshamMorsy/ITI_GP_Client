@@ -11,7 +11,7 @@ import retrofit2.http.QueryMap
  * Created by Hesham on 5/31/2018.
  */
 interface LoginService {
-    @POST("auth/login")
+    @POST("authentication/signin")
     fun getTokin(@QueryMap options:Map<String, String> ) : Observable<LoginResponse>
 }
 
