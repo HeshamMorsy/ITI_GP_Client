@@ -18,6 +18,7 @@ interface LoginContract {
         fun goToHomeScreen()
         fun startLoading(mes:String)
         fun endLoading()
+        fun goToSignUpScreen()
     }
 
     interface Presenter {

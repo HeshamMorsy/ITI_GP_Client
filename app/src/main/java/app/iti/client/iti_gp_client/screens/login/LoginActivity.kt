@@ -97,9 +97,17 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
 
 
     override fun goToHomeScreen() {
-        val intent = Intent(this, HomeActivity::class.java)
+        val myIntent = Intent(this, HomeActivity::class.java)
         // start home activity
-        startActivity(intent)
+        startActivity(myIntent)
+        finish()
+    }
+
+    override fun goToSignUpScreen() {
+        val myIntent = Intent(this, SignUpActivity::class.java)
+        myIntent.putExtra("is_verified",false)
+        // start home activity
+        startActivity(myIntent)
         finish()
     }
 

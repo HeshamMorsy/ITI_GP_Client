@@ -71,4 +71,5 @@
     <string name="english">English</string>
     <string name="arabic">Arabic</string>
     <string name="soonToast">This part will be in the future plan ..</string>
+    <string name="notVerified">This email is not verified</string>
 </resources>

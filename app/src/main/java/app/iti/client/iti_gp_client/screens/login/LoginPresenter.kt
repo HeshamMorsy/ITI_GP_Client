@@ -6,6 +6,8 @@ import android.util.Log
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.entities.LoginResponse
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import app.iti.client.iti_gp_client.utilities.getAlertDialog
 import java.util.regex.Pattern
 
@@ -26,7 +28,10 @@ class LoginPresenter : Presenter {
     override fun initPresenter(view: View) {
         // initializing mView as LoginActivity and mModel as LoginModel
         mView = view
-        mModel= LoginModel(this)
+        // get auth_token from sharedPreferences
+        val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
+        val auth = defaultPref.get("auth_token","0")
+        mModel= LoginModel(this,auth!!)
     }
 
     // send email and password to model to check if the user email and password exists and matches in the login api
@@ -74,8 +79,24 @@ class LoginPresenter : Presenter {
     // response from login api model
     override fun receiveResponse(response: LoginResponse) {
         mView?.endLoading()
-        mView?.goToHomeScreen()
+        if(response.message == "success") {
+            mView?.goToHomeScreen()
+        }else if(response.message == "sorry this account is not yet verified"){
+            val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,
+                    response.message)
+            alert.setPositiveButton((mView as Activity).resources.getString(R.string.ok) ,DialogInterface.OnClickListener{dialog, which ->
+                alert.setCancelable(true)
+                mView?.goToSignUpScreen()
+            })
+            alert.show()
+
+        }else{
+            val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,
+                    response.message)
+            alert.show()
+        }
         Log.i("LoginPresenter Response","my token : "+response.auth_token)
+        Log.i("LoginPresenter Response","message : "+response.message)
     }
 
     override fun errorResponse() {
