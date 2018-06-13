@@ -29,7 +29,8 @@
             <EditText
                 android:id="@+id/searchPlaces"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
+                android:minHeight="50dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="20dp"
@@ -55,11 +56,11 @@
 
             <ImageView
                 android:id="@+id/location"
-                android:layout_width="48dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="@+id/searchPlaces"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:src="@mipmap/ic_current_location" />
@@ -67,15 +68,15 @@
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="84dp"
+                android:layout_marginTop="90dp"
                 android:src="@mipmap/ic_destination_line"
                 app:layout_constraintBottom_toBottomOf="@+id/searchPlaces"
                 app:layout_constraintEnd_toStartOf="@+id/location"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="0.812" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/mRecyclerView"
@@ -106,7 +107,7 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginLeft="8dp"
-                    android:background="@mipmap/hamb"
+                    android:background="@mipmap/hambor"
                     android:gravity="left" />
 
                 <LinearLayout
@@ -140,8 +141,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_height="wrap_content"
                 android:layout_width="match_parent"
+                android:layout_height="110dp"
                 android:layout_marginBottom="60dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginStart="11dp"
@@ -155,12 +156,11 @@
                     android:id="@+id/paymentSpinner"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:background="@drawable/spinner_style"
-                    app:layout_constraintTop_toBottomOf="@+id/scrollView2"
-                    tools:layout_editor_absoluteX="116dp"
                     android:layout_marginBottom="10dp"
+                    android:background="@drawable/spinner_style"
                     android:popupBackground="@drawable/background_popup"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+                    tools:layout_editor_absoluteX="116dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -172,21 +172,19 @@
                         android:id="@+id/order"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
+                        android:layout_marginRight="8dp"
                         android:layout_weight="4"
                         android:background="@drawable/btns_bg"
-                        android:layout_marginRight="8dp"
                         android:text="Order Now"
-                        android:textColor="@color/cardview_light_background"
-                        />
+                        android:textColor="@color/cardview_light_background" />
 
                     <ImageButton
                         android:id="@+id/dateTime"
                         android:layout_width="0dp"
                         android:layout_height="50dp"
                         android:layout_weight="1"
-                        android:src="@drawable/ic_menu_camera"
                         android:background="@drawable/calender_image"
-                         />
+                        android:src="@mipmap/calendar" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.constraint.ConstraintLayout>

@@ -9,7 +9,7 @@ import app.iti.client.iti_gp_client.entities.SignUpData
 interface SignUpInt {
     interface Model{
         fun signUp(phone:String,email:String,pass:String)
-
+        fun verify(pin:String,auth: String)
 
     }
     interface View{
@@ -21,6 +21,8 @@ interface SignUpInt {
         fun endLoading()
         fun showVerificationButtonSheet()
         fun errorResponse(msg:String)
+        fun saveAuth_token(auth_token:String)
+        fun navigateToLogin()
     }
     interface Presenter{
         fun signUp(phone:String,email:String,pass:String,repass:String)
@@ -30,5 +32,8 @@ interface SignUpInt {
         fun validatePhone(phone:String)
         fun validateRePassword(pass:String,repass:String)
         fun receiveErrorResponse()
+        fun verifyCode(text: String,auth:String)
+        fun handleVerificationResponse(response: String)
+        fun handleVerificationError()
     }
 }
