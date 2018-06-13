@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.Toast
 import app.iti.client.iti_gp_client.entities.FinalOrderRequest
 import app.iti.client.iti_gp_client.entities.Order
+import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.entities.OrderToBeSent
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -18,6 +19,9 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import android.os.Environment.DIRECTORY_DCIM
+import android.os.Environment.getExternalStoragePublicDirectory
+import java.time.LocalDateTime
 
 
 /**
@@ -36,41 +40,50 @@ class PaymentPresenter : Presenter {
 
 
 
-    override fun receiveResponse(response: FinalOrderRequest) {
+    override fun receiveResponse(response: OrderResponse) {
         Log.i("Response status","data sent")
         Toast.makeText(mView as PaymentActivity, "data sent",Toast.LENGTH_SHORT).show()
     }
 
     override fun errorResponse(error: Throwable) {
         Log.i("Response status","error")
-        Toast.makeText(mView as PaymentActivity, "error",Toast.LENGTH_SHORT).show()
+        Toast.makeText(mView as PaymentActivity, "error localized : ${error.localizedMessage}",Toast.LENGTH_LONG).show()
     }
 
     override fun prepareOrderAndSend(order: Order) {
         val imgArrayToSend = createMultiPartBody(order.paths)
+//        val arr: Array<MultipartBody.Part> = arrayOf(imgArrayToSend[0])
+//        val imageArray :
 //        val finalOrderRequest = FinalOrderRequest(arrayToSend,order)
         // the object of order entity to be sent to backend
-        val orderToBeSent = OrderToBeSent(order.title,23.3 ,1,50.5,"cash",imgArrayToSend
+        val orderToBeSent = OrderToBeSent(order.title,getCurrentDateTime().toString() ,1,50,"cash",imgArrayToSend
                 ,0.0,0.0,0.0 ,0.0)
         mModel?.uploadOrderData(orderToBeSent)
+
 
     }
 
     // prepare image paths as MultiPartBody.Part to send it to the backend
-    private fun createMultiPartBody(paths: ArrayList<String>): ArrayList<MultipartBody.Part>{
+    private fun createMultiPartBody(paths: ArrayList<String>): HashMap<String, RequestBody>{
         val multipartBodyArr:ArrayList<MultipartBody.Part> = ArrayList()
-
+        val map = HashMap<String, RequestBody>()
         for (path in paths){
             // create file from path
-            val file = File("path")
+            val file = File(path)
             // create RequestBody to parse the file into mutlipart/form-data
-            val requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+            val requestBody = RequestBody.create(MediaType.parse("*/*"),file)
+
+            map.put("file\"; filename=\""+file.name+"\"", requestBody)
+
             // create the MultiPartBody.Part as this type will be sent to the backEnd
             val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
             multipartBodyArr.add(multipartBody)
+            Toast.makeText(mView as PaymentActivity, "file name:${file.name}",Toast.LENGTH_LONG).show()
+            Toast.makeText(mView as PaymentActivity, "array index:${multipartBodyArr[0]}",Toast.LENGTH_LONG).show()
         }
 
-        return multipartBodyArr
+//        return multipartBodyArr
+        return map
     }
 
     // convert paths to bitmaps
@@ -96,4 +109,12 @@ class PaymentPresenter : Presenter {
 
         return convertedArray
     }*/
+
+    private fun getCurrentDateTime():Date{
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        return Date(year,month,day)
+    }
 }

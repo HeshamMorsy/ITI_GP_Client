@@ -18,6 +18,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
+        android:name=".utilities.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -68,7 +69,10 @@
             android:label="@string/title_activity_trip"
             android:theme="@style/AppTheme" />
         <activity android:name=".screens.payment.PaymentActivity" />
-        <activity android:name=".screens.profile.ProfileActivity"/>
+        <activity android:name=".screens.profile.ProfileActivity" />
+        <activity android:name=".screens.about.AboutActivity" />
+        <activity android:name=".screens.edit_profile.EditProfileActivity" />
+        <activity android:name=".screens.change_password.ChangePasswordActivity"></activity>
     </application>
 
 </manifest>
