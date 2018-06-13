@@ -6,8 +6,11 @@ import android.graphics.BitmapFactory
 import android.os.Build
 import android.support.annotation.RequiresApi
 import android.util.Base64.encodeToString
+import android.util.Log
+import android.widget.Toast
 import app.iti.client.iti_gp_client.entities.FinalOrderRequest
 import app.iti.client.iti_gp_client.entities.Order
+import app.iti.client.iti_gp_client.entities.OrderToBeSent
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -19,7 +22,7 @@ import kotlin.collections.ArrayList
 
 /**
  * Created by Hesham on 6/7/2018.
- * Responsible for handling actions in OrderActivity and updating UI if required
+ * Responsible for handling actions in [PaymentActivity] and updating UI if required
  */
 class PaymentPresenter : Presenter {
     // references to model and view of payment
@@ -34,17 +37,22 @@ class PaymentPresenter : Presenter {
 
 
     override fun receiveResponse(response: FinalOrderRequest) {
-
+        Log.i("Response status","data sent")
+        Toast.makeText(mView as PaymentActivity, "data sent",Toast.LENGTH_SHORT).show()
     }
 
     override fun errorResponse(error: Throwable) {
-
+        Log.i("Response status","error")
+        Toast.makeText(mView as PaymentActivity, "error",Toast.LENGTH_SHORT).show()
     }
 
     override fun prepareOrderAndSend(order: Order) {
-        val arrayToSend = createMultiPartBody(order.paths)
-        val finalOrderRequest = FinalOrderRequest(arrayToSend,order)
-        mModel?.uploadOrderData(finalOrderRequest)
+        val imgArrayToSend = createMultiPartBody(order.paths)
+//        val finalOrderRequest = FinalOrderRequest(arrayToSend,order)
+        // the object of order entity to be sent to backend
+        val orderToBeSent = OrderToBeSent(order.title,23.3 ,1,50.5,"cash",imgArrayToSend
+                ,0.0,0.0,0.0 ,0.0)
+        mModel?.uploadOrderData(orderToBeSent)
 
     }
 

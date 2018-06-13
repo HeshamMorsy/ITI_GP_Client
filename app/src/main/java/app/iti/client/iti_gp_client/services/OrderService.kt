@@ -10,8 +10,10 @@ interface OrderService {
     // @FormUrlEncoded
     // to send arrayList of multipart we use @Query("someKey[]")
     @Multipart
-    @POST("")
-    fun uploadImageAndOrder(@QueryMap options: Map<String,String>, @Part img: ArrayList<MultipartBody.Part>) : Observable<FinalOrderRequest>
+    @POST("orders")
+    fun uploadImageAndOrder(@QueryMap optionStrings: Map<String,String>, @QueryMap optionsDoubles: Map<String,Double>
+                            , @Query("payment_method") payment_method:Int
+                            , @Part img: ArrayList<MultipartBody.Part>) : Observable<FinalOrderRequest>
 }
 
 fun createOrderRequest(): OrderService {

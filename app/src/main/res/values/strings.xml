@@ -54,4 +54,9 @@
     <string name="trips">Trips</string>
     <string name="history">History</string>
     <string name="upcoming">Upcoming</string>
+    <string name="editProfile">Edit profile</string>
+    <string name="language">Language</string>
+    <string name="changePassword">Change password</string>
+    <string name="paymentMethod">Payment method</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
+import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
 
 /**
@@ -43,6 +44,11 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
 
         signTxt.setOnClickListener{
             startActivity(Intent(this,TripActivity::class.java
+            ))
+        }
+
+        toProfileTxt.setOnClickListener{
+            startActivity(Intent(this,ProfileActivity::class.java
             ))
         }
 
