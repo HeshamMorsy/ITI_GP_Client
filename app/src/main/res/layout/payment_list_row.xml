@@ -17,7 +17,6 @@
             android:id="@+id/carrierImage"
             android:layout_width="61dp"
             android:layout_height="26dp"
-            android:src="@mipmap/ic_launcher"
             android:layout_marginLeft="34dp"/>
 
         <TextView

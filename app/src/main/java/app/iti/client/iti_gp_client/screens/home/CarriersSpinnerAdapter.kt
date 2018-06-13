@@ -53,10 +53,11 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
         var carriers = objects!![position]
         spinnerText.text = carriers.name
         when(position){
-            0 -> spinnerImage.setBackgroundResource(R.mipmap.ic_carriers)
-            1 -> spinnerImage.setBackgroundResource(R.mipmap.ic_fedex)
-            2 -> spinnerImage.setBackgroundResource(R.mipmap.ic_dhl)
-            3 -> spinnerImage.setBackgroundResource(R.mipmap.ic_tnt)
+
+            0 -> spinnerImage.setImageResource(R.mipmap.ic_carriers)
+            1 -> spinnerImage.setImageResource(R.mipmap.ic_fedex)
+            2 -> spinnerImage.setImageResource(R.mipmap.ic_dhl)
+            3 -> spinnerImage.setImageResource(R.mipmap.ic_tnt)
         }
 
         return view
@@ -81,10 +82,10 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
         var carriers = objects!![position]
         spinnerText.text = carriers.name
         when(position){
-            0 -> spinnerImage.setBackgroundResource(R.mipmap.ic_carriers)
-            1 -> spinnerImage.setBackgroundResource(R.mipmap.ic_fedex)
-            2 -> spinnerImage.setBackgroundResource(R.mipmap.ic_dhl)
-            3 -> spinnerImage.setBackgroundResource(R.mipmap.ic_tnt)
+            0 -> spinnerImage.setImageResource(R.mipmap.ic_carriers)
+            1 -> spinnerImage.setImageResource(R.mipmap.ic_fedex)
+            2 -> spinnerImage.setImageResource(R.mipmap.ic_dhl)
+            3 -> spinnerImage.setImageResource(R.mipmap.ic_tnt)
         }
 
         return view
