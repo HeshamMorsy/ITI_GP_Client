@@ -13,3 +13,6 @@ data class SelectCarriers(var img:String,var name:String)
 
 //request order class
 data class RequestOrder(var id:String,var date:String,var time:String,var address:String,var status:String)
+
+//verification Data
+data class VerifyData(var message:String)

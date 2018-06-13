@@ -14,22 +14,29 @@ import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import android.support.design.widget.BottomSheetDialog
+import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.defaultPrefs
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import app.iti.client.iti_gp_client.utilities.alertWithOneButton
+import kotlinx.android.synthetic.main.verification_button_sheet.*
 
 
 class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeListener {
-
-
 
     //creating the presenter for the activity
     var presenter:SignUpInt.Presenter? = null
 
     lateinit var dialouge:AlertDialog
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+//        showVerificationButtonSheet()
         //try navigation drawer
         imageView2.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
@@ -59,6 +66,16 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         userPassword.setOnFocusChangeListener(this)
         userRepassword.setOnFocusChangeListener(this)
     }
+
+    private fun confirmCode() {
+        Log.i("response","show confirm code clicked")
+        var defaultPref = PreferenceHelper.defaultPrefs(this)
+        val auth = defaultPref.get("auth_token","0")
+        Log.i("auth_token",auth)
+        presenter!!.verifyCode(verificationCode.text.toString(),auth!!)
+
+    }
+
     fun gotoLoginPage(){
         val intent = Intent(this, LoginActivity::class.java)
         // start your next activity
@@ -117,13 +134,43 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
     }
 
     override fun showVerificationButtonSheet(){
+        Log.i("response","show verification buttonsheet")
         val mBottomSheetDialog = BottomSheetDialog(this)
         val sheetView = this.layoutInflater.inflate(R.layout.verification_button_sheet, null)
+        //prevent dismiss
+
+
+        var conver = sheetView.findViewById<Button>(R.id.confirmVerification)
+        conver.setOnClickListener{
+            Log.i("response","show confirm code clicked")
+            var defaultPref = PreferenceHelper.defaultPrefs(this)
+            val auth = defaultPref.get("auth_token","0")
+            Log.i("auth_token",auth)
+            presenter!!.verifyCode(sheetView.findViewById<EditText>(R.id.verificationCode).text.toString(),auth!!)
+        }
         mBottomSheetDialog.setContentView(sheetView)
         mBottomSheetDialog.show()
+
+
+//        var touchOutside:View =mBottomSheetDialog.window.findViewById(android.support.design.R.id.touch_outside)
+//        touchOutside.setOnClickListener(null)
+        mBottomSheetDialog.setCancelable(false)
+        mBottomSheetDialog.setCanceledOnTouchOutside(false)
+        //register the confirm code button
+
     }
     override fun errorResponse(msg:String){
         alertWithOneButton(this,"Error Message",msg,"Ok")
 //        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+    }
+    override fun saveAuth_token(auth_token:String){
+        var defaultPref = defaultPrefs(this)
+        defaultPref.setValue("auth_token",auth_token)
+    }
+    override fun navigateToLogin() {
+        val intent = Intent(this, LoginActivity::class.java)
+        // start your next activity
+        startActivity(intent)
+        finish()
     }
 }

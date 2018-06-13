@@ -3,7 +3,9 @@ package app.iti.client.iti_gp_client.screens.signup
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.SignUpInt
 import app.iti.client.iti_gp_client.entities.SignUpData
+import app.iti.client.iti_gp_client.entities.VerifyData
 import app.iti.client.iti_gp_client.services.createSignUpRequest
+import app.iti.client.iti_gp_client.services.createVerifyRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -23,16 +25,35 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
 
     private fun handleResponse(response: SignUpData) {
-        Log.i("response", "response data"+response)
+        Log.i("response", "response data: "+response)
 
         presenter.receiveResponse(response)
     }
 
     private fun handleError(error: Throwable) {
+        Log.i("error", "error receiving data"+error.localizedMessage)
         presenter.receiveErrorResponse()
 
-        Log.i("error", "error receiving data"+error.localizedMessage)
-
 //        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun verify(pin:String,auth:String){
+        Log.i("response","model veriy fn")
+        var verificationRequest = createVerifyRequest()
+        verificationRequest.confirmCode(pin,auth)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleVerificationResponse, this::handleVerificationError)
+
+    }
+
+    private fun handleVerificationResponse(response: VerifyData) {
+        Log.i("response", "response verification data"+response)
+        presenter.handleVerificationResponse(response.message)
+    }
+    private fun handleVerificationError(error: Throwable) {
+        Log.i("error", "error receiving data"+error.localizedMessage)
+        presenter.handleVerificationError()
+
     }
 }

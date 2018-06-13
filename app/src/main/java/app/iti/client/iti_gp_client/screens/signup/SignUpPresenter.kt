@@ -11,6 +11,7 @@ import app.iti.client.iti_gp_client.utilities.isNetworkAvailable
  * Created by Hazem on 5/30/2018.
  */
 class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
+
     val model = SignUpModel(this)
     private var emailValidation = false
     private var phoneValidation = false
@@ -88,16 +89,44 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
     override fun receiveResponse(response: SignUpData){
         view.endLoading()
+        Log.i("response in presenter", response.toString())
         if (response.message.equals("success")){
             val auth_token = response.auth_token
+            view.saveAuth_token(auth_token)
+            view.showVerificationButtonSheet()
+
         }else{
             view.errorResponse(response.message)
         }
-        Log.i("response", response.toString())
+
     }
+
+
     override fun receiveErrorResponse(){
         view.endLoading()
         view.errorResponse("server error")
         Log.i("response", "presenter error response")
+    }
+
+
+    override fun verifyCode(pinCode: String,auth:String) {
+        view.startLoading("verifing code....")
+        model.verify(pinCode,auth)
+    }
+
+
+    override fun handleVerificationResponse(response: String) {
+        view.endLoading()
+        if (response.equals("success")){
+            view.navigateToLogin()
+        }else{
+            view.errorResponse(response)
+        }
+    }
+
+
+    override fun handleVerificationError(){
+        view.endLoading()
+        view.errorResponse("server error")
     }
 }
