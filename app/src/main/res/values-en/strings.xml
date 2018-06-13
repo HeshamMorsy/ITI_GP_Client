@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--application name-->
-    <string name="app_name">Driveo</string>
-    <string name="driveo">D r i v e o</string>
+    <string name="app_name">Wassal</string>
+    <string name="driveo">Wassal</string>
 
     <!--navigation drawer strings-->
     <string name="title_activity_home">HomeActivity</string>
