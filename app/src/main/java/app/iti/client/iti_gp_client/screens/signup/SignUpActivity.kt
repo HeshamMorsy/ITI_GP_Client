@@ -1,7 +1,6 @@
 package app.iti.client.iti_gp_client.screens.signup
 
 import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -16,7 +15,6 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import android.support.design.widget.BottomSheetDialog
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.defaultPrefs
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue

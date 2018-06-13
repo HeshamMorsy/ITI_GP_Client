@@ -16,3 +16,8 @@ data class RequestOrder(var id:String,var date:String,var time:String,var addres
 
 //verification Data
 data class VerifyData(var message:String)
+
+//providers data
+data class ProvidersRequest(var message:String,var providers:Array<Provider>)
+data class Provider(var id:Int,var name: String,var image: Image)
+data class Image(var url:String)

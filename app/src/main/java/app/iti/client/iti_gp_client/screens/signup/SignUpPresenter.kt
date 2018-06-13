@@ -11,8 +11,11 @@ import app.iti.client.iti_gp_client.utilities.isNetworkAvailable
  * Created by Hazem on 5/30/2018.
  */
 class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
+    var model:SignUpInt.Model
+    init {
+         model = SignUpModel(this)
+    }
 
-    val model = SignUpModel(this)
     private var emailValidation = false
     private var phoneValidation = false
     private var passwordValidation = false
