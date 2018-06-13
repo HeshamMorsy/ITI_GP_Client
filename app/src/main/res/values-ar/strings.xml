@@ -1,6 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--application name-->
-    <string name="app_name">Driveo</string>
+    <string name="app_name">ّوصّـــل</string>
     <string name="driveo">D r i v e o</string>
 
     <!--navigation drawer strings-->
@@ -10,11 +10,11 @@
     <string name="action_settings">Settings</string>
 
     <!--login strings-->
-    <string name="signIn">Sign in</string>
-    <string name="forgotPasswor">Forgot my password</string>
-    <string name="login">Login</string>
-    <string name="noAccount">Don\'t have an account?</string>
-    <string name="registerNow">\tregister now</string>
+    <string name="signIn">الدخول</string>
+    <string name="forgotPasswor">نسيت كلمة السر</string>
+    <string name="login">الدخول</string>
+    <string name="noAccount">ليس لديّ حساب؟</string>
+    <string name="registerNow">\tالتسجيل الآن</string>
 
     <!--forgot password strings-->
     <string name="forgot_content">enter the email address associated with your account, and we\'ll email you a link to reset your password</string>
@@ -54,11 +54,11 @@
     <string name="trips">Trips</string>
     <string name="history">History</string>
     <string name="upcoming">Upcoming</string>
-    <string name="editProfile">Edit profile</string>
-    <string name="language">Language</string>
-    <string name="changePassword">Change password</string>
-    <string name="paymentMethod">Payment method</string>
-    <string name="logout">Logout</string>
+    <string name="editProfile">تعديل الصفحة الشخصية</string>
+    <string name="language">اللغة</string>
+    <string name="changePassword">تغيير كلمة السر</string>
+    <string name="paymentMethod">طرق الدفع</string>
+    <string name="logout">الخروج</string>
     <string name="about">About</string>
     <string name="dummy">this is dummy data until we get data from the backend.. So we will wait until they finish and get data from our api .. Okay?! :D</string>
     <string name="oldPassword">Old password</string>
@@ -68,7 +68,6 @@
     <string name="changeEmail">Change email</string>
     <string name="changePhone">Change phone</string>
     <string name="changeImage">Change Image</string>
-    <string name="english">English</string>
-    <string name="arabic">Arabic</string>
-    <string name="soonToast">This part will be in the future plan ..</string>
+    <string name="english">الانجليزية</string>
+    <string name="arabic">العربية</string>
 </resources>

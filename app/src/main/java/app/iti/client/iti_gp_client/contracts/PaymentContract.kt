@@ -4,6 +4,7 @@ import android.graphics.Bitmap
 import app.iti.client.iti_gp_client.entities.FinalOrderRequest
 import app.iti.client.iti_gp_client.screens.payment.*
 import app.iti.client.iti_gp_client.entities.Order
+import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.entities.OrderToBeSent
 
 /**
@@ -23,7 +24,7 @@ interface PaymentContract {
 
     interface Presenter {
         fun initPresenter(view: View)
-        fun receiveResponse(response: FinalOrderRequest)
+        fun receiveResponse(response: OrderResponse)
         fun errorResponse(error: Throwable)
         fun prepareOrderAndSend(order: Order)
     }

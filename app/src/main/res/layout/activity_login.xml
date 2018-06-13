@@ -101,6 +101,7 @@
         android:id="@+id/login_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:maxHeight="50dp"
         android:layout_marginBottom="22dp"
         android:layout_marginEnd="60dp"
         android:layout_marginStart="60dp"
