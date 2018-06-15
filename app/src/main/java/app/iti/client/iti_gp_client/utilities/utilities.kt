@@ -7,6 +7,8 @@ import android.net.NetworkInfo
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLConnection
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by Hazem on 6/2/2018.
@@ -32,3 +34,15 @@ fun isNetworkAvailable(context: Context):Boolean{
     return isConnected
 }
 
+fun formatDateTime(cal:Calendar):String{
+    val sdfDay   = SimpleDateFormat("dd")
+    val sdfMonth = SimpleDateFormat("MM")
+    val sdfYear  = SimpleDateFormat("yyyy")
+    val sdfHour = SimpleDateFormat("HH")
+    val sdfMinute = SimpleDateFormat("mm")
+    val sdfSec = SimpleDateFormat("ss")
+
+    return sdfYear.format(cal.get(Calendar.YEAR)) + "-" + sdfMonth.format(cal.get(Calendar.MONTH)) + "-" + sdfDay.format(cal.get(Calendar.DAY_OF_MONTH))+
+            " " +
+            sdfHour.format(cal.get(Calendar.HOUR_OF_DAY)) + ":" + sdfMinute.format(cal.get(Calendar.MINUTE)) + ":" + sdfSec.format(cal.get(Calendar.SECOND))
+}

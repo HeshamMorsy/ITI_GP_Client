@@ -36,7 +36,7 @@
                 android:layout_marginTop="20dp"
                 android:background="@drawable/edit_text_style"
                 android:drawableLeft="@drawable/drawable_left"
-                android:hint="enter the pick up location"
+                android:hint="select pickup"
                 android:paddingRight="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -48,8 +48,8 @@
                 android:layout_width="27dp"
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginTop="26dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:src="@mipmap/ic_close_search" />
@@ -133,7 +133,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:text="TextView"
+                        android:text="pickup location"
+                        style="@style/sub_header"
+                        android:singleLine="true"
                         tools:layout_editor_absoluteX="271dp"
                         tools:layout_editor_absoluteY="407dp" />
 

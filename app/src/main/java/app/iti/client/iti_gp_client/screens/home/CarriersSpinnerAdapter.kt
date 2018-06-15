@@ -8,12 +8,13 @@ import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.entities.SelectCarriers
 
 /**
  * Created by Hazem on 6/7/2018.
  */
-class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var objects: MutableList<SelectCarriers>?) : ArrayAdapter<SelectCarriers>(context1, resource, objects) {
+class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var objects: MutableList<Provider>?) : ArrayAdapter<Provider>(context1, resource, objects) {
 
     var mInflater = LayoutInflater.from(context)
 

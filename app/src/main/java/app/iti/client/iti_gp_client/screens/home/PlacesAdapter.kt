@@ -16,14 +16,30 @@ import com.google.android.gms.location.places.Places
 import kotlinx.android.synthetic.main.searchview_adapter.view.*
 import java.util.ArrayList
 import java.util.concurrent.TimeUnit
+import android.R.attr.data
+
+
 
 /**
  * Created by Hazem on 6/4/2018.
  */
-class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient: GoogleApiClient,var mBounds:LatLngBounds,var mPlaceFilter: AutocompleteFilter?): RecyclerView.Adapter<PlacesAdapter.PredictionHolder>(), Filterable {
+class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient: GoogleApiClient,var mBounds:LatLngBounds,var mPlaceFilter: AutocompleteFilter?):
+        RecyclerView.Adapter<PlacesAdapter.PredictionHolder>(),
+        Filterable {
+
+    private var mResultList: ArrayList<PlaceAutocomplete>? = null
 
 
+    fun clearPlacesData(){
+        val size = mResultList!!.size
+        if (size > 0) {
+            for (i in 0 until size) {
+                mResultList!!.removeAt(0)
+            }
 
+            notifyItemRangeRemoved(0, size)
+        }
+    }
 
     override fun onBindViewHolder(holder: PredictionHolder, position: Int) {
         holder.placeAddress.setText(mResultList!!.get(position).description)
@@ -45,7 +61,7 @@ class PlacesAdapter(val mContext: Context,val resource:Int,var mGoogleApiClient:
         else 0
     }
 
-    private var mResultList: ArrayList<PlaceAutocomplete>? = null
+
 
 
     override fun getFilter(): Filter {

@@ -90,6 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
+                android:singleLine="true"
                 android:text="selected from past activity" />
 
             <TextView
@@ -104,7 +105,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="not selected yet" />
+                android:text="not selected yet"
+                android:singleLine="true"/>
         </LinearLayout>
 
         <LinearLayout
