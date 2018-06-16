@@ -84,6 +84,7 @@ class LoginPresenter : Presenter {
         }else if(response.message == "sorry this account is not yet verified"){
             val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,
                     response.message)
+            alert.setCancelable(false)
             alert.setPositiveButton((mView as Activity).resources.getString(R.string.ok) ,DialogInterface.OnClickListener{dialog, which ->
                 alert.setCancelable(true)
                 mView?.goToSignUpScreen()

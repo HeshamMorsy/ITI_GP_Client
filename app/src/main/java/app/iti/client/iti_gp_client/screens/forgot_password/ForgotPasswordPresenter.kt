@@ -4,7 +4,6 @@ import android.app.Activity
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
 import app.iti.client.iti_gp_client.entities.ForgotPasswordResponse
-import app.iti.client.iti_gp_client.entities.LoginResponse
 import java.util.regex.Pattern
 
 /**
@@ -54,10 +53,12 @@ class ForgotPasswordPresenter : Presenter {
     }
 
     override fun receiveResponse(response: ForgotPasswordResponse) {
-        mView?.endLoading()
+        mView?.endLoading(response.message)
     }
 
-    override fun errorResponse() {
-        mView?.endLoading()
+    override fun errorResponse(error: String) {
+        if(error == (mView as Activity).resources.getString(R.string.notFound)) {
+            mView?.endLoading((mView as Activity).resources.getString(R.string.emailNotFound))
+        }
     }
 }

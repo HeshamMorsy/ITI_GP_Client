@@ -18,7 +18,8 @@ class LoginModel(val presenter: LoginPresenter, val user_auth: String ) : Model 
     // check if the user email and password exists and matches in the login api
     override fun requestToApi(email: String, password: String) {
         val loginRequest = createLoginRequest()
-//        loginRequest.auth = user_auth
+
+        // set user data in a hash map to send it in a map query
         val options:Map<String, String> = hashMapOf("email" to email, "password" to password)
 
             loginRequest.getTokin(options)

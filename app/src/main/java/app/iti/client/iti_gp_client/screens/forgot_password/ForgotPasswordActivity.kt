@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
 import kotlinx.android.synthetic.main.activity_forgot_password.*
@@ -16,20 +17,20 @@ import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 class ForgotPasswordActivity : AppCompatActivity(), View{
     // reference to presenter
-    var mPresenter:Presenter? = null
-    var dialog:AlertDialog? = null
+    private lateinit var mPresenter:Presenter
+    private lateinit var dialog:AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_forgot_password)
         // initialize the presenter as ForgotPasswordPresenter
         mPresenter = ForgotPasswordPresenter()
-        mPresenter?.initPresenter(this)
+        mPresenter.initPresenter(this)
 
         // set on click on send reset link button
         forgot_sendResetBtn.setOnClickListener {
             val email = forgot_emailEditText.text.toString()
-            mPresenter?.sendResetBtnEvent(email)
+            mPresenter.sendResetBtnEvent(email)
 //            mPresenter?.isEmailValid(forgot_emailEditText.text.toString())
         }
     }
@@ -47,12 +48,13 @@ class ForgotPasswordActivity : AppCompatActivity(), View{
         builder.setView(dialougeView)
         builder.setCancelable(false)
         dialog = builder.create()
-        dialog?.show()
+        dialog.show()
     }
 
-    override fun endLoading(){
+    override fun endLoading(result: String){
+        Toast.makeText(this, result,Toast.LENGTH_SHORT).show()
         Log.i("response", "end loading function")
-        dialog?.dismiss()
+        dialog.dismiss()
     }
 
 }

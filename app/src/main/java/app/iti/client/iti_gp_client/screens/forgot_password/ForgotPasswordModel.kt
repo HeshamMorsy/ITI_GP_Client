@@ -1,7 +1,7 @@
 package app.iti.client.iti_gp_client.screens.forgot_password
 
 import android.util.Log
-import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.Model
+import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
 import app.iti.client.iti_gp_client.entities.ForgotPasswordResponse
 import app.iti.client.iti_gp_client.services.createForgotPasswordRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -28,9 +28,8 @@ class ForgotPasswordModel(val presenter: ForgotPasswordPresenter) : Model {
     }
 
     private fun handleError(error: Throwable) {
-        Log.i("error Response", "error receiving data"+error.message)
-        presenter.errorResponse()
-//        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
+        Log.i("error Response", "error receiving data "+error.message)
+        presenter.errorResponse(error.message+"")
     }
 
 

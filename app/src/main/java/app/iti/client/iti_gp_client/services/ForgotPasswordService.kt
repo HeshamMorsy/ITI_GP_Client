@@ -11,7 +11,7 @@ import retrofit2.http.QueryMap
  * interface to represent the service that get pin code from api
  */
 interface ForgotPasswordService {
-    @POST("authenticate/forgotpassword")
+    @POST("authentication/forgotpassword")
     fun getPassword(@QueryMap options:Map<String, String> ) : Observable<ForgotPasswordResponse>
 }
 

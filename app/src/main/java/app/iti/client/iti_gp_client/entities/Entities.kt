@@ -14,7 +14,8 @@ import java.util.*
 //login data classes
 data class LoginUserData(val email:String,var password:String)
 data class LoginResponse(val message: String, val auth_token:String)
-data class ForgotPasswordResponse(val message: String, val reset_token: String)
+//data class ForgotPasswordResponse(val message: String, val reset_token: String) // old api
+data class ForgotPasswordResponse(val message: String)
 data class Order(val title: String, val description: String, val paths: ArrayList<String>) : Serializable
 // for payment list view
 data class Payment(val paymentMethod:String, val status: String, val Rid: Int)
@@ -31,6 +32,15 @@ data class Driver(val id: Int, val latitude: Double, val longitude: Double , val
 data class OrderResponse(val message: String
 //                         , val driver: Driver
                         )
+
+
+// responses of edit profile api
+data class EditProfileResponse(val result: String)
+// response of change password api
+data class ChangePasswordResponse(val result: String)
+// response of about api
+data class AboutResponse(val result: String)
+
 
 /*
 {

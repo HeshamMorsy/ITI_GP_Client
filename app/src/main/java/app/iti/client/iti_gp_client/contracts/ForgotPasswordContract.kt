@@ -16,7 +16,7 @@ interface ForgotPasswordContract {
     interface View {
         fun setEmailError(error:String)
         fun startLoading(mes:String)
-        fun endLoading()
+        fun endLoading(result: String)
     }
 
     interface Presenter {
@@ -24,6 +24,6 @@ interface ForgotPasswordContract {
         fun isEmailValid(email:String)
         fun sendResetBtnEvent(email: String)
         fun receiveResponse(response: ForgotPasswordResponse)
-        fun errorResponse()
+        fun errorResponse(error: String)
     }
 }
