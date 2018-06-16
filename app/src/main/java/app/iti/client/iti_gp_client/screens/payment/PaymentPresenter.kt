@@ -1,27 +1,20 @@
 package app.iti.client.iti_gp_client.screens.payment
 
-import android.graphics.Bitmap
-import app.iti.client.iti_gp_client.contracts.PaymentContract.*
-import android.graphics.BitmapFactory
-import android.os.Build
-import android.support.annotation.RequiresApi
-import android.util.Base64.encodeToString
+import android.app.Activity
 import android.util.Log
 import android.widget.Toast
-import app.iti.client.iti_gp_client.entities.FinalOrderRequest
+import app.iti.client.iti_gp_client.contracts.PaymentContract.*
 import app.iti.client.iti_gp_client.entities.Order
 import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.entities.OrderToBeSent
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
-import android.os.Environment.DIRECTORY_DCIM
-import android.os.Environment.getExternalStoragePublicDirectory
-import java.time.LocalDateTime
 
 
 /**
@@ -58,31 +51,62 @@ class PaymentPresenter : Presenter {
         // the object of order entity to be sent to backend
         val orderToBeSent = OrderToBeSent(order.title,getCurrentDateTime().toString() ,1,50,"cash",imgArrayToSend
                 ,0.0,0.0,0.0 ,0.0)
-        mModel?.uploadOrderData(orderToBeSent)
+        // get auth_token from sharedPreferences
+        val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
+        val auth = defaultPref.get("auth_token","0")
+        Toast.makeText((mView as Activity),auth,Toast.LENGTH_SHORT).show()
+        mModel?.uploadOrderData(orderToBeSent, auth!!)
 
 
     }
 
+//    // prepare image paths as MultiPartBody.Part to send it to the backend
+//    private fun createMultiPartBody(paths: ArrayList<String>): ArrayList<MultipartBody.Part> {
+//        val multipartBodyArr:ArrayList<MultipartBody.Part> = ArrayList()
+////        val map = HashMap<String, RequestBody>()
+//        for (path in paths){
+//            // create file from path
+//            val file = File(path)
+//            // create RequestBody to parse the file into mutlipart/form-data
+//            val requestBody = RequestBody.create(MediaType.parse("*/*"),file)
+//
+////            map.put("file\"; filename=\""+file.name+"\"", requestBody)
+//
+//            // create the MultiPartBody.Part as this type will be sent to the backEnd
+//            val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
+//            multipartBodyArr.add(multipartBody)
+//            Toast.makeText(mView as PaymentActivity, "file name:${file.name}",Toast.LENGTH_LONG).show()
+//            Toast.makeText(mView as PaymentActivity, "array index:${multipartBodyArr[0]}",Toast.LENGTH_LONG).show()
+//        }
+//
+//        return multipartBodyArr
+////        return map
+//    }
+
+
+
     // prepare image paths as MultiPartBody.Part to send it to the backend
-    private fun createMultiPartBody(paths: ArrayList<String>): HashMap<String, RequestBody>{
+    private fun createMultiPartBody(paths: ArrayList<String>): HashMap<String,ArrayList<MultipartBody.Part>> {
+        // create
         val multipartBodyArr:ArrayList<MultipartBody.Part> = ArrayList()
-        val map = HashMap<String, RequestBody>()
         for (path in paths){
+
             // create file from path
             val file = File(path)
+
             // create RequestBody to parse the file into mutlipart/form-data
             val requestBody = RequestBody.create(MediaType.parse("*/*"),file)
-
-            map.put("file\"; filename=\""+file.name+"\"", requestBody)
 
             // create the MultiPartBody.Part as this type will be sent to the backEnd
             val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
             multipartBodyArr.add(multipartBody)
+
             Toast.makeText(mView as PaymentActivity, "file name:${file.name}",Toast.LENGTH_LONG).show()
             Toast.makeText(mView as PaymentActivity, "array index:${multipartBodyArr[0]}",Toast.LENGTH_LONG).show()
         }
+        val map: HashMap<String,ArrayList<MultipartBody.Part>> =
+                hashMapOf("images" to multipartBodyArr)
 
-//        return multipartBodyArr
         return map
     }
 

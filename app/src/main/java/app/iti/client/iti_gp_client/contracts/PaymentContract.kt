@@ -13,7 +13,7 @@ import app.iti.client.iti_gp_client.entities.OrderToBeSent
  */
 interface PaymentContract {
     interface Model {
-        fun uploadOrderData(finalOrder: OrderToBeSent)
+        fun uploadOrderData(finalOrder: OrderToBeSent, auth: String)
     }
 
     interface View {

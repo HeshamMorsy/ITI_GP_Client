@@ -3,11 +3,13 @@ package app.iti.client.iti_gp_client.screens.login
 import android.app.Activity
 import android.content.DialogInterface
 import android.util.Log
+import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.entities.LoginResponse
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
 import app.iti.client.iti_gp_client.utilities.getAlertDialog
 import java.util.regex.Pattern
 
@@ -28,10 +30,8 @@ class LoginPresenter : Presenter {
     override fun initPresenter(view: View) {
         // initializing mView as LoginActivity and mModel as LoginModel
         mView = view
-        // get auth_token from sharedPreferences
-        val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
-        val auth = defaultPref.get("auth_token","0")
-        mModel= LoginModel(this,auth!!)
+
+        mModel= LoginModel(this)
     }
 
     // send email and password to model to check if the user email and password exists and matches in the login api
@@ -80,6 +80,9 @@ class LoginPresenter : Presenter {
     override fun receiveResponse(response: LoginResponse) {
         mView?.endLoading()
         if(response.message == "success") {
+            val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
+            defaultPref.setValue("auth_token",response.auth_token)
+            Toast.makeText((mView as Activity),response.auth_token,Toast.LENGTH_SHORT).show()
             mView?.goToHomeScreen()
         }else if(response.message == "sorry this account is not yet verified"){
             val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,

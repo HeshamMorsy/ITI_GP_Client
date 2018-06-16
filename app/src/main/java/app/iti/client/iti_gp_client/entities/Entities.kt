@@ -5,6 +5,8 @@ import okhttp3.RequestBody
 import java.io.Serializable
 import java.sql.Driver
 import java.util.*
+import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 
 
 /**
@@ -23,7 +25,7 @@ data class Payment(val paymentMethod:String, val status: String, val Rid: Int)
 data class FinalOrderRequest(val images: ArrayList<MultipartBody.Part>, val orderData: Order)
 data class ProfileOption(val optionTitle: String, val arrowImage: Int, val language: String)
 data class OrderToBeSent(val title: String, val time: String, val provider_id: Int, val weight: Int, val payment_method: String,
-                         val images: Map<String,RequestBody>, val src_latitude: Double, val src_longitude: Double,
+                         val images: HashMap<String,ArrayList<MultipartBody.Part>>, val src_latitude: Double, val src_longitude: Double,
                          val dest_latitude: Double, val dest_longitude: Double)
 // submitting order data response model
 data class Driver(val id: Int, val latitude: Double, val longitude: Double , val name: String, val phone: String

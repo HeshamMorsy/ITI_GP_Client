@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
  * Created by Hesham on 5/29/2018.
  * Responsible for checking if the email and password exists and matches together in the login api, if requested from LoginPresenter
  */
-class LoginModel(val presenter: LoginPresenter, val user_auth: String ) : Model {
+class LoginModel(val presenter: LoginPresenter) : Model {
 
     // check if the user email and password exists and matches in the login api
     override fun requestToApi(email: String, password: String) {
