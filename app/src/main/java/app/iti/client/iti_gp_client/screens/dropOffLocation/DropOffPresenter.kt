@@ -27,9 +27,9 @@ class DropOffPresenter(var view:DropOff.View):DropOff.Presenter {
     }
 
     override fun updateDestLocation(longitude: Double, latitude: Double, add: String) {
-        RequestCreation.src_latitude = latitude
-        RequestCreation.src_longitude = longitude
-        RequestCreation.src_address = add
+        RequestCreation.dest_latitude = latitude
+        RequestCreation.dest_longitude = longitude
+        RequestCreation.dest_address = add
         validDestination = true
     }
     override fun handleRequest(){
