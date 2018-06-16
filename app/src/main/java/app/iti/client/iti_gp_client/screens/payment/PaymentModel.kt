@@ -40,7 +40,7 @@ class PaymentModel(val presenter: PaymentPresenter) : Model {
                 .subscribe(this::handleResponse, this::handleError)
                 */
 
-        orderRequest.uploadData("eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo2LCJleHAiOjE1MzE1MjA5Njd9.11rsqDPO1FuLbuKknOprO5jK10Xu7uasTy4eo3TqL_0" ,finalOrder.title, finalOrder.time, finalOrder.provider_id, finalOrder.images, finalOrder.weight,
+        orderRequest.uploadData(auth ,finalOrder.title, finalOrder.time, finalOrder.provider_id, finalOrder.images, finalOrder.weight,
                 finalOrder.payment_method, finalOrder.src_latitude, finalOrder.src_longitude, finalOrder.dest_latitude,
                 finalOrder.dest_longitude)
                 .observeOn(AndroidSchedulers.mainThread())
