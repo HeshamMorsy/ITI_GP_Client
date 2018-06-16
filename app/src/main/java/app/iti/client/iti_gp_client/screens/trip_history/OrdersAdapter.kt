@@ -47,7 +47,7 @@ class OrdersAdapter(private val orders: ArrayList<RequestOrder>): RecyclerView.A
         }
         fun bindOrder(order: RequestOrder) {
             this.order = order
-            view.orderId.text = order.id
+            view.orderId.text = "id#"+order.id
             view.orderDate.text = order.date
             view.orderTime.text = order.time
             view.orderAddress.text = order.address

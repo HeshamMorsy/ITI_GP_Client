@@ -40,15 +40,15 @@ class HistoryFragment : Fragment() {
         activeLinearLayoutManager = LinearLayoutManager(context)
         pastrecyclerView.layoutManager = pastLinearLayoutManager
         histActiverecyclerView.layoutManager = activeLinearLayoutManager
-        var activeOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
+        var activeOrders = arrayListOf<RequestOrder>(RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
 
         var pastOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Delivered"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Cancelled"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Delivered"))
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"),
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Cancelled"),
+                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"))
         pastAdapter = OrdersAdapter(pastOrders)
         activeAdapter = OrdersAdapter(activeOrders)
         pastrecyclerView.adapter = pastAdapter

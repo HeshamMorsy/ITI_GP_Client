@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="5dp"
+    android:layout_marginTop="5dp">
 
     <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -24,9 +26,11 @@
                 xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_margin="0dp"
+                android:layout_marginBottom="10dp"
                 card_view:contentPadding="0dp"
-                card_view:cardCornerRadius="10dp">
+                card_view:cardCornerRadius="10dp"
+                card_view:cardElevation="8dp"
+                >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,6 +42,7 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:paddingLeft="25dp"
                         android:orientation="vertical"
                         android:weightSum="2">
 
@@ -49,18 +54,25 @@
 
                             <TextView
                                 android:id="@+id/orderDate"
+                                android:textColor="#4b4668"
+                                android:textSize="15.3sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="07 Apr 2018" />
 
                             <TextView
+                                android:textSize="12sp"
+                                android:textColor="#4b4668"
                                 android:id="@+id/orderTime"
+                                android:layout_marginLeft="4dp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="03:13AM" />
                         </LinearLayout>
 
                         <TextView
+                            android:textColor="#818c9e"
+                            android:textSize="12sp"
                             android:id="@+id/orderAddress"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
@@ -76,21 +88,41 @@
                         android:weightSum="2">
 
                         <TextView
+                            android:layout_marginRight="16dp"
+                            android:textColor="#ffc599"
+                            android:textSize="15.36sp"
                             android:id="@+id/orderId"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:gravity="bottom"
+                            android:gravity="right|bottom"
                             android:text="id#2454" />
                     </LinearLayout>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="pending" />
+                android:layout_height="wrap_content"
+                android:weightSum="5"
+                android:orientation="horizontal">
+                <TextView
+                    android:textSize="8.7sp"
+                    android:textColor="#ff8330"
+                    android:layout_width="0dp"
+                    android:layout_weight="3"
+                    android:layout_height="50dp"
+                    android:paddingLeft="25dp"
+                    android:text="pending" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="2"
+                    android:layout_height="50dp"
+                    android:paddingLeft="10dp"
+                    android:text="34.00Le" />
+            </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -105,7 +137,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="24dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_carriers"
+            android:src="@mipmap/ic_payment_cash"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
