@@ -21,6 +21,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
     private var passwordValidation = false
     private var repasswordValidation = false
 
+
     override fun signUp(phone:String,email:String,pass:String,repass:String){
 
         if (isNetworkAvailable(view as Context)){
@@ -132,4 +133,5 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         view.endLoading()
         view.errorResponse("server error")
     }
+
 }

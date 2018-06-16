@@ -10,9 +10,14 @@ interface DropOff {
     interface Presenter{
         fun editDistinationLocation()
         fun editPickUpLocation()
+        fun updatePickUpLocation(longitude: Double, latitude: Double, add: String)
+        fun updateDestLocation(longitude: Double, latitude: Double, add: String)
+        fun handleRequest()
     }
     interface View{
+        fun startOrderDetails()
         fun editDistinationLocation()
         fun editPickUpLocation()
+        fun displayError(msg: String)
     }
 }

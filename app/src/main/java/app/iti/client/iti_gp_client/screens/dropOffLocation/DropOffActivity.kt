@@ -7,15 +7,15 @@ import android.view.View
 import app.iti.client.iti_gp_client.R
 import kotlinx.android.synthetic.main.activity_drop_off.*
 import android.content.Intent
+import android.util.Log
 import com.google.android.gms.location.places.ui.PlacePicker
 import android.widget.Toast
 import app.iti.client.iti_gp_client.contracts.DropOff
+import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
+import app.iti.client.iti_gp_client.utilities.RequestCreation
 
 
-
-
-
-class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View {
+class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View{
 
     //ref to the presenter of the activity
     var presenter:DropOff.Presenter? = null
@@ -29,20 +29,32 @@ class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_drop_off)
-
+        //check the Registrition request
+        pickUpName.setText(RequestCreation.src_address)
+        checkRequest()
         //register the pickup and distnation buttons
         editPickUp.setOnClickListener(this)
         editDistination.setOnClickListener(this)
 
+        //regester the complete order button
+        requestNext.setOnClickListener(this)
+
         //create the presenter for the activity
         presenter = DropOffPresenter(this)
     }
+
+    private fun checkRequest() {
+        Log.i("requestObject",RequestCreation.toString())
+    }
+
     override fun onClick(v: View?) {
         when(v?.id){
             //when editpickup clicked
-            R.id.editPickUp -> editPickUpLocation()
+            R.id.editPickUp -> presenter!!.editPickUpLocation()
             //when edit distnition clicked
-            R.id.editDistination -> editDistinationLocation()
+            R.id.editDistination -> presenter!!.editDistinationLocation()
+
+            R.id.requestNext -> presenter!!.handleRequest()
         }
     }
 
@@ -61,7 +73,7 @@ class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (requestCode == PLACE_PICKER_REQUEST) {
+        if (requestCode == PLACE_PICKER_REQUEST && data!=null) {
             if (resultCode == Activity.RESULT_OK) {
                 val place = PlacePicker.getPlace(this,data)
                 pickUpLat = place.latLng.latitude
@@ -69,8 +81,9 @@ class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View {
                 val toastMsg = String.format("Place1: %s", place.name)
                 pickUpName.text = place.name
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show()
+                presenter!!.updatePickUpLocation(pickUpLong!!,pickUpLat!!,place.name.toString())
             }
-        }else if(requestCode == PLACE_DISTINATION_REQUEST){
+        }else if(requestCode == PLACE_DISTINATION_REQUEST && data !=null){
             if (resultCode == Activity.RESULT_OK){
                 val place = PlacePicker.getPlace(this, data)
                 distLat = place.latLng.latitude
@@ -78,7 +91,17 @@ class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View {
                 distName.text = place.name
                 val toastMsg = String.format("Place2: %s", place.name)
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show()
+                presenter!!.updateDestLocation(distLong!!,distLat!!,place.name.toString())
             }
         }
+    }
+
+    override fun startOrderDetails(){
+        val requestIntent = Intent(this, OrderActivity::class.java)
+        // start your next activity
+        startActivity(requestIntent)
+    }
+    override fun displayError(msg:String){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
     }
 }
