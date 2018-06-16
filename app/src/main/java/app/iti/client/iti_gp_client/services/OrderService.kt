@@ -3,11 +3,13 @@ package app.iti.client.iti_gp_client.services
 import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.utilities.RetrofitCreation
 import io.reactivex.Observable
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 import retrofit2.http.*
 import java.time.LocalDateTime
 import java.util.*
+import kotlin.collections.HashMap
 
 interface OrderService {
     // @FormUrlEncoded
@@ -19,8 +21,8 @@ interface OrderService {
                             , @Part img: ArrayList<MultipartBody.Part>) : Observable<OrderResponse>*/
     @Multipart
     @POST("orders")
-    fun uploadData(@Query("title") title: String, @Query("time") time: String,
-                   @Query("provider_id") provider_id: Int, @PartMap img: Map<String,@JvmSuppressWildcards RequestBody>,
+    fun uploadData(@Header("Authorization") auth: String, @Query("title") title: String, @Query("time") time: String,
+                   @Query("provider_id") provider_id: Int, @PartMap images: HashMap<String,ArrayList<MultipartBody.Part>>,
                    @Query("weight") weight: Int, @Query("payment_method") payment_method: String,
                    @Query("src_latitude") src_latitude: Double, @Query("src_longitude") src_longitude: Double,
                    @Query("dest_latitude") dest_latitude: Double, @Query("dest_longitude") dest_longitude: Double)

@@ -65,7 +65,7 @@ class OrderPresenter : Presenter {
                 Manifest.permission.READ_EXTERNAL_STORAGE)
         if(checkPermission != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions((mView as Activity),
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_GALARY_REQUEST!!)
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_GALARY_REQUEST)
         }else{
             Log.i("Permission","Read External Storage Granted")
             check = true
