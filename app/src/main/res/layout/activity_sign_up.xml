@@ -9,11 +9,11 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="65dp"
+        android:layout_width="@dimen/logo_width"
         android:layout_height="48dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="@dimen/image_margin_top"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -21,17 +21,18 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout2"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/edit_width"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="@dimen/edit_margin_top1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
         <EditText
             android:id="@+id/userPhone"
+            style="@style/editText_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -44,17 +45,18 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/edit_width"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/edit_margin_top2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <EditText
             android:id="@+id/userEmail"
+            style="@style/editText_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -68,17 +70,18 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout3"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/edit_width"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/edit_margin_top2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <EditText
             android:id="@+id/userPassword"
+            style="@style/editText_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -90,17 +93,18 @@
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/textInputLayout4"
-        android:layout_width="260dp"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/edit_width"
+        android:layout_height="0dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/edit_margin_top2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <EditText
             android:id="@+id/userRepassword"
+            style="@style/editText_style"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -123,12 +127,12 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
 
     <LinearLayout
-        android:layout_width="260dp"
+        android:layout_width="@dimen/btn_width"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="496dp"
+        android:layout_marginTop="@dimen/already_login_top"
         android:orientation="horizontal"
         android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -136,19 +140,22 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
+            android:textSize="@dimen/small_txt_size"
             android:id="@+id/textView2"
             android:layout_width="0dp"
-            android:layout_height="20dp"
+            android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:layout_marginRight="5dp"
             android:gravity="right"
             android:text="already have an account?"
             tools:layout_editor_absoluteX="80dp"
             tools:layout_editor_absoluteY="556dp" />
 
         <TextView
+            android:textSize="@dimen/small_txt_size"
             android:id="@+id/loginLabel"
             android:layout_width="0dp"
-            android:layout_height="15dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="1"
             android:gravity="left"

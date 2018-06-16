@@ -34,7 +34,10 @@ import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.entities.SelectCarriers
+import app.iti.client.iti_gp_client.screens.about.AboutActivity
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
+import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
+import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
 import app.iti.client.iti_gp_client.utilities.formatDateTime
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -307,23 +310,24 @@ class HomeActivity : AppCompatActivity(),
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_camera -> {
-                // Handle the camera action
+            R.id.nav_home -> {
+                // close the navigationViewer
+                drawer_layout.closeDrawer(Gravity.LEFT)
             }
-            R.id.nav_gallery -> {
-
+            R.id.nav_myOrders -> {
+                val myOrdersIntent = Intent(this, TripActivity::class.java)
+                // start the orders history activity
+                startActivity(myOrdersIntent)
             }
-            R.id.nav_slideshow -> {
-
+            R.id.nav_profile -> {
+                val profileIntent = Intent(this, ProfileActivity::class.java)
+                // start profile activity
+                startActivity(profileIntent)
             }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
+            R.id.nav_about -> {
+                val aboutIntent = Intent(this, AboutActivity::class.java)
+                // start about activity
+                startActivity(aboutIntent)
             }
         }
 

@@ -20,4 +20,9 @@
     <dimen name="circled_image_width">99dp</dimen>
     <dimen name="circled_image_height">99dp</dimen>
     <dimen name="verification_font">36sp</dimen>
+    <!--signup dimens-->
+    <dimen name="image_margin_top">60dp</dimen>
+    <dimen name="edit_margin_top1">36dp</dimen>
+    <dimen name="edit_margin_top2">12dp</dimen>
+    <dimen name="already_login_top">476dp</dimen>
 </resources>
