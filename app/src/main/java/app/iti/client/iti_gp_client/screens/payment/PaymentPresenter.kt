@@ -9,12 +9,16 @@ import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.entities.OrderToBeSent
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import app.iti.client.iti_gp_client.utilities.RequestCreation
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import java.io.File
 import java.util.*
 import kotlin.collections.ArrayList
+import android.graphics.Bitmap
+import java.io.ByteArrayOutputStream
+import kotlin.collections.HashMap
 
 
 /**
@@ -35,7 +39,8 @@ class PaymentPresenter : Presenter {
 
     override fun receiveResponse(response: OrderResponse) {
         Log.i("Response status","data sent")
-        Toast.makeText(mView as PaymentActivity, "data sent",Toast.LENGTH_SHORT).show()
+        Log.i("Response status",response.message)
+        Toast.makeText(mView as PaymentActivity, response.message ,Toast.LENGTH_SHORT).show()
     }
 
     override fun errorResponse(error: Throwable) {
@@ -44,18 +49,25 @@ class PaymentPresenter : Presenter {
     }
 
     override fun prepareOrderAndSend(order: Order) {
-        val imgArrayToSend = createMultiPartBody(order.paths)
-//        val arr: Array<MultipartBody.Part> = arrayOf(imgArrayToSend[0])
-//        val imageArray :
-//        val finalOrderRequest = FinalOrderRequest(arrayToSend,order)
-        // the object of order entity to be sent to backend
-        val orderToBeSent = OrderToBeSent(order.title,getCurrentDateTime().toString() ,1,50,"cash",imgArrayToSend
-                ,0.0,0.0,0.0 ,0.0)
+        RequestCreation.images = createMultiPartBody(order.paths)
+        RequestCreation.payment_method = "cash"
+        RequestCreation.weight = 10
+        // be5 ay 7aga
+        RequestCreation.title = "be5"
+        RequestCreation.time = "2018-12-5 12:30:35"
+        RequestCreation.src_latitude = 31.2
+        RequestCreation.src_longitude = 31.2
+        RequestCreation.dest_latitude = 32.2
+        RequestCreation.dest_longitude = 32.2
+        RequestCreation.provider_id = 1
+        RequestCreation.description = "fdmsfds"
+        Log.i("Order before upload",RequestCreation.toString())
+
         // get auth_token from sharedPreferences
         val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
         val auth = defaultPref.get("auth_token","0")
         Toast.makeText((mView as Activity),auth,Toast.LENGTH_SHORT).show()
-        mModel?.uploadOrderData(orderToBeSent, auth!!)
+        mModel?.uploadOrderData( auth!!)
 
 
     }
@@ -95,8 +107,7 @@ class PaymentPresenter : Presenter {
             val file = File(path)
 
             // create RequestBody to parse the file into mutlipart/form-data
-            val requestBody = RequestBody.create(MediaType.parse("*/*"),file)
-
+            val requestBody = RequestBody.create(MediaType.parse("image/*"),file)
             // create the MultiPartBody.Part as this type will be sent to the backEnd
             val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
             multipartBodyArr.add(multipartBody)
@@ -134,11 +145,4 @@ class PaymentPresenter : Presenter {
         return convertedArray
     }*/
 
-    private fun getCurrentDateTime():Date{
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-        return Date(year,month,day)
-    }
 }

@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 /**
  * Created by Hazem on 6/9/2018.
  */
-class HomePresenter(var view: HomeInt.View,var mGoogleApiClient: GoogleApiClient):HomeInt.Presenter {
+class HomePresenter(var view: HomeInt.View):HomeInt.Presenter {
 
     //validate request paremeters
     private var srcLocationValid = false
@@ -62,11 +62,11 @@ class HomePresenter(var view: HomeInt.View,var mGoogleApiClient: GoogleApiClient
 
 
 
-    fun createPlaceAdapter(){
-        mAutoCompleteAdapter = PlacesAdapter(view as Context, R.layout.searchview_adapter,
-                mGoogleApiClient!!, BOUNDS, null)
-        view.initRecyclerView(mAutoCompleteAdapter!!)
-    }
+//    fun createPlaceAdapter(){
+//        mAutoCompleteAdapter = PlacesAdapter(view as Context, R.layout.searchview_adapter,
+//                mGoogleApiClient!!, BOUNDS, null)
+//        view.initRecyclerView(mAutoCompleteAdapter!!)
+//    }
 
     override fun filterPlaces(s: CharSequence){
         mAutoCompleteAdapter!!.filter.filter(s.toString())

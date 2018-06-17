@@ -84,7 +84,11 @@ class LoginPresenter : Presenter {
             // save authentication token in shared preferences
             val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)
             defaultPref.setValue("auth_token",response.auth_token)
-            Toast.makeText((mView as Activity),response.auth_token,Toast.LENGTH_SHORT).show()
+            defaultPref.setValue("email",response.user.email)
+            defaultPref.setValue("phone",response.user.phone)
+            defaultPref.setValue("name",response.user.name)
+            defaultPref.setValue("avatar",response.user.avatar.url)
+
             mView?.goToHomeScreen()
         }else if(response.message == "sorry this account is not yet verified"){
             val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,

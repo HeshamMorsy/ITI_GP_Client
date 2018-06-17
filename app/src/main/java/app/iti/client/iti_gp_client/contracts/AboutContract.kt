@@ -16,5 +16,6 @@ interface AboutContract {
         fun initPresenter(view: View)
         fun receiveResponse(response: AboutResponse)
         fun errorResponse(error: Throwable)
+        fun getDataFromModel()
     }
 }

@@ -13,6 +13,9 @@ import app.iti.client.iti_gp_client.contracts.OrderContract.*
 import app.iti.client.iti_gp_client.utilities.Constants.Companion.CAMERA_REQUEST
 import app.iti.client.iti_gp_client.utilities.Constants.Companion.READ_GALARY_REQUEST
 import app.iti.client.iti_gp_client.utilities.Constants.Companion.WRITE_GALARY_REQUEST
+import app.iti.client.iti_gp_client.utilities.Permissions.checkAccessCameraPermission
+import app.iti.client.iti_gp_client.utilities.Permissions.checkReadGalleryPermission
+import app.iti.client.iti_gp_client.utilities.Permissions.checkWriteStoragePermission
 import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 
@@ -51,56 +54,11 @@ class OrderPresenter : Presenter {
     override fun getImageAction() {
         Log.i("OrderPresenter","getImageAction()")
         // getAlertDialog method returns reference to alertDialog.Builder to use it easily
-        readExternalStorage = checkReadGalleryPermission()
-        writeExternalStorage = checkWriteStoragePermission()
-        accessCamera =checkAccessCameraPermission()
+        readExternalStorage = checkReadGalleryPermission(mView as Activity)
+        writeExternalStorage = checkWriteStoragePermission(mView as Activity)
+        accessCamera =checkAccessCameraPermission(mView as Activity)
         if(readExternalStorage!! && writeExternalStorage!! && accessCamera!!)
         EasyImage.openChooserWithGallery(mView as Activity, "Select Image", 10)
-    }
-
-    // check READ_EXTERNAL_STORAGE permission
-    private fun checkReadGalleryPermission(): Boolean{
-        var check = false
-        val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
-                Manifest.permission.READ_EXTERNAL_STORAGE)
-        if(checkPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions((mView as Activity),
-                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), READ_GALARY_REQUEST)
-        }else{
-            Log.i("Permission","Read External Storage Granted")
-            check = true
-        }
-        return check
-    }
-
-    // check WRITE_EXTERNAL_STORAGE permission
-    private fun checkWriteStoragePermission(): Boolean{
-        var check = false
-        val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if(checkPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions((mView as Activity),
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), WRITE_GALARY_REQUEST)
-        }else{
-            Log.i("Permission","Write External Storage Granted")
-            check = true
-        }
-        return check
-    }
-
-    // check CAMERA permission
-    private fun checkAccessCameraPermission(): Boolean{
-        var check = false
-        val checkPermission = ContextCompat.checkSelfPermission((mView as Activity),
-                Manifest.permission.CAMERA)
-        if(checkPermission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions((mView as Activity),
-                    arrayOf(Manifest.permission.CAMERA), CAMERA_REQUEST)
-        }else{
-            Log.i("Permission","Camera Granted")
-            check =  true
-        }
-        return check
     }
 
     // convert arrayList file to a Bitmap

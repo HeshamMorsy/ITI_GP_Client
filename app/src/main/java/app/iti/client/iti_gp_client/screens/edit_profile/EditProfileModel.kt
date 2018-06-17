@@ -6,6 +6,7 @@ import app.iti.client.iti_gp_client.entities.EditProfileResponse
 import app.iti.client.iti_gp_client.services.createEditProfileRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 
 /**
  * Responsible for sending edited data of the user from [EditProfilePresenter] to the backend
@@ -19,15 +20,26 @@ class EditProfileModel : Model {
         mPresenter = presenter
     }
 
-    override fun requestToApi(email: String, phone: String) {
+    override fun requestToApi(auth: String ,email: String, phone: String, name: String, multipartImage: MultipartBody.Part?) {
         val editProfileRequest = createEditProfileRequest()
         // set user data in a map query
-        val options:Map<String, String> = hashMapOf("email" to email, "phone" to phone)
+        val options:Map<String, String> = hashMapOf("email" to email, "phone" to phone, "name" to name)
 
-        editProfileRequest.postEditProfile(options)
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::handleResponse, this::handleError)
+        if(multipartImage == null){
+            // put data without image
+            editProfileRequest.postWithoutImage(
+                    options, auth)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse, this::handleError)
+        }else {
+            // then image is not equal null
+            editProfileRequest.postEditProfile(
+                    options, multipartImage, auth)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribeOn(Schedulers.io())
+                    .subscribe(this::handleResponse, this::handleError)
+        }
 
     }
 

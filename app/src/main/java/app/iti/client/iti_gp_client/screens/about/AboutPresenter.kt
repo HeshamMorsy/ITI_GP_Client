@@ -1,5 +1,7 @@
 package app.iti.client.iti_gp_client.screens.about
 
+import android.app.Activity
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.AboutContract.*
 import app.iti.client.iti_gp_client.entities.AboutResponse
 
@@ -21,10 +23,14 @@ class AboutPresenter : Presenter {
     }
 
     override fun receiveResponse(response: AboutResponse) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        mView.onRequestSuccess(response)
     }
 
     override fun errorResponse(error: Throwable) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            mView.onRequestError(error)
+    }
+
+    override fun getDataFromModel(){
+        mModel.requestToApi()
     }
 }

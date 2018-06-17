@@ -48,7 +48,6 @@ class ForgotPasswordPresenter : Presenter {
             mModel?.resetPassword(email)
         }else{
             mView?.setEmailError("Invalid Email")
-
         }
     }
 
@@ -59,6 +58,8 @@ class ForgotPasswordPresenter : Presenter {
     override fun errorResponse(error: String) {
         if(error == (mView as Activity).resources.getString(R.string.notFound)) {
             mView?.endLoading((mView as Activity).resources.getString(R.string.emailNotFound))
+        }else{
+            mView?.endLoading(error)
         }
     }
 }

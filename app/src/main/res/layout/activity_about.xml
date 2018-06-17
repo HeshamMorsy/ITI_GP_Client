@@ -38,13 +38,13 @@
             android:layout_gravity="center_horizontal"/>
 
         <TextView
+            android:id="@+id/about_msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="10"
             android:textSize="19sp"
             android:textColor="@color/textColor"
             android:layout_margin="20dp"
-            android:text="@string/dummy"
             />
 
     </LinearLayout>

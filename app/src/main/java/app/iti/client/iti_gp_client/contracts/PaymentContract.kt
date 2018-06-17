@@ -6,6 +6,7 @@ import app.iti.client.iti_gp_client.screens.payment.*
 import app.iti.client.iti_gp_client.entities.Order
 import app.iti.client.iti_gp_client.entities.OrderResponse
 import app.iti.client.iti_gp_client.entities.OrderToBeSent
+import app.iti.client.iti_gp_client.utilities.RequestCreation
 
 /**
  * Created by Hesham on 6/7/2018.
@@ -13,7 +14,7 @@ import app.iti.client.iti_gp_client.entities.OrderToBeSent
  */
 interface PaymentContract {
     interface Model {
-        fun uploadOrderData(finalOrder: OrderToBeSent, auth: String)
+        fun uploadOrderData( auth: String)
     }
 
     interface View {

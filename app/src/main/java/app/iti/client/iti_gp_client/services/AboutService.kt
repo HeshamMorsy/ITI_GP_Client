@@ -7,7 +7,7 @@ import retrofit2.http.GET
 
 
 interface AboutService {
-    @GET("")
+    @GET("about")
     fun getAbout(): Observable<AboutResponse>
 }
 

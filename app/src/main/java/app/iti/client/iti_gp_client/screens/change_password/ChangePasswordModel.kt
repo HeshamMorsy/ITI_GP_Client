@@ -20,12 +20,14 @@ class ChangePasswordModel : Model {
         mPresenter = presenter
     }
 
-    override fun requestToApi(email: String) {
+    override fun requestToApi(auth: String  ,old_password: String, new_password: String, confirm_password: String) {
         val changePassRequest = createChangePasswordRequest()
         // set user data in a map query
-        val options:Map<String, String> = hashMapOf("email" to email)
+        val options:Map<String, String> = hashMapOf("password" to old_password,
+                                                    "new_password" to new_password,
+                                                    "confirm_password" to confirm_password)
 
-        changePassRequest.postChangePassword(options)
+        changePassRequest.postChangePassword(options, auth)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)

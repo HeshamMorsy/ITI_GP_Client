@@ -74,4 +74,13 @@
     <string name="notVerified">This email is not verified</string>
     <string name="notFound">HTTP 404 Not Found</string>
     <string name="emailNotFound">this email not found!!</string>
+    <string name="wrongMsg">Something went wrong! please check internet connection..</string>
+    <string name="wrongPasswordConfirmation">wrong password confirmation !</string>
+    <string name="notValid">is not Valid</string>
+    <string name="wrong">something went wrong !</string>
+    <string name="passwordNotMatch">passwords don\'t match !</string>
+    <string name="passwordNotValid">password not valid</string>
+    <string name="confirmPasswordNotValid">confirm password not valid</string>
+    <string name="resetPassword">Reset password</string>
+    <string name="changeName">Change Name</string>
 </resources>

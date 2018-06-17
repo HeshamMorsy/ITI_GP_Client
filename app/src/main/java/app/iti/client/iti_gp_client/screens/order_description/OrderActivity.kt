@@ -329,6 +329,11 @@ class OrderActivity : AppCompatActivity(), View {
         val title = order_titleEditText.text.toString()
         val description = order_descriptionEditText.text.toString()
         if(title != "" && description != "" && imageArray.size>0) {
+            // set data in order request singleton
+            RequestCreation.title = title
+            RequestCreation.description = description
+            // RequestCreation.description = description // this is when we add description in the backend
+
                 // create order object to send it to the payment activity
                 val order = Order(title, description, imagePaths)
                 intent.putExtra("Order", order as Serializable)
