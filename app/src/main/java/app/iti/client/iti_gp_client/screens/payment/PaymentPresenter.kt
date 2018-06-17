@@ -52,7 +52,7 @@ class PaymentPresenter : Presenter {
         RequestCreation.images = createMultiPartBody(order.paths)
         RequestCreation.payment_method = "cash"
         RequestCreation.weight = 10
-        // be5 ay 7aga
+        /*// be5 ay 7aga
         RequestCreation.title = "be5"
         RequestCreation.time = "2018-12-5 12:30:35"
         RequestCreation.src_latitude = 31.2
@@ -60,7 +60,7 @@ class PaymentPresenter : Presenter {
         RequestCreation.dest_latitude = 32.2
         RequestCreation.dest_longitude = 32.2
         RequestCreation.provider_id = 1
-        RequestCreation.description = "fdmsfds"
+        RequestCreation.description = "fdmsfds"*/
         Log.i("Order before upload",RequestCreation.toString())
 
         // get auth_token from sharedPreferences
