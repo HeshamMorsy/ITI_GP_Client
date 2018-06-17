@@ -26,6 +26,60 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_height="70dp"
+                android:layout_width="match_parent"
+                android:layout_marginEnd="11dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <Button
+                    android:id="@+id/hamb"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginLeft="8dp"
+                    android:background="@mipmap/hambor"
+                    android:gravity="left"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/textView8"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="Driveo"
+                        style="@style/header"
+                        tools:layout_editor_absoluteX="141dp"
+                        tools:layout_editor_absoluteY="388dp" />
+
+                    <TextView
+                        android:id="@+id/currentPlace"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal"
+                        android:text="pickup location"
+                        style="@style/sub_header"
+                        android:singleLine="true"
+                        tools:layout_editor_absoluteX="271dp"
+                        tools:layout_editor_absoluteY="407dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
             <EditText
                 android:id="@+id/searchPlaces"
                 android:layout_width="match_parent"
@@ -33,7 +87,7 @@
                 android:minHeight="50dp"
                 android:layout_marginEnd="11dp"
                 android:layout_marginStart="11dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_style"
                 android:drawableLeft="@drawable/drawable_left"
                 android:hint="select pickup"
@@ -49,7 +103,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="26dp"
+                android:layout_marginTop="14dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:src="@mipmap/ic_close_search" />
@@ -60,7 +114,7 @@
                 android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="12dp"
                 app:layout_constraintEnd_toEndOf="@+id/searchPlaces"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:src="@mipmap/ic_current_location" />
@@ -89,59 +143,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/searchPlaces"/>
 
-            <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_height="70dp"
-                android:layout_width="match_parent"
-                android:layout_marginEnd="11dp"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
 
-
-                <Button
-                    android:id="@+id/hamb"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="8dp"
-                    android:background="@mipmap/hambor"
-                    android:gravity="left" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView8"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="Driveo"
-                        style="@style/header"
-                        tools:layout_editor_absoluteX="141dp"
-                        tools:layout_editor_absoluteY="388dp" />
-
-                    <TextView
-                        android:id="@+id/currentPlace"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal"
-                        android:text="pickup location"
-                        style="@style/sub_header"
-                        android:singleLine="true"
-                        tools:layout_editor_absoluteX="271dp"
-                        tools:layout_editor_absoluteY="407dp" />
-
-                </LinearLayout>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

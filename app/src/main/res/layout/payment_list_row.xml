@@ -30,6 +30,7 @@
 
         <TextView
             android:id="@+id/carrierRate"
+            android:layout_marginRight="20dp"
             android:layout_width="156dp"
             android:layout_height="wrap_content"
             android:layout_weight="4"
@@ -41,8 +42,8 @@
 
         <ImageView
             android:id="@+id/spinnerArrow"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:layout_marginRight="10dp"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"

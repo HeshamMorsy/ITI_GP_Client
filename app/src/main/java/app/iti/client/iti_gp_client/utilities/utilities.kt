@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
+import android.util.Log
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLConnection
@@ -45,4 +46,18 @@ fun formatDateTime(cal:Calendar):String{
     return sdfYear.format(cal.get(Calendar.YEAR)) + "-" + sdfMonth.format(cal.get(Calendar.MONTH)) + "-" + sdfDay.format(cal.get(Calendar.DAY_OF_MONTH))+
             " " +
             sdfHour.format(cal.get(Calendar.HOUR_OF_DAY)) + ":" + sdfMinute.format(cal.get(Calendar.MINUTE)) + ":" + sdfSec.format(cal.get(Calendar.SECOND))
+}
+//2018-06-16T22:46:35.535Z
+fun confirtDateFormat(oldDate:String):String{
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
+    val newFormat = SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss Z")
+    var convertedDate = Date()
+    convertedDate = dateFormat.parse(oldDate)
+    val newDate = newFormat.format(convertedDate)
+    Log.i("date","old date:" + oldDate)
+    Log.i("date", "converted date: " + convertedDate.toString())
+    val str = newDate.toString().split(',')
+    val finalDate = str[1].split('+')
+    Log.i("date", "new date: " + finalDate[0])
+    return finalDate[0]
 }

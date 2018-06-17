@@ -4,12 +4,19 @@ package app.iti.client.iti_gp_client.screens.trip_history
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.contracts.OrderHistory
+import app.iti.client.iti_gp_client.contracts.UpcommingOrders
+import app.iti.client.iti_gp_client.entities.OrderDetails
 import app.iti.client.iti_gp_client.entities.RequestOrder
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_upcoming.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,10 +28,11 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  *
  */
-class UpcomingFragment : Fragment() {
+class UpcomingFragment : Fragment(),UpcommingOrders.View {
     private lateinit var futureOrderLayoutManager: LinearLayoutManager
     private lateinit var futureOrderAdapter: OrdersAdapter
-
+    private lateinit var presenter:UpcommingOrders.Presenter
+    private lateinit var futureOrders:ArrayList<OrderDetails>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
@@ -33,16 +41,48 @@ class UpcomingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        presenter = UpCommingPresenter(this)
+        //set the layout manager for the resycler view
         futureOrderLayoutManager = LinearLayoutManager(context)
         futureOrdersrecyclerView.layoutManager = futureOrderLayoutManager
 
-        var futureOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
+        futureOrders = ArrayList()
+
+        //get the data
+        presenter.getOrders()
+
+        futureOrdersrecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                var isBottomReached:Boolean = !recyclerView!!.canScrollVertically(1)
+                Log.i("orders","isBottomReached: " + isBottomReached)
+                if (isBottomReached){
+                    presenter.getOrders()
+                }
+            }
+        })
+
+//        var futureOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
+//        futureOrderAdapter = OrdersAdapter(futureOrders)
+//        futureOrdersrecyclerView.adapter = futureOrderAdapter
+    }
+    override fun getAuth(): String? {
+        Log.i("orders","get auth from upcomming fragment")
+        var defaultPref = PreferenceHelper.defaultPrefs(context!!)
+        return defaultPref.get("auth_token","0")
+    }
+    override fun updateData(future:ArrayList<OrderDetails>){
+        Log.i("orders","in upcomming fragment")
+        for (order in future){
+            futureOrders.add(order)
+        }
+        Log.i("orders","orders in upcomming fragment: "+ futureOrders.toString())
         futureOrderAdapter = OrdersAdapter(futureOrders)
         futureOrdersrecyclerView.adapter = futureOrderAdapter
     }
