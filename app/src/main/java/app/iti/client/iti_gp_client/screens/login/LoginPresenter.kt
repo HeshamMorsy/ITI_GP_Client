@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.screens.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
 import android.widget.Toast
@@ -80,7 +81,8 @@ class LoginPresenter : Presenter {
     override fun receiveResponse(response: LoginResponse) {
         mView?.endLoading()
         if(response.message == "success") {
-            val defaultPref = PreferenceHelper.defaultPrefs(mView as Activity)
+            // save authentication token in shared preferences
+            val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)
             defaultPref.setValue("auth_token",response.auth_token)
             Toast.makeText((mView as Activity),response.auth_token,Toast.LENGTH_SHORT).show()
             mView?.goToHomeScreen()
