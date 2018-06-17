@@ -5,24 +5,34 @@ import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.contracts.OrderHistory
+import app.iti.client.iti_gp_client.entities.OrderDetails
 import app.iti.client.iti_gp_client.entities.RequestOrder
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_history.*
+import kotlinx.android.synthetic.main.fragment_upcoming.*
 
 
 /**
  * Displays the history fragment in trip activity
  *
  */
-class HistoryFragment : Fragment() {
+class HistoryFragment : Fragment(),OrderHistory.View {
     private lateinit var pastLinearLayoutManager: LinearLayoutManager
     private lateinit var activeLinearLayoutManager: LinearLayoutManager
     private lateinit var pastAdapter: OrdersAdapter
     private lateinit var activeAdapter: OrdersAdapter
+    private lateinit var presenter:OrderHistory.Presenter
+    private lateinit var activeOrders:ArrayList<OrderDetails>
+    private lateinit var pastOrders:ArrayList<OrderDetails>
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,19 +46,55 @@ class HistoryFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        //initiate the presenter
+        presenter = HistoryPresenter(this)
+
+
+        activeOrders = ArrayList()
+        pastOrders = ArrayList()
+
+        //set the layout manager for the resyclerviews
         pastLinearLayoutManager = LinearLayoutManager(context)
         activeLinearLayoutManager = LinearLayoutManager(context)
         pastrecyclerView.layoutManager = pastLinearLayoutManager
         histActiverecyclerView.layoutManager = activeLinearLayoutManager
-        var activeOrders = arrayListOf<RequestOrder>(RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
 
-        var pastOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Cancelled"),
-                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"))
+        //get the data from the server
+        presenter.getOrders()
+
+        pastrecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                var isBottomReached:Boolean = !recyclerView!!.canScrollVertically(1)
+                if (isBottomReached){
+                    presenter.getOrders()
+                }
+            }
+        })
+
+//        var activeOrders = arrayListOf<RequestOrder>(RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
+//
+//        var pastOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Cancelled"),
+//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"))
+
+    }
+
+    override fun getAuth(): String? {
+        var defaultPref = PreferenceHelper.defaultPrefs(context!!)
+        return defaultPref.get("auth_token","0")
+    }
+
+    override fun updateData(active:ArrayList<OrderDetails>,past:ArrayList<OrderDetails>){
+        activeOrders = active
+        for (order in past){
+            pastOrders.add(order)
+        }
+        Log.i("orders","orders in hist fragment: "+ activeOrders.toString() + "past: "+pastOrders.toString())
         pastAdapter = OrdersAdapter(pastOrders)
         activeAdapter = OrdersAdapter(activeOrders)
         pastrecyclerView.adapter = pastAdapter

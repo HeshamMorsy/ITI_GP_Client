@@ -25,4 +25,7 @@
     <dimen name="edit_margin_top1">36dp</dimen>
     <dimen name="edit_margin_top2">12dp</dimen>
     <dimen name="already_login_top">476dp</dimen>
+
+    <!--location cell-->
+    <dimen name="location_cell_height">45dp</dimen>
 </resources>

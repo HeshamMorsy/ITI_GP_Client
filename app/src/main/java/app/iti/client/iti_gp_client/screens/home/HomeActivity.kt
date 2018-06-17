@@ -33,7 +33,6 @@ import android.widget.*
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.Provider
-import app.iti.client.iti_gp_client.entities.SelectCarriers
 import app.iti.client.iti_gp_client.screens.about.AboutActivity
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
@@ -50,7 +49,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.activity_home.*
-import java.text.SimpleDateFormat
 import java.util.*
 
 
@@ -61,11 +59,6 @@ class HomeActivity : AppCompatActivity(),
         View.OnClickListener,
         OnMapReadyCallback,
         GoogleMap.OnMapClickListener,HomeInt.View {
-
-
-    override fun initRecyclerView(mAutoCompleteAdapter: PlacesAdapter) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
     lateinit var presenter: HomeInt.Presenter
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -90,6 +83,14 @@ class HomeActivity : AppCompatActivity(),
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
+
+        //init map
+        initMap()
+
+        //initialize the presenter
+        presenter = HomePresenter(this)
+
+
         //start next request screen
         order.setOnClickListener(this)
 
@@ -103,7 +104,7 @@ class HomeActivity : AppCompatActivity(),
         //register the datetime button
         dateTime.setOnClickListener(this)
 
-        checkLocationDialog()
+//        checkLocationDialog()
 //        //test location permission
 //        getLocationPermission()
 
@@ -350,8 +351,7 @@ class HomeActivity : AppCompatActivity(),
 
             }
         } else {
-            getLocation()
-
+            checkLocationDialog()
         }
 //        var mLastKnownLocation = LocationServices.FusedLocationApi
 //                .getLastLocation(mGoogleApiClient)
@@ -422,13 +422,13 @@ class HomeActivity : AppCompatActivity(),
 //    @SuppressLint("MissingPermission")
     override fun onMapReady(p0: GoogleMap?) {
         mMapView = p0
+//        mMapView.setLatLngBoundsForCameraTarget(BOUNDS)
         //go to my location
         getMyLocation()
-
-        //initialize the presenter
-        presenter = HomePresenter(this, mGoogleApiClient!!)
         //set onmap click listner
         mMapView!!.setOnMapClickListener(this)
+        var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(LatLng(29.9062619,31.1926205), 16f)
+        mMapView!!.animateCamera(cameraUpdate)
 //        mMapView!!.isMyLocationEnabled = true
         Log.i("googleplaces", "map bacame ready" + mMapView)
 
@@ -437,9 +437,14 @@ class HomeActivity : AppCompatActivity(),
     //handle clicks on map
     override fun onMapClick(p0: LatLng?) {
         Log.i("googleplaces", "in map click listner" + p0)
-        if (p0 != null){
-            updatePickUpLocation(p0)
+        if(checkGpsOrNetwork()){
+            if (p0 != null){
+                updatePickUpLocation(p0)
+            }
+        }else{
+            checkLocationDialog()
         }
+//29.9062619  //31.1926205
     }
 
     private fun updatePickUpLocation(p0:LatLng) {
@@ -448,7 +453,7 @@ class HomeActivity : AppCompatActivity(),
         if (addresses != null && addresses.size > 0) {
             val add = addresses.get(0).getAddressLine(0)
             currentPlace.text = add
-            Log.i("googleplaces", addresses.get(0).toString())
+            Log.i("googleplaces","lat: "+p0.latitude + "long: " + p0.longitude + "address: "+ addresses.get(0).toString())
             presenter.updatePickUpLocation(p0!!.longitude,p0!!.latitude,add)
         }
 
@@ -470,22 +475,27 @@ class HomeActivity : AppCompatActivity(),
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
 
-            fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-            fusedLocationClient.lastLocation
-                    .addOnSuccessListener { location: Location? ->
-                        // Got last known location. In some rare situations this can be null.
-                        cLattitude = location?.latitude ?: 0.0
-                        cLongitude = location?.longitude ?: 0.0
-                        var latLng: LatLng = LatLng(cLattitude, cLongitude)
-                        Log.i("googleplaces", "mMap: " + mMapView)
-                        Log.i("googleplaces", "current longitude:" + cLongitude + "current latitude: " + cLattitude)
-                        mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
-                        var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
-                        mMapView!!.animateCamera(cameraUpdate)
-                    }
+            if (checkGpsOrNetwork()){
+                fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+                fusedLocationClient.lastLocation
+                        .addOnSuccessListener { location: Location? ->
+                            // Got last known location. In some rare situations this can be null.
+                            cLattitude = location?.latitude ?: 0.0
+                            cLongitude = location?.longitude ?: 0.0
+                            var latLng: LatLng = LatLng(cLattitude, cLongitude)
+                            Log.i("googleplaces", "mMap: " + mMapView)
+                            Log.i("googleplaces", "current longitude:" + cLongitude + "current latitude: " + cLattitude)
+                            mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
+                            var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
+                            mMapView!!.animateCamera(cameraUpdate)
+                        }
+            }else{
+                checkLocationDialog()
+            }
+
 
         }else{
-            Toast.makeText(this,"please enable gps ",Toast.LENGTH_SHORT).show()
+            checkLocationDialog()
         }
     }
 
@@ -499,7 +509,7 @@ class HomeActivity : AppCompatActivity(),
                     == PackageManager.PERMISSION_GRANTED){
                 locationPermissionGranted = true
                 Log.i("locationPermission","Course_LOCATION ok")
-                initMap()
+                getLocation()
             }else{
                 ActivityCompat.requestPermissions(this,PERMISSIONS,REQUEST)
             }
@@ -523,7 +533,7 @@ class HomeActivity : AppCompatActivity(),
 
                     locationPermissionGranted = true
                     // initialize map
-                    initMap()
+//                    initMap()
                 }
             }
             2 -> getLocationPermission()
@@ -536,24 +546,17 @@ class HomeActivity : AppCompatActivity(),
 //        checkLocationDialog()
     }
 
+    //check gps
+    fun checkGpsOrNetwork():Boolean{
+        var lm: LocationManager =  getApplicationContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        var network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        return (gps_enabled||network_enabled)
+    }
     // this dialog is shown when GPS is disabled ..
     fun checkLocationDialog(){
-        var lm: LocationManager =  getApplicationContext().getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        var gps_enabled = false
-        var network_enabled = false
 
-        try {
-            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        }catch (e:Exception){
-
-        }
-
-        try {
-            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        } catch (ex:Exception ) {
-        }
-
-        if (!gps_enabled && !network_enabled) {
+        if (!checkGpsOrNetwork()) {
             // notify user
             val askPermission = AlertDialog.Builder(this);
             askPermission.setTitle("gps wanted");
@@ -561,10 +564,12 @@ class HomeActivity : AppCompatActivity(),
 //            askPermission.setIcon(R.mipmap.hamb);
             askPermission.setMessage("gps is wanted to get your current location");
 
-            askPermission.setPositiveButton("Ok",DialogInterface.OnClickListener { dialog, which ->
+            askPermission.setPositiveButton("Ok",DialogInterface.OnClickListener {
+                dialog, which ->
                 startActivityForResult(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS),2)
             } )
-            askPermission.setNegativeButton("cancel",DialogInterface.OnClickListener { dialog, which ->
+            askPermission.setNegativeButton("cancel",DialogInterface.OnClickListener {
+                dialog, which ->
                 askPermission.setCancelable(false)
 
             } )
@@ -576,10 +581,15 @@ class HomeActivity : AppCompatActivity(),
         }
     }
 
+
+
+
     override fun displayError(msg:String){
         Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
     }
 
-
+    override fun initRecyclerView(mAutoCompleteAdapter: PlacesAdapter) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 }

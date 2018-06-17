@@ -43,9 +43,9 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
             var dev = view.findViewById<View>(R.id.devider)
             dev.visibility = View.GONE
             var label = view.findViewById<TextView>(R.id.carrierLabel)
-//            var carrierArrow = view.findViewById<ImageView>(R.id.spinnerArrow)
-            label.visibility = View.VISIBLE
-//            carrierArrow.visibility = View.VISIBLE
+            var carrierArrow = view.findViewById<ImageView>(R.id.spinnerArrow)
+//            label.visibility = View.VISIBLE
+            carrierArrow.visibility = View.VISIBLE
             var spinnerText = view.findViewById<TextView>(R.id.carrierRate)
             spinnerText.visibility = View.INVISIBLE
         }
@@ -75,7 +75,7 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
         }
 
         var carrierArrow = view.findViewById<ImageView>(R.id.spinnerArrow)
-//        carrierArrow.visibility = View.VISIBLE
+        carrierArrow.visibility = View.VISIBLE
         var dev = view.findViewById<View>(R.id.devider)
         dev.visibility = View.GONE
         var spinnerText = view.findViewById<TextView>(R.id.carrierRate)

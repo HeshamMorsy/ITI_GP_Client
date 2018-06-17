@@ -21,3 +21,11 @@ data class VerifyData(var message:String)
 data class ProvidersRequest(var message:String,var providers:Array<Provider>)
 data class Provider(var id:Int,var name: String,var image: Image)
 data class Image(var url:String)
+
+//order history data
+data class OrderDetails(var id:Int,var created_at:String,var payment_method:String,var status: String,var pickup_location:String,var dropoff_location:String,var cost:Double?)
+data class OrderHistoryResponse(var message:String,var total_pages:Int,var data: unNecessaryData)
+data class unNecessaryData(var active:Array<OrderDetails>,var history:Array<OrderDetails>)
+//upcoming order data
+data class OrderupcomingResponse(var message:String,var total_pages:Int,var data:unNeccessaryObject)
+data class unNeccessaryObject(var upcoming:Array<OrderDetails>)
