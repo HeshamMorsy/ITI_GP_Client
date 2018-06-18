@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -48,6 +50,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 
@@ -87,6 +90,7 @@ class HomeActivity : AppCompatActivity(),
         //init map
         initMap()
 
+        Log.i("push",FirebaseInstanceId.getInstance().getToken())
         //initialize the presenter
         presenter = HomePresenter(this)
 
@@ -440,6 +444,7 @@ class HomeActivity : AppCompatActivity(),
         if(checkGpsOrNetwork()){
             if (p0 != null){
                 updatePickUpLocation(p0)
+
             }
         }else{
             checkLocationDialog()
@@ -453,6 +458,7 @@ class HomeActivity : AppCompatActivity(),
         if (addresses != null && addresses.size > 0) {
             val add = addresses.get(0).getAddressLine(0)
             currentPlace.text = add
+            addMarker(p0,add)
             Log.i("googleplaces","lat: "+p0.latitude + "long: " + p0.longitude + "address: "+ addresses.get(0).toString())
             presenter.updatePickUpLocation(p0!!.longitude,p0!!.latitude,add)
         }
@@ -485,9 +491,7 @@ class HomeActivity : AppCompatActivity(),
                             var latLng: LatLng = LatLng(cLattitude, cLongitude)
                             Log.i("googleplaces", "mMap: " + mMapView)
                             Log.i("googleplaces", "current longitude:" + cLongitude + "current latitude: " + cLattitude)
-                            mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
-                            var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
-                            mMapView!!.animateCamera(cameraUpdate)
+                            addMarker(latLng,"current location")
                         }
             }else{
                 checkLocationDialog()
@@ -497,6 +501,23 @@ class HomeActivity : AppCompatActivity(),
         }else{
             checkLocationDialog()
         }
+    }
+
+    private fun addMarker(latLng: LatLng,address:String) {
+        mMapView?.clear()
+        val height = 100
+        val width = 100
+        val bitmapdraw= resources.getDrawable(R.mipmap.ic_myself) as BitmapDrawable
+        val b=bitmapdraw.getBitmap()
+        val smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+
+        mMapView!!.addMarker(MarkerOptions()
+                .title(address)
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                )
+        var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
+        mMapView!!.animateCamera(cameraUpdate)
     }
 
     private fun getLocationPermission(){

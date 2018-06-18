@@ -23,7 +23,7 @@ fun Calendar.formatDateTime(calender:Calendar):String{
     val sdfMinute = SimpleDateFormat("mm")
     val sdfSec = SimpleDateFormat("ss")
 
-    return (calender.get(Calendar.YEAR)).toString() + "-" + (calender.get(Calendar.MONTH)).toString() + "-" + (calender.get(Calendar.DAY_OF_MONTH)).toString()+
+    return (calender.get(Calendar.YEAR)).toString() + "-" + (calender.get(Calendar.MONTH) + 1).toString() + "-" + (calender.get(Calendar.DAY_OF_MONTH)).toString()+
             " " +
             (calender.get(Calendar.HOUR_OF_DAY)).toString() + ":" + (calender.get(Calendar.MINUTE)).toString() + ":" + (calender.get(Calendar.SECOND)).toString()
 

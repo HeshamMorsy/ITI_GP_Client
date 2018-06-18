@@ -7,7 +7,8 @@
         android:id="@+id/sideMenuHome">
         <item
             android:id="@+id/nav_home"
-            android:title="Home" />
+            android:title="Home"
+            />
     </group>
 
     <group android:checkableBehavior="single"
@@ -21,13 +22,15 @@
         android:id="@+id/sideMenuProfile">
         <item
             android:id="@+id/nav_profile"
-            android:title="Profile" />
+            android:title="Profile"
+            />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/sideMenuAbout">
         <item
             android:id="@+id/nav_about"
-            android:title="About Us" />
+            android:title="About Us"
+            />
     </group>
 
     <!--<item android:title="Communicate">-->

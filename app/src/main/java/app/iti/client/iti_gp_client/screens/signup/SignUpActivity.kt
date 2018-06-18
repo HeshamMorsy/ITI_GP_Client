@@ -34,6 +34,13 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up)
 
+        //check if user is not verified
+        val bundle=intent.extras
+        if(bundle!=null)
+        {
+            showVerificationButtonSheet()
+        }
+
 //        showVerificationButtonSheet()
         //try navigation drawer
         imageView2.setOnClickListener {
@@ -85,6 +92,7 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         val email = userEmail.text.toString()
         val pass  = userPassword.text.toString()
         val repass = userRepassword.text.toString()
+        presenter?.validateRePassword(pass,repass)
         presenter?.signUp(phone,email,pass, repass)?: Log.i("error","presenter is null")
     }
 
@@ -141,10 +149,13 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         var conver = sheetView.findViewById<Button>(R.id.confirmVerification)
         conver.setOnClickListener{
             Log.i("response","show confirm code clicked")
-            var defaultPref = PreferenceHelper.defaultPrefs(this)
-            val auth = defaultPref.get("auth_token","0")
-            Log.i("auth_token",auth)
-            presenter!!.verifyCode(sheetView.findViewById<EditText>(R.id.verificationCode).text.toString(),auth!!)
+            Log.i("auth_token",getAuth())
+            presenter!!.verifyCode(sheetView.findViewById<EditText>(R.id.verificationCode).text.toString(),getAuth()!!)
+        }
+
+        val resendVerification = sheetView.findViewById<Button>(R.id.sendVerification)
+        resendVerification.setOnClickListener {
+            presenter!!.resendCode(getAuth()!!)
         }
         mBottomSheetDialog.setContentView(sheetView)
         mBottomSheetDialog.show()
@@ -157,6 +168,12 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         //register the confirm code button
 
     }
+
+    private fun getAuth(): String? {
+        var defaultPref = PreferenceHelper.defaultPrefs(this)
+        return defaultPref.get("auth_token","0")
+    }
+
     override fun errorResponse(msg:String){
         alertWithOneButton(this,"Error Message",msg,"Ok")
 //        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()

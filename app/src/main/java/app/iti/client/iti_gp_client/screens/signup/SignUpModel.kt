@@ -2,8 +2,10 @@ package app.iti.client.iti_gp_client.screens.signup
 
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.SignUpInt
+import app.iti.client.iti_gp_client.entities.ResendDetails
 import app.iti.client.iti_gp_client.entities.SignUpData
 import app.iti.client.iti_gp_client.entities.VerifyData
+import app.iti.client.iti_gp_client.services.createResendRequest
 import app.iti.client.iti_gp_client.services.createSignUpRequest
 import app.iti.client.iti_gp_client.services.createVerifyRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -53,6 +55,24 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
     private fun handleVerificationError(error: Throwable) {
         Log.i("error", "error receiving data"+error.localizedMessage)
+        presenter.handleVerificationError()
+
+    }
+
+    override fun resendCode(auth: String) {
+        var resendVRequest = createResendRequest()
+        resendVRequest.resendVerificationCode(auth)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleResendResponse, this::handleResendError)
+    }
+
+    private fun handleResendResponse(response: ResendDetails) {
+        Log.i("response", "response resend data"+response)
+        presenter.handleResendResponse(response)
+    }
+    private fun handleResendError(error: Throwable) {
+        Log.i("error", "error receiving resend data"+error.localizedMessage)
         presenter.handleVerificationError()
 
     }
