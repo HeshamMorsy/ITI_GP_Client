@@ -24,7 +24,7 @@
     <dimen name="image_margin_top">60dp</dimen>
     <dimen name="edit_margin_top1">36dp</dimen>
     <dimen name="edit_margin_top2">12dp</dimen>
-    <dimen name="already_login_top">476dp</dimen>
+    <dimen name="already_login_top">500dp</dimen>
 
     <!--location cell-->
     <dimen name="location_cell_height">45dp</dimen>
@@ -35,5 +35,7 @@
     <dimen name="seperator_height">80dp</dimen>
     <dimen name="start_margin">3dp</dimen>
     <dimen name="sep_height">73dp</dimen>
+    <dimen name="provider_width">60</dimen>
+    <dimen name="provider_height">25</dimen>
     <!---->
 </resources>

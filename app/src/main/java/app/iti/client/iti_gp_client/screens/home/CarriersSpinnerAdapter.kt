@@ -1,6 +1,8 @@
 package app.iti.client.iti_gp_client.screens.home
 
 import android.content.Context
+import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +12,13 @@ import android.widget.TextView
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.entities.SelectCarriers
+import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_home.*
 
 /**
  * Created by Hazem on 6/7/2018.
  */
-class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var objects: MutableList<Provider>?) : ArrayAdapter<Provider>(context1, resource, objects) {
+class CarriersSpinnerAdapter(private var context1: Context?, var resource: Int, var objects: MutableList<Provider>?) : ArrayAdapter<Provider>(context1, resource, objects) {
 
     var mInflater = LayoutInflater.from(context)
 
@@ -53,12 +57,17 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
         var spinnerImage = view.findViewById<ImageView>(R.id.carrierImage)
         var carriers = objects!![position]
         spinnerText.text = carriers.name
+
+
         when(position){
 
             0 -> spinnerImage.setImageResource(R.mipmap.ic_carriers)
-            1 -> spinnerImage.setImageResource(R.mipmap.ic_fedex)
-            2 -> spinnerImage.setImageResource(R.mipmap.ic_dhl)
-            3 -> spinnerImage.setImageResource(R.mipmap.ic_tnt)
+            else ->{
+                Glide.with(context)
+                        .load(objects!![position].image.url)
+                        .into(spinnerImage)
+                Log.i("spinner",objects!![position].image.url)
+            }
         }
 
         return view
@@ -66,8 +75,6 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
     private fun displayItemView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view:View  = mInflater.inflate(resource, parent, false)
         if(position == 0){
-
-
             var label = view.findViewById<TextView>(R.id.carrierLabel)
             label.visibility = View.VISIBLE
             var spinnerText = view.findViewById<TextView>(R.id.carrierRate)
@@ -83,10 +90,14 @@ class CarriersSpinnerAdapter(var context1: Context?,var resource: Int,var object
         var carriers = objects!![position]
         spinnerText.text = carriers.name
         when(position){
+
             0 -> spinnerImage.setImageResource(R.mipmap.ic_carriers)
-            1 -> spinnerImage.setImageResource(R.mipmap.ic_fedex)
-            2 -> spinnerImage.setImageResource(R.mipmap.ic_dhl)
-            3 -> spinnerImage.setImageResource(R.mipmap.ic_tnt)
+            else ->{
+                Glide.with(context)
+                        .load(objects!![position].image.url)
+                        .into(spinnerImage)
+                Log.i("spinner",objects!![position].image.url)
+            }
         }
 
         return view

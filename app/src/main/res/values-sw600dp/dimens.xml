@@ -35,4 +35,6 @@
     <dimen name="seperator_height">120dp</dimen>
     <dimen name="start_margin">10dp</dimen>
     <dimen name="sep_height">110dp</dimen>
+    <dimen name="provider_width">150</dimen>
+    <dimen name="provider_height">40</dimen>
 </resources>
