@@ -4,12 +4,10 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
-import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.entities.LoginResponse
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
-import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
 import app.iti.client.iti_gp_client.utilities.getAlertDialog
 import java.util.regex.Pattern
@@ -103,6 +101,9 @@ class LoginPresenter : Presenter {
         }else{
             val alert = getAlertDialog(mView as Activity, (mView as Activity).resources.getString(R.string.error) ,
                     response.message)
+            alert.setPositiveButton((mView as Activity).resources.getString(R.string.ok) ,DialogInterface.OnClickListener{dialog, which ->
+                alert.setCancelable(true)
+            })
             alert.show()
         }
         Log.i("LoginPresenter Response","my token : "+response.auth_token)
