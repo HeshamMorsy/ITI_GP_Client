@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.iti.client.iti_gp_client.screens.order_description.OrderActivity"
+    tools:context="app.iti.client.iti_gp_client.screens.about.AboutActivity"
     tools:layout_editor_absoluteY="25dp">
 
 

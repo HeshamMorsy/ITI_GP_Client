@@ -39,9 +39,9 @@ class PaymentModel(val presenter: PaymentPresenter) : Model {
 
     private fun handleError(error: Throwable) {
         Log.i("error Response", "stackTrace : "+error.localizedMessage)
-        var er = error as HttpException
+        /*var er = error as HttpException
         Log.i("error Response", "cause : "+er.response().errorBody().toString())
-        Log.i("error Response", "error receiving data"+error.printStackTrace())
+        Log.i("error Response", "error receiving data"+error.printStackTrace())*/
         presenter.errorResponse(error)
     }
 }
