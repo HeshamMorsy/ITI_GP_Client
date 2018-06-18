@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/spinnerImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/provider_width"
+        android:layout_height="@dimen/provider_height"
         app:srcCompat="@mipmap/ic_carriers" />
 
     <TextView

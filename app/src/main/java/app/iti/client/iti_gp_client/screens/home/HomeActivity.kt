@@ -8,6 +8,8 @@ import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
 import android.location.Geocoder
 import android.location.Location
 import android.location.LocationManager
@@ -17,6 +19,7 @@ import android.provider.Settings
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -31,12 +34,14 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.R.id.userImage
 import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.screens.about.AboutActivity
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.formatDateTime
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -48,9 +53,11 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
-
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import com.bumptech.glide.Glide
 
 class HomeActivity : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
@@ -87,6 +94,9 @@ class HomeActivity : AppCompatActivity(),
         //init map
         initMap()
 
+
+
+        Log.i("push",FirebaseInstanceId.getInstance().getToken())
         //initialize the presenter
         presenter = HomePresenter(this)
 
@@ -142,6 +152,27 @@ class HomeActivity : AppCompatActivity(),
         var textChangedListner = createTextChangedLisntner()
         searchPlaces.addTextChangedListener(textChangedListner)
 
+        //load data
+        loadInitialData()
+
+    }
+
+    private fun loadInitialData() {
+        //load image url from shared default
+        var sharedPref = PreferenceHelper.defaultPrefs(this)
+        var imageUrl = sharedPref.get("avatar","image")
+        var userName = sharedPref.get("name","Wassal User")
+        var userEmail = sharedPref.get("email","user@yahoo.com")
+        Glide.with(this)
+                .load(imageUrl)
+                .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
+                .onLoadFailed(ContextCompat.getDrawable(this,R.drawable.user))
+
+
+
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.userName).text = userName
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.user_email).text = userEmail
+
     }
 
     private fun createTextChangedLisntner(): TextWatcher? {
@@ -190,7 +221,6 @@ class HomeActivity : AppCompatActivity(),
                         updatePickUpLocation(places.get(0).latLng)
                         searchPlaces.setText("")
                         mAutoCompleteAdapter!!.clearPlacesData()
-
                     } else {
                         Toast.makeText(applicationContext, Constants.SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT).show()
                     }
@@ -440,6 +470,7 @@ class HomeActivity : AppCompatActivity(),
         if(checkGpsOrNetwork()){
             if (p0 != null){
                 updatePickUpLocation(p0)
+
             }
         }else{
             checkLocationDialog()
@@ -453,6 +484,7 @@ class HomeActivity : AppCompatActivity(),
         if (addresses != null && addresses.size > 0) {
             val add = addresses.get(0).getAddressLine(0)
             currentPlace.text = add
+            addMarker(p0,add)
             Log.i("googleplaces","lat: "+p0.latitude + "long: " + p0.longitude + "address: "+ addresses.get(0).toString())
             presenter.updatePickUpLocation(p0!!.longitude,p0!!.latitude,add)
         }
@@ -485,9 +517,7 @@ class HomeActivity : AppCompatActivity(),
                             var latLng: LatLng = LatLng(cLattitude, cLongitude)
                             Log.i("googleplaces", "mMap: " + mMapView)
                             Log.i("googleplaces", "current longitude:" + cLongitude + "current latitude: " + cLattitude)
-                            mMapView!!.addMarker(MarkerOptions().title("current location").position(latLng).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_myself)).draggable(true))
-                            var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
-                            mMapView!!.animateCamera(cameraUpdate)
+                            addMarker(latLng,"current location")
                         }
             }else{
                 checkLocationDialog()
@@ -497,6 +527,23 @@ class HomeActivity : AppCompatActivity(),
         }else{
             checkLocationDialog()
         }
+    }
+
+    private fun addMarker(latLng: LatLng,address:String) {
+        mMapView?.clear()
+        val height = 100
+        val width = 100
+        val bitmapdraw= resources.getDrawable(R.mipmap.ic_myself) as BitmapDrawable
+        val b=bitmapdraw.getBitmap()
+        val smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+
+        mMapView!!.addMarker(MarkerOptions()
+                .title(address)
+                .position(latLng)
+                .icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+                )
+        var cameraUpdate: CameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 16f)
+        mMapView!!.animateCamera(cameraUpdate)
     }
 
     private fun getLocationPermission(){

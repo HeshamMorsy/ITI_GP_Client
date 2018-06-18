@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.contracts
 
 import android.widget.EditText
+import app.iti.client.iti_gp_client.entities.ResendDetails
 import app.iti.client.iti_gp_client.entities.SignUpData
 
 /**
@@ -10,6 +11,7 @@ interface SignUpInt {
     interface Model{
         fun signUp(phone:String,email:String,pass:String)
         fun verify(pin:String,auth: String)
+        fun resendCode(auth: String)
 
     }
     interface View{
@@ -35,5 +37,7 @@ interface SignUpInt {
         fun verifyCode(text: String,auth:String)
         fun handleVerificationResponse(response: String)
         fun handleVerificationError()
+        fun resendCode(auth: String)
+        fun handleResendResponse(message: ResendDetails)
     }
 }

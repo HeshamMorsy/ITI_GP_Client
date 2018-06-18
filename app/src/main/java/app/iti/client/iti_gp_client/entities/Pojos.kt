@@ -29,3 +29,6 @@ data class unNecessaryData(var active:Array<OrderDetails>,var history:Array<Orde
 //upcoming order data
 data class OrderupcomingResponse(var message:String,var total_pages:Int,var data:unNeccessaryObject)
 data class unNeccessaryObject(var upcoming:Array<OrderDetails>)
+
+//resend verifications data
+data class ResendDetails(var message: String,var user:SignUpUser)

@@ -10,7 +10,7 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="@dimen/logo_width"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/logo_height"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/image_margin_top"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="enter user phone"
+            android:hint="Phone"
             android:inputType="phone"
             tools:layout_editor_absoluteX="54dp"
             tools:layout_editor_absoluteY="209dp" />
@@ -60,7 +60,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="enter user email"
+            android:hint="Email"
             android:inputType="textEmailAddress"
             app:layout_constraintBottom_toTopOf="@+id/userPassword"
             app:layout_constraintEnd_toEndOf="parent"
@@ -85,7 +85,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="enter user password"
+            android:hint="Password"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="54dp"
             tools:layout_editor_absoluteY="296dp" />
@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="enter password again"
+            android:hint="Retype Password"
             android:inputType="textPassword"
             tools:layout_editor_absoluteX="54dp"
             tools:layout_editor_absoluteY="364dp" />
@@ -120,7 +120,7 @@
         style="@style/btn_main"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="@dimen/signupButton_margintop"
         android:text="SignUp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,39 +128,39 @@
 
     <LinearLayout
         android:layout_width="@dimen/btn_width"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="@dimen/already_login_top"
         android:orientation="horizontal"
-        android:weightSum="3"
+        android:weightSum="7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:textSize="@dimen/small_txt_size"
             android:id="@+id/textView2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
             android:layout_marginRight="5dp"
+            android:layout_weight="5"
             android:gravity="right"
             android:text="already have an account?"
+            android:textSize="@dimen/small_txt_size"
             tools:layout_editor_absoluteX="80dp"
             tools:layout_editor_absoluteY="556dp" />
 
         <TextView
-            android:textSize="@dimen/small_txt_size"
             android:id="@+id/loginLabel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="left"
-            android:text="loginNow"
+            android:text="loginnow"
             android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/small_txt_size"
             tools:layout_editor_absoluteX="192dp"
             tools:layout_editor_absoluteY="20dp" />
     </LinearLayout>

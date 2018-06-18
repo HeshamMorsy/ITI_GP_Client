@@ -21,14 +21,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-
+            style="@style/header"
             android:text="CreateRequest" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="location" />
+            android:text="location"
+            style="@style/sub_header"
+            android:textColor="@color/colorPrimary"
+            />
     </LinearLayout>
 
     <LinearLayout
@@ -55,12 +58,12 @@
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginLeft="1dp"
-                android:layout_marginTop="3dp"
+                android:layout_marginTop="@dimen/start_margin"
                 android:src="@mipmap/ic_destination_a" />
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
+                android:layout_height="@dimen/seperator_height"
                 android:layout_marginLeft="6dp"
                 android:layout_marginTop="1dp"
                 android:src="@mipmap/ic_destination_line" />
@@ -82,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-
+                style="@style/header"
                 android:text="Pick Up Location" />
 
             <TextView
@@ -91,6 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:singleLine="true"
+                style="@style/sub_header"
                 android:text="selected from past activity" />
 
             <TextView
@@ -98,10 +102,12 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 android:layout_marginTop="55dp"
+                style="@style/header"
                 android:text="DropOffLocation" />
 
             <TextView
                 android:id="@+id/distName"
+                style="@style/sub_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
@@ -116,6 +122,7 @@
             android:orientation="vertical">
 
             <ImageView
+                android:layout_marginTop="@dimen/start_margin"
                 android:id="@+id/editPickUp"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
@@ -126,7 +133,7 @@
                 android:id="@+id/editDistination"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
-                android:layout_marginTop="73dp"
+                android:layout_marginTop="@dimen/sep_height"
                 android:src="@mipmap/ic_edit"
                 />
         </LinearLayout>
@@ -135,20 +142,16 @@
 
     <Button
         android:id="@+id/requestNext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/btn_main"
         android:layout_marginBottom="28dp"
         android:layout_marginEnd="49dp"
         android:layout_marginStart="49dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/btns_bg"
         android:text="@string/next"
-        android:textColor="#FFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.861" />
+        app:layout_constraintVertical_bias="0.85" />
 
 </android.support.constraint.ConstraintLayout>

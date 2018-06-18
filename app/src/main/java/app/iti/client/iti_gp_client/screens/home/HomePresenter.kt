@@ -2,7 +2,6 @@ package app.iti.client.iti_gp_client.screens.home
 
 import android.content.Context
 import android.util.Log
-import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.Image
 import app.iti.client.iti_gp_client.entities.Provider
@@ -11,7 +10,6 @@ import app.iti.client.iti_gp_client.entities.SelectCarriers
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import app.iti.client.iti_gp_client.utilities.RequestCreation
-import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 

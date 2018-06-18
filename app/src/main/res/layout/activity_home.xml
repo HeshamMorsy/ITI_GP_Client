@@ -103,7 +103,7 @@
                 android:layout_height="20dp"
                 android:layout_alignParentRight="true"
                 android:layout_marginEnd="8dp"
-                android:layout_marginTop="14dp"
+                android:layout_marginTop="18dp"
                 app:layout_constraintEnd_toStartOf="@+id/imageView5"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
                 android:src="@mipmap/ic_close_search" />
@@ -206,9 +206,13 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:layout_gravity="start"
+        android:foregroundGravity="center"
     android:fitsSystemWindows="true"
     app:headerLayout="@layout/nav_header_home"
-    app:menu="@menu/activity_home_drawer" />
+    app:menu="@menu/activity_home_drawer"
+
+
+        />
 
 
 </android.support.v4.widget.DrawerLayout>

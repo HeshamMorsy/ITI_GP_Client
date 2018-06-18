@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.widget.Toast
 import app.iti.client.iti_gp_client.contracts.SignUpInt
+import app.iti.client.iti_gp_client.entities.ResendDetails
 import app.iti.client.iti_gp_client.entities.SignUpData
 import app.iti.client.iti_gp_client.utilities.isNetworkAvailable
 
@@ -11,6 +12,7 @@ import app.iti.client.iti_gp_client.utilities.isNetworkAvailable
  * Created by Hazem on 5/30/2018.
  */
 class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
+
     var model:SignUpInt.Model
     init {
          model = SignUpModel(this)
@@ -133,5 +135,15 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         view.endLoading()
         view.errorResponse("server error")
     }
+    override fun resendCode(auth: String) {
+        view.startLoading("resending code....")
+        model.resendCode(auth)
+    }
 
+    override fun handleResendResponse(message: ResendDetails) {
+        view.endLoading()
+        if (message.message == "success"){
+
+        }
+    }
 }
