@@ -19,6 +19,7 @@ import android.provider.Settings
 import android.support.design.widget.NavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
@@ -33,12 +34,14 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import app.iti.client.iti_gp_client.R
+import app.iti.client.iti_gp_client.R.id.userImage
 import app.iti.client.iti_gp_client.contracts.HomeInt
 import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.screens.about.AboutActivity
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.formatDateTime
 import com.google.android.gms.common.ConnectionResult
 import com.google.android.gms.common.api.GoogleApiClient
@@ -53,7 +56,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.google.firebase.iid.FirebaseInstanceId
 import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
-
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import com.bumptech.glide.Glide
 
 class HomeActivity : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
@@ -89,6 +93,8 @@ class HomeActivity : AppCompatActivity(),
 
         //init map
         initMap()
+
+
 
         Log.i("push",FirebaseInstanceId.getInstance().getToken())
         //initialize the presenter
@@ -146,6 +152,27 @@ class HomeActivity : AppCompatActivity(),
         var textChangedListner = createTextChangedLisntner()
         searchPlaces.addTextChangedListener(textChangedListner)
 
+        //load data
+        loadInitialData()
+
+    }
+
+    private fun loadInitialData() {
+        //load image url from shared default
+        var sharedPref = PreferenceHelper.defaultPrefs(this)
+        var imageUrl = sharedPref.get("avatar","image")
+        var userName = sharedPref.get("name","Wassal User")
+        var userEmail = sharedPref.get("email","user@yahoo.com")
+        Glide.with(this)
+                .load(imageUrl)
+                .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
+                .onLoadFailed(ContextCompat.getDrawable(this,R.drawable.user))
+
+
+
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.userName).text = userName
+        nav_view.getHeaderView(0).findViewById<TextView>(R.id.user_email).text = userEmail
+
     }
 
     private fun createTextChangedLisntner(): TextWatcher? {
@@ -194,7 +221,6 @@ class HomeActivity : AppCompatActivity(),
                         updatePickUpLocation(places.get(0).latLng)
                         searchPlaces.setText("")
                         mAutoCompleteAdapter!!.clearPlacesData()
-
                     } else {
                         Toast.makeText(applicationContext, Constants.SOMETHING_WENT_WRONG, Toast.LENGTH_SHORT).show()
                     }
