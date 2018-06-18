@@ -24,7 +24,7 @@ interface OrderService {
     fun uploadData(@Header("Authorization") auth: String, @Query("title") title: String,
                    @Query("description") description: String ,@Query("time") time: String,
                    @Query("provider_id") provider_id: Int, @PartMap images: HashMap<String,ArrayList<MultipartBody.Part>>,
-                   @Query("weight") weight: Int, @Query("payment_method") payment_method: String,
+                   @Query("weight") weight: Double, @Query("payment_method") payment_method: String,
                    @Query("src_latitude") src_latitude: Double, @Query("src_longitude") src_longitude: Double,
                    @Query("dest_latitude") dest_latitude: Double, @Query("dest_longitude") dest_longitude: Double)
             : Observable<OrderResponse>

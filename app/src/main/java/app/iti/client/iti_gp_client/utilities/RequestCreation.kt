@@ -11,7 +11,7 @@ object RequestCreation {
     var time:String? = null
     var provider_id:Int? = null
     lateinit var images:HashMap<String,ArrayList<MultipartBody.Part>>
-    var weight:Int? = null
+    var weight:Double? = null
     var payment_method:String? = null
     var description:String? = null
     var src_latitude:Double? = null

@@ -51,7 +51,7 @@ class PaymentPresenter : Presenter {
     override fun prepareOrderAndSend(order: Order) {
         RequestCreation.images = createMultiPartBody(order.paths)
         RequestCreation.payment_method = "cash"
-        RequestCreation.weight = 10
+        RequestCreation.weight = order.weight.toDouble()
         /*// be5 ay 7aga
         RequestCreation.title = "be5"
         RequestCreation.time = "2018-12-5 12:30:35"

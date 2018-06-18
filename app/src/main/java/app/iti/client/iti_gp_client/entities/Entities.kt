@@ -16,7 +16,7 @@ import kotlin.collections.HashMap
 
 //data class ForgotPasswordResponse(val message: String, val reset_token: String) // old api
 data class ForgotPasswordResponse(val message: String)
-data class Order(val title: String, val description: String, val paths: ArrayList<String>) : Serializable
+data class Order(val title: String, val description: String, val weight: String , val paths: ArrayList<String>) : Serializable
 // for payment list view
 data class Payment(val paymentMethod:String, val status: String, val Rid: Int)
 // all order request data entity

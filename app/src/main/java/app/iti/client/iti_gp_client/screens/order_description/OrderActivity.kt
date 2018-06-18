@@ -327,20 +327,24 @@ class OrderActivity : AppCompatActivity(), View {
         val intent = Intent(this, PaymentActivity::class.java)
         // get data from screan
         val title = order_titleEditText.text.toString()
+        val weight = order_weightEditText.text.toString()
         val description = order_descriptionEditText.text.toString()
-        if(title != "" && description != "" && imageArray.size>0) {
+        // check if the data not empty
+        if(title == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterTitle),Toast.LENGTH_LONG).show()
+        if(description == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterDescription),Toast.LENGTH_LONG).show()
+        if(weight == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterWeight),Toast.LENGTH_LONG).show()
+        if(imageArray.size ==0 ) Toast.makeText(this,resources.getString(R.string.pleaseEnterImage),Toast.LENGTH_LONG).show()
+
+        if(weight != "" && title != "" && description != "" && imageArray.size>0) {
             // set data in order request singleton
             RequestCreation.title = title
             RequestCreation.description = description
             // RequestCreation.description = description // this is when we add description in the backend
 
                 // create order object to send it to the payment activity
-                val order = Order(title, description, imagePaths)
+                val order = Order(title, description , weight , imagePaths)
                 intent.putExtra("Order", order as Serializable)
                 startActivity(intent)
-        }else{
-            Toast.makeText(this,"please enter the full information about" +
-                    " your order (title, description and one image at least)",Toast.LENGTH_LONG).show()
         }
 
     }
