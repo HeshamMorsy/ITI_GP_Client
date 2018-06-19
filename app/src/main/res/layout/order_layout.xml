@@ -107,6 +107,7 @@
                 android:weightSum="5"
                 android:orientation="horizontal">
                 <TextView
+                    android:gravity="top|left"
                     android:id="@+id/orderStatus"
                     android:textSize="@dimen/hint_font"
                     android:textColor="#ff8330"
@@ -117,11 +118,12 @@
                     android:text="pending" />
 
                 <TextView
+
                     android:id="@+id/orderPrice"
                     android:layout_width="0dp"
                     android:layout_weight="2"
                     android:layout_height="50dp"
-                    android:gravity="right"
+                    android:gravity="top|right"
                     android:paddingRight="70dp"
                     android:text="34.00Le"
                     android:textSize="@dimen/price"

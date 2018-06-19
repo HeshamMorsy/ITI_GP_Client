@@ -1,23 +1,29 @@
 package app.iti.client.iti_gp_client.screens.trip_history
 
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.app.AlertDialog
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import app.iti.client.iti_gp_client.R
-import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.contracts.UpcommingOrders
 import app.iti.client.iti_gp_client.entities.OrderDetails
-import app.iti.client.iti_gp_client.entities.RequestOrder
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_upcoming.*
+import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener
+import app.iti.client.iti_gp_client.R.id.mRecyclerView
+import app.iti.client.iti_gp_client.screens.home.Constants
+import app.iti.client.iti_gp_client.screens.home.RecyclerItemClickListener
+import com.google.android.gms.location.places.Places
+import kotlinx.android.synthetic.main.activity_home.*
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +55,8 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
 
         futureOrders = ArrayList()
 
+
+
         //get the data
         presenter.getOrders()
 
@@ -61,17 +69,14 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
                 }
             }
         })
-
-//        var futureOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
-//        futureOrderAdapter = OrdersAdapter(futureOrders)
-//        futureOrdersrecyclerView.adapter = futureOrderAdapter
+        // onitemclicklistner for the recyler view
+        var listner = createItemClickListner()
+        // register the listner for recyclerview
+        futureOrdersrecyclerView.addOnItemTouchListener(listner)
     }
+
+
+
     override fun getAuth(): String? {
         Log.i("orders","get auth from upcomming fragment")
         var defaultPref = PreferenceHelper.defaultPrefs(context!!)
@@ -86,4 +91,42 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
         futureOrderAdapter = OrdersAdapter(futureOrders)
         futureOrdersrecyclerView.adapter = futureOrderAdapter
     }
+
+    fun alertWithOneButton(title:String, message:String, btnTitle:String,canTitle:String ,pos:Int){
+        var alert: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        alert.setMessage(message)
+        alert.setTitle(title)
+        alert.setPositiveButton(btnTitle, DialogInterface.OnClickListener { dialog, which ->
+            Log.i("alert","ok clicked")
+            Log.i("alert","orderId"+ futureOrders.get(pos).id)
+            var defaultPref = PreferenceHelper.defaultPrefs(context!!)
+            val auth = defaultPref.get("auth_token","0")
+            presenter.cancelTrip(auth,futureOrders.get(pos).id)
+            futureOrders.remove(futureOrders[pos])
+
+        })
+        alert.setNegativeButton(canTitle, DialogInterface.OnClickListener { dialog, which ->
+            Log.i("alert","cancelled clicked")
+        })
+        alert.show()
+    }
+
+    override fun updateView() {
+        futureOrderAdapter.notifyDataSetChanged()
+    }
+
+    private fun createItemClickListner(): RecyclerView.OnItemTouchListener? {
+        return RecyclerItemClickListener(context, object : RecyclerItemClickListener.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                Log.i("click","clicked: " + position)
+                alertWithOneButton("Cancell Order", "Are you sure you want to cancell order", "OK","Cancell",position)
+            }
+        })
+    }
+
+
+
+
+
+
 }

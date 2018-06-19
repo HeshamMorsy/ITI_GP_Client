@@ -2,6 +2,7 @@ package app.iti.client.iti_gp_client.screens.trip_history
 
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -15,6 +16,8 @@ import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.entities.OrderDetails
 import app.iti.client.iti_gp_client.entities.RequestOrder
+import app.iti.client.iti_gp_client.screens.home.RecyclerItemClickListener
+import app.iti.client.iti_gp_client.screens.tracking.TrackingActivity
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_history.*
@@ -72,16 +75,8 @@ class HistoryFragment : Fragment(),OrderHistory.View {
             }
         })
 
-//        var activeOrders = arrayListOf<RequestOrder>(RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Pending"))
-//
-//        var pastOrders = arrayListOf<RequestOrder>(RequestOrder("1","19 Apr 2018","12:20","945 apagiali prairi","Pending"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Cancelled"),
-//                RequestOrder("2454","19 Apr 2018","12:20","945 apagiali prairi","Delivered"))
-
+        var listner = createItemClickListner()
+        histActiverecyclerView.addOnItemTouchListener(listner)
     }
 
     override fun getAuth(): String? {
@@ -99,5 +94,15 @@ class HistoryFragment : Fragment(),OrderHistory.View {
         activeAdapter = OrdersAdapter(activeOrders)
         pastrecyclerView.adapter = pastAdapter
         histActiverecyclerView.adapter = activeAdapter
+    }
+
+    private fun createItemClickListner(): RecyclerView.OnItemTouchListener? {
+        return RecyclerItemClickListener(context, object : RecyclerItemClickListener.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int) {
+                Log.i("click","clicked: " + position)
+                val trackingIntent = Intent(context,TrackingActivity::class.java)
+                startActivity(trackingIntent)
+            }
+        })
     }
 }
