@@ -168,6 +168,7 @@ class HomeActivity : AppCompatActivity(),
                 .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
 
 
+
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.userName).text = userName
         nav_view.getHeaderView(0).findViewById<TextView>(R.id.user_email).text = userEmail
 

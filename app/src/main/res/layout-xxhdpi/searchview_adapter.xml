@@ -15,19 +15,19 @@
         android:layout_height="22dp"
         android:src="@mipmap/location_pin"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/search_box_height"
         android:textColor="#000"
         android:textSize="15sp"
         android:layout_toRightOf="@+id/image"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"/>
+        />
 
 </RelativeLayout>
