@@ -39,17 +39,19 @@ class EditProfilePresenter : Presenter {
 
     override fun receiveResponse(response: EditProfileResponse) {
         mView.showMessage(response.message)
+        mView.onRequestSuccess(response)
     }
 
     override fun errorResponse(error: Throwable) {
         mView.showMessage(error.localizedMessage)
     }
 
-    override fun sendChangesToModel(email: String, phone: String ,name: String, image: Bitmap) {
+    override fun sendChangesToModel(email: String, phone: String ,name: String) {
         // get token from shared preferences
         val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)
         val auth = defaultPref.get("auth_token", "0")
         // convert bitmap into multi body part
+        Toast.makeText(mView as Activity,multipartBody.toString(),Toast.LENGTH_SHORT).show()
         mModel.requestToApi(auth!! ,email , phone, name , multipartBody)
     }
 
@@ -67,6 +69,7 @@ class EditProfilePresenter : Presenter {
     override fun convertImageToBitmap(imageFiles: MutableList<File>) {
         val bitmap: Bitmap = BitmapFactory.decodeFile(imageFiles[0].path)
         multipartBody = createMultiPartBody(imageFiles[0].path)
+        Toast.makeText(mView as Activity, multipartBody.toString(),Toast.LENGTH_SHORT).show()
         mView.updateImageView(bitmap)
     }
 

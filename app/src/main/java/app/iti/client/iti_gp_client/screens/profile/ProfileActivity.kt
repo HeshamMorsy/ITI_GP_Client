@@ -5,12 +5,8 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
-import android.view.MotionEvent
-import android.widget.ExpandableListView
 import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ProfileContract.Presenter
@@ -22,9 +18,9 @@ import app.iti.client.iti_gp_client.utilities.Constants.Companion.CURRENT_LANGUA
 import app.iti.client.iti_gp_client.utilities.LocaleHelper
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_profile.*
-import android.view.ViewGroup
-
-
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import com.bumptech.glide.Glide
 
 
 class ProfileActivity : AppCompatActivity(), View {
@@ -47,6 +43,14 @@ class ProfileActivity : AppCompatActivity(), View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        // get user data from shared preferences
+        val sharedPreferences = PreferenceHelper.defaultPrefs(this)
+        val name = sharedPreferences.get("name","user name")
+        val imageUrl = sharedPreferences.get("avatar","")
+        if(imageUrl != "")
+            Glide.with(this).load(imageUrl).into(profile_image)
+        profile_name.text = name
 
         // get language from shared preferences if exists
         val pref:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)

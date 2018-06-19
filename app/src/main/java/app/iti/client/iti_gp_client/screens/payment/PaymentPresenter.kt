@@ -41,6 +41,7 @@ class PaymentPresenter : Presenter {
         Log.i("Response status","data sent")
         Log.i("Response status",response.message)
         Toast.makeText(mView as PaymentActivity, response.message ,Toast.LENGTH_SHORT).show()
+        mView!!.goToHomeScreen()
     }
 
     override fun errorResponse(error: Throwable) {

@@ -20,7 +20,7 @@ interface EditProfileContract {
         fun initPresenter(view: View)
         fun receiveResponse(response: EditProfileResponse)
         fun errorResponse(error: Throwable)
-        fun sendChangesToModel(email: String, phone: String, name: String, image: Bitmap)
+        fun sendChangesToModel(email: String, phone: String, name: String)
         fun getNewImage()
         fun convertImageToBitmap(imageFiles: MutableList<File>)
     }
