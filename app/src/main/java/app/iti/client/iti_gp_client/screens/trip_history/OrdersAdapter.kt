@@ -1,13 +1,11 @@
 package app.iti.client.iti_gp_client.screens.trip_history
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.entities.OrderDetails
-import app.iti.client.iti_gp_client.entities.RequestOrder
 import app.iti.client.iti_gp_client.utilities.confirtDateFormat
 import app.iti.client.iti_gp_client.utilities.inflate
 import kotlinx.android.synthetic.main.order_layout.view.*

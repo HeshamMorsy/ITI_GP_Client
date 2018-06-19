@@ -1,15 +1,10 @@
 package app.iti.client.iti_gp_client.screens.trip_history
 
-import android.content.Context
 import android.util.Log
-import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.contracts.UpcommingOrders
 import app.iti.client.iti_gp_client.entities.CancelOrderResponse
 import app.iti.client.iti_gp_client.entities.OrderDetails
-import app.iti.client.iti_gp_client.entities.OrderHistoryResponse
 import app.iti.client.iti_gp_client.entities.OrderupcomingResponse
-import app.iti.client.iti_gp_client.utilities.PreferenceHelper
-import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 
 /**
  * Created by Hazem on 6/16/2018.

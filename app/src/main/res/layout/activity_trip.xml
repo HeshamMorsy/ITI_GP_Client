@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="match_parent"
             android:gravity="center"
-            android:text="Trips"
+            android:text="@string/trips"
             style="@style/header"
             android:layout_height="wrap_content" />
 
@@ -60,16 +60,3 @@
 
 
 </android.support.design.widget.CoordinatorLayout>
-
-<!--<android.support.v7.widget.Toolbar-->
-<!--android:id="@+id/toolbar"-->
-<!--android:layout_width="match_parent"-->
-<!--android:layout_height="wrap_content"-->
-<!--android:layout_weight="1"-->
-<!--android:background="@color/colorPrimary"-->
-<!--app:layout_scrollFlags="scroll|enterAlways"-->
-<!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
-<!--android:layout_gravity="center_horizontal"-->
-<!--app:title="@string/trips">-->
-
-<!--</android.support.v7.widget.Toolbar>-->

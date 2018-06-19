@@ -3,7 +3,6 @@ package app.iti.client.iti_gp_client.screens.trip_history
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.entities.OrderHistoryResponse
-import app.iti.client.iti_gp_client.entities.ProvidersRequest
 import app.iti.client.iti_gp_client.services.createOrderHistoryRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

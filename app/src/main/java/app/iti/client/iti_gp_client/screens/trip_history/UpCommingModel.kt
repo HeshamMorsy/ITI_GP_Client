@@ -3,7 +3,6 @@ package app.iti.client.iti_gp_client.screens.trip_history
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.UpcommingOrders
 import app.iti.client.iti_gp_client.entities.CancelOrderResponse
-import app.iti.client.iti_gp_client.entities.OrderHistoryResponse
 import app.iti.client.iti_gp_client.entities.OrderupcomingResponse
 import app.iti.client.iti_gp_client.services.createCancelServiceRequest
 import app.iti.client.iti_gp_client.services.createOrderUpcommingRequest

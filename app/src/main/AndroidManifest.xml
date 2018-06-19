@@ -23,7 +23,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <service android:name=".utilities.pushnotification.MyFirebaseMessagingService">
             <intent-filter>
@@ -36,15 +36,23 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".screens.login.LoginActivity" />
-        <activity android:name=".screens.dropOffLocation.DropOffActivity" />
+        <activity android:name=".screens.login.LoginActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".screens.dropOffLocation.DropOffActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".screens.home.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".screens.signup.SignUpActivity" />
-        <activity android:name=".screens.forgot_password.ForgotPasswordActivity" />
-        <activity android:name=".screens.splash_screen.SplashActivity">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"
+            />
+        <activity android:name=".screens.signup.SignUpActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.forgot_password.ForgotPasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.splash_screen.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -66,10 +74,12 @@
         <activity
             android:name=".screens.order_description.OrderActivity"
             android:label="@string/title_activity_order"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
-            android:theme="@style/MultipleImageSelectTheme">
+            android:theme="@style/MultipleImageSelectTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
@@ -77,13 +87,20 @@
         <activity
             android:name=".screens.trip_history.TripActivity"
             android:label="@string/title_activity_trip"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".screens.payment.PaymentActivity" />
-        <activity android:name=".screens.profile.ProfileActivity" />
-        <activity android:name=".screens.about.AboutActivity" />
-        <activity android:name=".screens.edit_profile.EditProfileActivity" />
-        <activity android:name=".screens.change_password.ChangePasswordActivity" />
-        <activity android:name=".screens.forgot_password.reset_password.NewPasswordActivity">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.payment.PaymentActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.profile.ProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.about.AboutActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.edit_profile.EditProfileActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.change_password.ChangePasswordActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".screens.forgot_password.reset_password.NewPasswordActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -98,7 +115,8 @@
         </activity>
         <activity
             android:name=".screens.tracking.TrackingActivity"
-            android:label="@string/title_activity_tracking"></activity>
+            android:label="@string/title_activity_tracking"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

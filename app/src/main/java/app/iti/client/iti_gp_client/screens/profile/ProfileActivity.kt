@@ -115,7 +115,7 @@ class ProfileActivity : AppCompatActivity(), View {
 
                 // savae current language in shared preferences
                 currentLanguage = resources.getString(R.string.english)
-                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE_SHARED_PREFERENCE)
+                saveInSharedPreferences(CURRENT_LANGUAGE_SHARED_PREFERENCE, currentLanguage!!)
 
                 // start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
@@ -136,8 +136,8 @@ class ProfileActivity : AppCompatActivity(), View {
                         R.mipmap.ic_down_arrow,resources.getString(R.string.arabic)))
 
                 // save current language in shared preferences
-                currentLanguage = resources.getString(R.string.english)
-                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE_SHARED_PREFERENCE)
+                currentLanguage = resources.getString(R.string.arabic)
+                saveInSharedPreferences(CURRENT_LANGUAGE_SHARED_PREFERENCE, currentLanguage!!)
 
                 // start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
@@ -240,7 +240,7 @@ class ProfileActivity : AppCompatActivity(), View {
         expandAdapter!!.notifyDataSetChanged()
     }
 
-    private fun saveInSharedPreferences(data: String , key: String){
+    private fun saveInSharedPreferences( key: String, data: String){
         val prefs = PreferenceHelper.defaultPrefs(this)
         prefs.setValue(key,data)
     }

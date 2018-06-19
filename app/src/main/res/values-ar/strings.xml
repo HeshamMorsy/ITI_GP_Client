@@ -129,6 +129,14 @@
         <string name="profile">Profile</string>
         <string name="aboutUs">About Us</string>
     <string name="title_activity_tracking">Map</string>
+    <string name="active">Active</string>
+    <string name="past">Past</string>
+    <string name="futureOrders">Future Orders</string>
+    <string name="dummyDate">07 Apr 2018</string>
+    <string name="dummyAddress">945 Abagail Praire</string>
+    <string name="pending">pending</string>
+    <string name="dummyCost">34.00LE</string>
+
 
 
 </resources>
