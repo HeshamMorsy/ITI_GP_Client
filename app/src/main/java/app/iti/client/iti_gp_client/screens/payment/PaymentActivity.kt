@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.screens.payment
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,7 @@ import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.PaymentContract.*
 import app.iti.client.iti_gp_client.entities.Order
 import app.iti.client.iti_gp_client.entities.Payment
+import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import kotlinx.android.synthetic.main.activity_payment.*
 
 /**
@@ -103,5 +105,12 @@ class PaymentActivity : AppCompatActivity(), View {
         paymentMethodArray?.add(masterPayment)
         paymentMethodArray?.add(visaPayment)
     }
+
+    override fun goToHomeScreen() {
+        val myIntent = Intent(this,HomeActivity::class.java)
+        startActivity(myIntent)
+        finish()
+    }
+
 
 }

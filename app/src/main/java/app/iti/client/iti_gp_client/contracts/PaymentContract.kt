@@ -21,7 +21,8 @@ interface PaymentContract {
         fun updateImage(photo: Bitmap)
         fun startLoading(mes:String)
         fun endLoading()
-   }
+        fun goToHomeScreen()
+    }
 
     interface Presenter {
         fun initPresenter(view: View)

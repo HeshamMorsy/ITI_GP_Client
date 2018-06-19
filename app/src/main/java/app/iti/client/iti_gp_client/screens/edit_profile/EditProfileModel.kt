@@ -2,11 +2,14 @@ package app.iti.client.iti_gp_client.screens.edit_profile
 
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.EditProfileContract.*
+import app.iti.client.iti_gp_client.entities.Avatar
 import app.iti.client.iti_gp_client.entities.EditProfileResponse
+import app.iti.client.iti_gp_client.entities.LoginedUser
 import app.iti.client.iti_gp_client.services.createEditProfileRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 /**
  * Responsible for sending edited data of the user from [EditProfilePresenter] to the backend
@@ -20,22 +23,23 @@ class EditProfileModel : Model {
         mPresenter = presenter
     }
 
-    override fun requestToApi(auth: String ,email: String, phone: String, name: String, multipartImage: MultipartBody.Part?) {
+    override fun requestToApi(auth: String ,name: RequestBody, email: RequestBody, phone: RequestBody, avatar: MultipartBody.Part?, user: LoginedUser) {
         val editProfileRequest = createEditProfileRequest()
         // set user data in a map query
-        val options:Map<String, String> = hashMapOf("email" to email, "phone" to phone, "name" to name)
+//        val options:Map<String, RequestBody> = hashMapOf("email" to email, "phone" to phone, "name" to name)
+        val stringOptions: Map<String, String> = hashMapOf("email" to user.email, "phone" to user.phone, "name" to user.name)
 
-        if(multipartImage == null){
+        if(avatar == null){
             // put data without image
             editProfileRequest.postWithoutImage(
-                    options, auth)
+                    stringOptions, auth)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(this::handleResponse, this::handleError)
         }else {
             // then image is not equal null
             editProfileRequest.postEditProfile(
-                    options, multipartImage, auth)
+                    email,phone,name, avatar, auth)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribeOn(Schedulers.io())
                     .subscribe(this::handleResponse, this::handleError)
