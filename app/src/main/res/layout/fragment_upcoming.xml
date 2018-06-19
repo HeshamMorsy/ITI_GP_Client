@@ -26,7 +26,7 @@
                 android:gravity="center"
                 android:paddingBottom="5dp"
                 android:paddingTop="5dp"
-                android:text="Future Orders" />
+                android:text="@string/futureOrders" />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/futureOrdersrecyclerView"

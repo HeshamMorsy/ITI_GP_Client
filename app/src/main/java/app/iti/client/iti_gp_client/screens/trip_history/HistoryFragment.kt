@@ -1,7 +1,6 @@
 package app.iti.client.iti_gp_client.screens.trip_history
 
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
@@ -11,17 +10,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.entities.OrderDetails
-import app.iti.client.iti_gp_client.entities.RequestOrder
 import app.iti.client.iti_gp_client.screens.home.RecyclerItemClickListener
 import app.iti.client.iti_gp_client.screens.tracking.TrackingActivity
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.TOKEN_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_history.*
-import kotlinx.android.synthetic.main.fragment_upcoming.*
 
 
 /**
@@ -81,7 +78,7 @@ class HistoryFragment : Fragment(),OrderHistory.View {
 
     override fun getAuth(): String? {
         var defaultPref = PreferenceHelper.defaultPrefs(context!!)
-        return defaultPref.get("auth_token","0")
+        return defaultPref.get(TOKEN_SHARED_PREFERENCE,"0")
     }
 
     override fun updateData(active:ArrayList<OrderDetails>,past:ArrayList<OrderDetails>){

@@ -14,15 +14,11 @@ import android.view.ViewGroup
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.UpcommingOrders
 import app.iti.client.iti_gp_client.entities.OrderDetails
+import app.iti.client.iti_gp_client.screens.home.RecyclerItemClickListener
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.TOKEN_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_upcoming.*
-import com.github.brnunes.swipeablerecyclerview.SwipeableRecyclerViewTouchListener
-import app.iti.client.iti_gp_client.R.id.mRecyclerView
-import app.iti.client.iti_gp_client.screens.home.Constants
-import app.iti.client.iti_gp_client.screens.home.RecyclerItemClickListener
-import com.google.android.gms.location.places.Places
-import kotlinx.android.synthetic.main.activity_home.*
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -79,8 +75,8 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
 
     override fun getAuth(): String? {
         Log.i("orders","get auth from upcomming fragment")
-        var defaultPref = PreferenceHelper.defaultPrefs(context!!)
-        return defaultPref.get("auth_token","0")
+        val defaultPref = PreferenceHelper.defaultPrefs(context!!)
+        return defaultPref.get(TOKEN_SHARED_PREFERENCE,"0")
     }
     override fun updateData(future:ArrayList<OrderDetails>){
         Log.i("orders","in upcomming fragment")
@@ -93,14 +89,14 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
     }
 
     fun alertWithOneButton(title:String, message:String, btnTitle:String,canTitle:String ,pos:Int){
-        var alert: AlertDialog.Builder = AlertDialog.Builder(context!!)
+        val alert: AlertDialog.Builder = AlertDialog.Builder(context!!)
         alert.setMessage(message)
         alert.setTitle(title)
         alert.setPositiveButton(btnTitle, DialogInterface.OnClickListener { dialog, which ->
             Log.i("alert","ok clicked")
             Log.i("alert","orderId"+ futureOrders.get(pos).id)
-            var defaultPref = PreferenceHelper.defaultPrefs(context!!)
-            val auth = defaultPref.get("auth_token","0")
+            val defaultPref = PreferenceHelper.defaultPrefs(context!!)
+            val auth = defaultPref.get(TOKEN_SHARED_PREFERENCE,"0")
             presenter.cancelTrip(auth,futureOrders.get(pos).id)
             futureOrders.remove(futureOrders[pos])
 
@@ -119,7 +115,7 @@ class UpcomingFragment : Fragment(),UpcommingOrders.View {
         return RecyclerItemClickListener(context, object : RecyclerItemClickListener.OnItemClickListener {
             override fun onItemClick(view: View, position: Int) {
                 Log.i("click","clicked: " + position)
-                alertWithOneButton("Cancell Order", "Are you sure you want to cancell order", "OK","Cancell",position)
+                alertWithOneButton("Cancel Order", "Are you sure you want to cancel order", "OK","Cancel",position)
             }
         })
     }

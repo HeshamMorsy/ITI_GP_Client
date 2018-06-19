@@ -51,7 +51,7 @@
                                 style="@style/sub_header"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="07 Apr 2018" />
+                                android:text="@string/dummyDate" />
 
                             <!--android:textColor="#4b4668"-->
                             <!--android:textSize="15.3sp"-->
@@ -76,7 +76,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:text="945 Abagail Praire" />
+                            android:text="@string/dummyAddress" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -115,7 +115,7 @@
                     android:layout_weight="3"
                     android:layout_height="50dp"
                     android:paddingLeft="25dp"
-                    android:text="pending" />
+                    android:text="@string/pending" />
 
                 <TextView
 
@@ -125,7 +125,7 @@
                     android:layout_height="50dp"
                     android:gravity="top|right"
                     android:paddingRight="70dp"
-                    android:text="34.00Le"
+                    android:text="@string/dummyCost"
                     android:textSize="@dimen/price"
                     android:textColor="#818c9e"/>
             </LinearLayout>

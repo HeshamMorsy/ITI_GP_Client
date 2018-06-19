@@ -43,7 +43,7 @@
     <string name="visa">Visa</string>
     <string name="soon">Soon</string>
     <string name="error">Error</string>
-    <string name="ok">OK</string>
+    <string name="ok">Ok</string>
     <string name="invalid">Invalid credentials</string>
     <string name="wait">Please wait..</string>
     <string name="title_activity_trip">TripActivity</string>
@@ -94,9 +94,9 @@
     <string name="maxImages">max number of images</string>
     <string name="pleaseEnterValidWeight">order weight must be between 1 kg to 100 kg</string>
     <string name="paymentSoon">payment will be enabled soon..</string>
-    <string name="loginSuccessful">Login Successful</string>
+    <string name="loginSuccessful">Login Successfull</string>
     <string name="logoutSuccessfully">logout successfully</string>
-    <string name="sendingData">sending sign up data!!</string>
+    <string name="sendingData">sending signup data!!</string>
     <string name="phoneValidError">please enter a valid phone</string>
     <string name="emailValidError">please enter a correct email</string>
     <string name="passwordNotStrongError">please enter stronger password</string>
@@ -126,5 +126,12 @@
     <string name="profile">Profile</string>
     <string name="aboutUs">About Us</string>
     <string name="title_activity_tracking">Map</string>
+    <string name="active">Active</string>
+    <string name="past">Past</string>
+    <string name="futureOrders">Future Orders</string>
+    <string name="dummyDate">07 Apr 2018</string>
+    <string name="dummyAddress">945 Abagail Praire</string>
+    <string name="pending">pending</string>
+    <string name="dummyCost">34.00LE</string>
 
 </resources>
