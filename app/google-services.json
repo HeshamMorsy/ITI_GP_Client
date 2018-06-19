@@ -1,31 +1,31 @@
 {
   "project_info": {
-    "project_number": "16858867590",
-    "firebase_url": "https://wassal-31884.firebaseio.com",
-    "project_id": "wassal-31884",
-    "storage_bucket": "wassal-31884.appspot.com"
+    "project_number": "311477229751",
+    "firebase_url": "https://wassel-client.firebaseio.com",
+    "project_id": "wassel-client",
+    "storage_bucket": "wassel-client.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:16858867590:android:5f4b92201a9efb18",
+        "mobilesdk_app_id": "1:311477229751:android:5f4b92201a9efb18",
         "android_client_info": {
           "package_name": "app.iti.client.iti_gp_client"
         }
       },
       "oauth_client": [
         {
-          "client_id": "16858867590-5jmgahl5ltmdivs7e31lfbi3a2u0io7s.apps.googleusercontent.com",
+          "client_id": "311477229751-stqb5f4180b98v6o2iujholjt6eb2pdl.apps.googleusercontent.com",
           "client_type": 3
         },
         {
-          "client_id": "16858867590-5jmgahl5ltmdivs7e31lfbi3a2u0io7s.apps.googleusercontent.com",
+          "client_id": "311477229751-stqb5f4180b98v6o2iujholjt6eb2pdl.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAJLT-NJuSv5jz6-b_Ns20bAFEZZ68BoCM"
+          "current_key": "AIzaSyA94MjnpwDuyQlO9qtgDga4AH-PNd4JT70"
         }
       ],
       "services": {

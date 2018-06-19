@@ -15,7 +15,7 @@
     <string name="forgotPasswor">Forgot my password</string>
     <string name="login">Login</string>
     <string name="noAccount">Don\'t have an account?</string>
-    <string name="registerNow">\tregister now</string>
+    <string name="registerNow">register now</string>
 
     <!--forgot password strings-->
     <string name="forgot_content">enter the email address associated with your account, and we\'ll email you a link to reset your password</string>

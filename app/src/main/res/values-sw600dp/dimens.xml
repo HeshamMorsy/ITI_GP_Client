@@ -46,4 +46,10 @@
     <dimen name="buttonsheet_marginright">50dp</dimen>
     <dimen name="mainCard_height">200dp</dimen>
     <dimen name="nestedCard_height">150dp</dimen>
+    <dimen name="logo_login_height">366dp</dimen>
+    <dimen name="edit_login_margintop">72dp</dimen>
+    <dimen name="password_margintop">56dp</dimen>
+    <dimen name="registernow_maginright">200dp</dimen>
+    <dimen name="signin_marginleft">15dp</dimen>
+    <dimen name="already_margintop">70dp</dimen>
 </resources>
