@@ -91,6 +91,18 @@ class HomeActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
+
+        //handle FCM
+        val intent = intent
+        val message = intent.getStringExtra("message")
+        if(!message.isNullOrEmpty()) {
+            AlertDialog.Builder(this)
+                    .setTitle("Notification")
+                    .setMessage(message)
+                    .setPositiveButton("Ok", { dialog, which -> }).show()
+        }
+
+
         //init map
         initMap()
 
@@ -163,9 +175,12 @@ class HomeActivity : AppCompatActivity(),
         var imageUrl = sharedPref.get("avatar","image")
         var userName = sharedPref.get("name","Wassal User")
         var userEmail = sharedPref.get("email","user@yahoo.com")
-        Glide.with(this)
-                .load(imageUrl)
-                .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
+        if(imageUrl!=""){
+            Glide.with(this)
+                    .load(imageUrl)
+                    .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
+        }
+
 
 
 
