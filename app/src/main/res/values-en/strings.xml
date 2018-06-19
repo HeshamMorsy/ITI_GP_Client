@@ -125,4 +125,6 @@
     <string name="myOrders">My Orders</string>
     <string name="profile">Profile</string>
     <string name="aboutUs">About Us</string>
+    <string name="title_activity_tracking">Map</string>
+
 </resources>
