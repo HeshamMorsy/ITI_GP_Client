@@ -44,7 +44,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".screens.signup.SignUpActivity" />
         <activity android:name=".screens.forgot_password.ForgotPasswordActivity" />
-        <activity android:name=".screens.pin_verification.PinActivity" />
         <activity android:name=".screens.splash_screen.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
