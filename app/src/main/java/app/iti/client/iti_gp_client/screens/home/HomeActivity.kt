@@ -166,7 +166,6 @@ class HomeActivity : AppCompatActivity(),
         Glide.with(this)
                 .load(imageUrl)
                 .into(nav_view.getHeaderView(0).findViewById(R.id.userImage))
-                .onLoadFailed(ContextCompat.getDrawable(this,R.drawable.user))
 
 
 

@@ -72,8 +72,8 @@ class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View{
         startActivityForResult(builder.build(this),PLACE_PICKER_REQUEST )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        if (requestCode == PLACE_PICKER_REQUEST && data!=null) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == PLACE_PICKER_REQUEST && data !=null) {
             if (resultCode == Activity.RESULT_OK) {
                 val place = PlacePicker.getPlace(this,data)
                 pickUpLat = place.latLng.latitude
