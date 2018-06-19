@@ -14,6 +14,7 @@ import app.iti.client.iti_gp_client.contracts.ProfileContract.View
 import app.iti.client.iti_gp_client.entities.ProfileOption
 import app.iti.client.iti_gp_client.screens.change_password.ChangePasswordActivity
 import app.iti.client.iti_gp_client.screens.edit_profile.EditProfileActivity
+import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import app.iti.client.iti_gp_client.utilities.Constants
 import app.iti.client.iti_gp_client.utilities.Constants.Companion.AVATAR_SHARED_PREFERENCE
@@ -244,5 +245,11 @@ class ProfileActivity : AppCompatActivity(), View {
         prefs.setValue(key,data)
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val myIntent = Intent(this, HomeActivity::class.java)
+        startActivity(myIntent)
+        finish()
+    }
 
 }
