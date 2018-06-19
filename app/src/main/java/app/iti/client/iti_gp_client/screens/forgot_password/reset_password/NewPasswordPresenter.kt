@@ -3,6 +3,10 @@ package app.iti.client.iti_gp_client.screens.forgot_password.reset_password
 import app.iti.client.iti_gp_client.contracts.NewPasswordContract.*
 import app.iti.client.iti_gp_client.entities.NewPasswordResponse
 
+/**
+ * created by Hesham
+ */
+
 class NewPasswordPresenter : Presenter {
     //references to view and model
     lateinit var mModel: Model

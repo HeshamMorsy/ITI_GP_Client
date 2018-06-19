@@ -2,7 +2,6 @@ package app.iti.client.iti_gp_client.screens.change_password
 
 import android.app.Activity
 import android.content.Context
-import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ChangePasswordContract.*
 import app.iti.client.iti_gp_client.entities.ChangePasswordResponse
@@ -10,6 +9,7 @@ import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 
 /**
+ * created by Hesham 14/6/2018
  * Responsible for getting data from [ChangePasswordActivity] and send it to the model [ChangePasswordModel] to send it to backend
  * , handling actions in the screen and update UI if needed
  */
@@ -35,9 +35,9 @@ class ChangePasswordPresenter : Presenter {
 
     override fun sendPasswordToModel(old_password: String ,new_password: String, confirm_password: String) {
         // show message for user of which password field is not valid
-        if(!isPasswordValid(old_password)) mView.showMessage("old password "+(mView as Activity).resources.getString(R.string.notValid))
-        if(!isPasswordValid(new_password)) mView.showMessage("new password "+(mView as Activity).resources.getString(R.string.notValid))
-        if(!isPasswordValid(new_password)) mView.showMessage("confirm password "+(mView as Activity).resources.getString(R.string.notValid))
+        if(!isPasswordValid(old_password)) mView.showMessage((mView as Activity).resources.getString(R.string.oldPasswordNotValid))
+        if(!isPasswordValid(new_password)) mView.showMessage((mView as Activity).resources.getString(R.string.newPasswordNotValid))
+        if(!isPasswordValid(new_password)) mView.showMessage((mView as Activity).resources.getString(R.string.confirmPasswordNotValid))
 
         if(isPasswordValid(old_password) && isPasswordValid(new_password) && isPasswordValid(confirm_password)) {
             val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)

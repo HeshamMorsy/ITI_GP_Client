@@ -1,14 +1,17 @@
 package app.iti.client.iti_gp_client.screens.change_password
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ChangePasswordContract.*
 import app.iti.client.iti_gp_client.entities.ChangePasswordResponse
+import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import kotlinx.android.synthetic.main.activity_change_password.*
 
 /**
+ * created by Hesham 14/6/2018
  * Displays the change password screen
  */
 
@@ -46,6 +49,13 @@ class ChangePasswordActivity : AppCompatActivity(), View {
 
     override fun showMessage(message: String) {
         Toast.makeText(this , message , Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val myIntent = Intent(this, ProfileActivity::class.java)
+        startActivity(myIntent)
+        finish()
     }
 
 }

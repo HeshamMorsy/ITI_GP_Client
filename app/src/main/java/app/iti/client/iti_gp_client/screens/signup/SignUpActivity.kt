@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import android.support.design.widget.BottomSheetDialog
 import android.widget.Button
 import android.widget.EditText
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.TOKEN_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.defaultPrefs
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
@@ -75,7 +76,7 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
     private fun confirmCode() {
         Log.i("response","show confirm code clicked")
         var defaultPref = PreferenceHelper.defaultPrefs(this)
-        val auth = defaultPref.get("auth_token","0")
+        val auth = defaultPref.get(TOKEN_SHARED_PREFERENCE,"0")
         Log.i("auth_token",auth)
         presenter!!.verifyCode(verificationCode.text.toString(),auth!!)
 
@@ -160,9 +161,6 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         mBottomSheetDialog.setContentView(sheetView)
         mBottomSheetDialog.show()
 
-
-//        var touchOutside:View =mBottomSheetDialog.window.findViewById(android.support.design.R.id.touch_outside)
-//        touchOutside.setOnClickListener(null)
         mBottomSheetDialog.setCancelable(false)
         mBottomSheetDialog.setCanceledOnTouchOutside(false)
         //register the confirm code button
@@ -170,17 +168,16 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
     }
 
     private fun getAuth(): String? {
-        var defaultPref = PreferenceHelper.defaultPrefs(this)
-        return defaultPref.get("auth_token","0")
+        val defaultPref = PreferenceHelper.defaultPrefs(this)
+        return defaultPref.get(TOKEN_SHARED_PREFERENCE,"0")
     }
 
     override fun errorResponse(msg:String){
-        alertWithOneButton(this,"Error Message",msg,"Ok")
-//        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show()
+        alertWithOneButton(this,resources.getString(R.string.error),msg,"Ok")
     }
     override fun saveAuth_token(auth_token:String){
-        var defaultPref = defaultPrefs(this)
-        defaultPref.setValue("auth_token",auth_token)
+        val defaultPref = defaultPrefs(this)
+        defaultPref.setValue(TOKEN_SHARED_PREFERENCE,auth_token)
     }
     override fun navigateToLogin() {
         val intent = Intent(this, LoginActivity::class.java)
@@ -188,4 +185,12 @@ class SignUpActivity : AppCompatActivity(),SignUpInt.View,View.OnFocusChangeList
         startActivity(intent)
         finish()
     }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val myIntent = Intent(this, LoginActivity::class.java)
+        startActivity(myIntent)
+        finish()
+    }
+
 }

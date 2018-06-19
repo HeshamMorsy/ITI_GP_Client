@@ -11,6 +11,10 @@ import app.iti.client.iti_gp_client.entities.NewPasswordResponse
 import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_new_password.*
 
+/**
+ * created by Hesham
+ */
+
 class NewPasswordActivity : AppCompatActivity(), View {
     // reference to presenter
     lateinit var mPresenter: Presenter
@@ -25,7 +29,7 @@ class NewPasswordActivity : AppCompatActivity(), View {
     override fun onRequestSuccess(response: NewPasswordResponse) {
         Toast.makeText(this, response.message, Toast.LENGTH_SHORT).show()
         // go to sign in activity
-        var myIntent = Intent(this , LoginActivity::class.java)
+        val myIntent = Intent(this , LoginActivity::class.java)
         startActivity(myIntent)
     }
 

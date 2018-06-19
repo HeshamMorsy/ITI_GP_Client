@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:layout_weight="3"
-            android:text="Carriers"
+            android:text="@string/carriers"
             android:visibility="invisible" />
 
         <TextView
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="2"
             android:gravity="right"
-            android:text="fedex"
+            android:text="@string/fedex"
             android:textColor="@color/textColor"
             android:textSize="18sp"
             android:textStyle="bold" />

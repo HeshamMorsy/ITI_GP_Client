@@ -7,7 +7,7 @@
         android:id="@+id/sideMenuHome">
         <item
             android:id="@+id/nav_home"
-            android:title="Home"
+            android:title="@string/home"
             />
     </group>
 
@@ -15,21 +15,21 @@
         android:id="@+id/sideMenuMyOrders">
         <item
             android:id="@+id/nav_myOrders"
-            android:title="MyOrders"
+            android:title="@string/myOrders"
             />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/sideMenuProfile">
         <item
             android:id="@+id/nav_profile"
-            android:title="Profile"
+            android:title="@string/profile"
             />
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/sideMenuAbout">
         <item
             android:id="@+id/nav_about"
-            android:title="About Us"
+            android:title="@string/aboutUs"
             />
     </group>
 

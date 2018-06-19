@@ -1,6 +1,5 @@
 package app.iti.client.iti_gp_client.services
 
-import app.iti.client.iti_gp_client.entities.OrderHistoryResponse
 import app.iti.client.iti_gp_client.entities.OrderupcomingResponse
 import app.iti.client.iti_gp_client.utilities.RetrofitCreation
 import io.reactivex.Observable

@@ -1,6 +1,7 @@
 package app.iti.client.iti_gp_client.screens.forgot_password
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,10 +9,12 @@ import android.widget.TextView
 import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.ForgotPasswordContract.*
+import app.iti.client.iti_gp_client.screens.login.LoginActivity
 import kotlinx.android.synthetic.main.activity_forgot_password.*
 
 
 /**
+ * created by Hesham
  * Display forgot password screen
  */
 
@@ -55,6 +58,13 @@ class ForgotPasswordActivity : AppCompatActivity(), View{
         Toast.makeText(this, result,Toast.LENGTH_SHORT).show()
         Log.i("response", "end loading function")
         dialog.dismiss()
+    }
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val myIntent = Intent(this, LoginActivity::class.java)
+        startActivity(myIntent)
+        finish()
     }
 
 }

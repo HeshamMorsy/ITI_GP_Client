@@ -1,15 +1,12 @@
 package app.iti.client.iti_gp_client.screens.payment
 
 import android.util.Log
-import app.iti.client.iti_gp_client.contracts.PaymentContract.*
-import app.iti.client.iti_gp_client.entities.FinalOrderRequest
+import app.iti.client.iti_gp_client.contracts.PaymentContract.Model
 import app.iti.client.iti_gp_client.entities.OrderResponse
-import app.iti.client.iti_gp_client.entities.OrderToBeSent
 import app.iti.client.iti_gp_client.services.createOrderRequest
 import app.iti.client.iti_gp_client.utilities.RequestCreation
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.HttpException
 
 
 /**
@@ -39,9 +36,6 @@ class PaymentModel(val presenter: PaymentPresenter) : Model {
 
     private fun handleError(error: Throwable) {
         Log.i("error Response", "stackTrace : "+error.localizedMessage)
-        /*var er = error as HttpException
-        Log.i("error Response", "cause : "+er.response().errorBody().toString())
-        Log.i("error Response", "error receiving data"+error.printStackTrace())*/
         presenter.errorResponse(error)
     }
 }

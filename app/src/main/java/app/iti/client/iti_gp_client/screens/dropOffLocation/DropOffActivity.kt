@@ -12,15 +12,18 @@ import com.google.android.gms.location.places.ui.PlacePicker
 import android.widget.Toast
 import app.iti.client.iti_gp_client.contracts.DropOff
 import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.PLACE_DISTINATION_REQUEST
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.PLACE_PICKER_REQUEST
 import app.iti.client.iti_gp_client.utilities.RequestCreation
 
+/**
+ * created by Hazem
+ */
 
 class DropOffActivity : AppCompatActivity(),View.OnClickListener, DropOff.View{
 
     //ref to the presenter of the activity
     var presenter:DropOff.Presenter? = null
-    val PLACE_PICKER_REQUEST = 1
-    val PLACE_DISTINATION_REQUEST = 2
     var pickUpLong:Double? =null
     var pickUpLat:Double? =null
     var distLong:Double? =null

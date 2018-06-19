@@ -1,5 +1,6 @@
 package app.iti.client.iti_gp_client.screens.login
 
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -15,6 +16,10 @@ import app.iti.client.iti_gp_client.screens.home.HomeActivity
 import app.iti.client.iti_gp_client.screens.order_description.OrderActivity
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
+import app.iti.client.iti_gp_client.utilities.Constants
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.LOGIN_STATUS_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 
 /**
  * Displays the login screen
@@ -36,9 +41,18 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         login_emailEditText.onFocusChangeListener = this
         login_passwordEditText.onFocusChangeListener= this
 
+        // check if user logged in or not
+        val defaultPref = PreferenceHelper.defaultPrefs(this)
+        val login_status = defaultPref.get(LOGIN_STATUS_SHARED_PREFERENCE,false)
+        if (login_status == true){
+            val myIntent = Intent(this,HomeActivity::class.java)
+            startActivity(myIntent)
+            finish()
+        }
+
         // temporarily go to order activity from the logo in login screen
         login_logo.setOnClickListener {
-            var myIntent = Intent(this, OrderActivity::class.java)
+            val myIntent = Intent(this, OrderActivity::class.java)
             startActivity(myIntent)
         }
 
@@ -128,4 +142,8 @@ class LoginActivity : AppCompatActivity(), View, android.view.View.OnFocusChange
         dialog?.dismiss()
     }
 
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        finishAffinity()
+    }
 }

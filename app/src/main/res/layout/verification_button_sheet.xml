@@ -27,7 +27,7 @@
             android:layout_marginTop="@dimen/buttonsheet_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Validation Code"
+            android:text="@string/validationCode"
             android:gravity="center"
             android:textColor="@color/colorPrimary"/>
         <EditText
@@ -47,7 +47,7 @@
             android:layout_gravity="center"
             android:layout_width="@dimen/btn_width"
             android:layout_height="@dimen/btn_height"
-            android:text="Confirm"
+            android:text="@string/confirm"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:textColor="#FFF"
@@ -63,7 +63,7 @@
             android:id="@+id/sendVerification"
             android:layout_width="@dimen/btn_width"
             android:layout_height="@dimen/btn_height"
-            android:text="Send Verification Code"
+            android:text="@string/sendVerificationCode"
             android:background="@drawable/verification_btn"
             android:textColor="#54545a"/>
     </LinearLayout>

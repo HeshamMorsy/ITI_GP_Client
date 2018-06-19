@@ -20,6 +20,6 @@
         android:layout_centerVertical="true"
         android:layout_marginStart="@dimen/spinner_image_marginleft"
         android:layout_toEndOf="@+id/spinnerImage"
-        android:text="Select Carriers"
+        android:text="@string/selectCarrier"
         tools:text="Select Carier" />
 </RelativeLayout>

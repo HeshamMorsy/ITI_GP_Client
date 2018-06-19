@@ -1,6 +1,5 @@
 package app.iti.client.iti_gp_client.utilities
 
-import app.iti.client.iti_gp_client.services.SignUpService
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory

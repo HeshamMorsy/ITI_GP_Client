@@ -21,6 +21,7 @@ import java.io.Serializable
 
 
 /**
+ * created by Hesham
  * Displays Order Screen
  */
 
@@ -92,7 +93,7 @@ class OrderActivity : AppCompatActivity(), View {
             imageArray.add(4,image)
             imagePaths.add(4,path)
         }else{
-            Toast.makeText(this,"max number of images", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this,resources.getString(R.string.maxImages), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -107,21 +108,7 @@ class OrderActivity : AppCompatActivity(), View {
             }
 
             override fun onImagesPicked(imagesFiles: List<File>, source: EasyImage.ImageSource, type: Int) {
-                //Handle the images
-                /*Log.i("imageFiles Length",imagesFiles.count().toString())
-                Log.i("file usableSpace", "${imagesFiles[0].usableSpace}")
-                Log.i("file length" ,"${imagesFiles[0].length()}")   // this displays the file size
-                Log.i("file totalSpace" ,"${imagesFiles[0].totalSpace}")
-                Log.i("file readBytes" ,"${imagesFiles[0].readBytes()}")
-                Log.i("name image",imagesFiles[0].name)
-                Log.i("path image",imagesFiles[0].path)
-                Log.i("absolutePath image",imagesFiles[0].absolutePath)
-                Log.i("canonicalPath image",imagesFiles[0].canonicalPath)
-                Log.i("parent image",imagesFiles[0].parent)
-                Log.i("extension image",imagesFiles[0].extension)
-                Log.i("invariantPath image",imagesFiles[0].invariantSeparatorsPath)
-                Log.i("nameWithout image",imagesFiles[0].nameWithoutExtension)
-                Log.i("absoluteFile image",imagesFiles[0].absoluteFile.toString())*/
+                //send files to be converted to bitmap images
                 mPresenter.convertFilesToBitmap(imagesFiles)
             }
         })
@@ -333,9 +320,10 @@ class OrderActivity : AppCompatActivity(), View {
         if(title == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterTitle),Toast.LENGTH_LONG).show()
         if(description == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterDescription),Toast.LENGTH_LONG).show()
         if(weight == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterWeight),Toast.LENGTH_LONG).show()
+        if(weight.toDouble() <= 0 && weight.toDouble() > 100) Toast.makeText(this,resources.getString(R.string.pleaseEnterValidWeight),Toast.LENGTH_LONG).show()
         if(imageArray.size ==0 ) Toast.makeText(this,resources.getString(R.string.pleaseEnterImage),Toast.LENGTH_LONG).show()
 
-        if(weight != "" && title != "" && description != "" && imageArray.size>0) {
+        if(weight != "" && title != "" && description != "" && imageArray.size>0 && weight.toDouble()>0 && weight.toDouble() <= 100) {
             // set data in order request singleton
             RequestCreation.title = title
             RequestCreation.description = description

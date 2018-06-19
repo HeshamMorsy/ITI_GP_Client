@@ -16,7 +16,7 @@ interface EditProfileContract {
         fun onRequestSuccess(response: EditProfileResponse)
         fun onRequestError(error: Throwable)
         fun showMessage(msg: String)
-        fun updateImageView(bitmap: Bitmap)
+//        fun updateImageView(bitmap: Bitmap)
     }
     interface Presenter {
         fun initPresenter(view: View)
@@ -24,6 +24,6 @@ interface EditProfileContract {
         fun errorResponse(error: Throwable)
         fun sendChangesToModel(email: String, phone: String, name: String)
         fun getNewImage()
-        fun convertImageToBitmap(imageFiles: MutableList<File>)
+        fun convertImageToBitmap(imageFiles: MutableList<File>) : Bitmap
     }
 }

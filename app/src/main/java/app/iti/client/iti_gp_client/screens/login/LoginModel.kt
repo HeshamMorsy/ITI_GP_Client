@@ -4,8 +4,6 @@ import android.util.Log
 import app.iti.client.iti_gp_client.contracts.LoginContract.Model
 import app.iti.client.iti_gp_client.entities.LoginResponse
 import app.iti.client.iti_gp_client.services.createLoginRequest
-import app.iti.client.iti_gp_client.utilities.PreferenceHelper
-import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -35,7 +33,7 @@ class LoginModel(val presenter: LoginPresenter) : Model {
 
     private fun handleError(error: Throwable) {
         Log.i("error Response", "error receiving data"+error.message)
-        presenter.errorResponse()
+        presenter.errorResponse(error.localizedMessage)
 //        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
     }
 }
