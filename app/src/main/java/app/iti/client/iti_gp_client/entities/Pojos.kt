@@ -32,3 +32,6 @@ data class unNeccessaryObject(var upcoming:Array<OrderDetails>)
 
 //resend verifications data
 data class ResendDetails(var message: String,var user:SignUpUser)
+
+//cancel order
+data class CancelOrderResponse(val message: String)

@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.OrderHistory
 import app.iti.client.iti_gp_client.contracts.UpcommingOrders
+import app.iti.client.iti_gp_client.entities.CancelOrderResponse
 import app.iti.client.iti_gp_client.entities.OrderDetails
 import app.iti.client.iti_gp_client.entities.OrderHistoryResponse
 import app.iti.client.iti_gp_client.entities.OrderupcomingResponse
@@ -44,4 +45,11 @@ class UpCommingPresenter(var view:UpcommingOrders.View):UpcommingOrders.Presente
         view.updateData(futureOrders)
     }
 
+    override fun cancelTrip(auth: String?, id: Int) {
+        model.cancellTrip(auth, id)
+    }
+
+    override fun handlecancelOrders(response: CancelOrderResponse) {
+        view.updateView()
+    }
 }

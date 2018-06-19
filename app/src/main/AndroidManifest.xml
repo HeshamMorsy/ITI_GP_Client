@@ -82,18 +82,23 @@
         <activity android:name=".screens.profile.ProfileActivity" />
         <activity android:name=".screens.about.AboutActivity" />
         <activity android:name=".screens.edit_profile.EditProfileActivity" />
-        <activity android:name=".screens.change_password.ChangePasswordActivity"/>
+        <activity android:name=".screens.change_password.ChangePasswordActivity" />
         <activity android:name=".screens.forgot_password.reset_password.NewPasswordActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data
                     android:host="driveo.herokuapp.com"
                     android:path="/api/v1/authentication/mobile/resetpassword"
                     android:scheme="https" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".screens.tracking.TrackingActivity"
+            android:label="@string/title_activity_tracking"></activity>
     </application>
 
 </manifest>
