@@ -14,14 +14,22 @@ import app.iti.client.iti_gp_client.contracts.ProfileContract.View
 import app.iti.client.iti_gp_client.entities.ProfileOption
 import app.iti.client.iti_gp_client.screens.change_password.ChangePasswordActivity
 import app.iti.client.iti_gp_client.screens.edit_profile.EditProfileActivity
-import app.iti.client.iti_gp_client.utilities.Constants.Companion.CURRENT_LANGUAGE
+import app.iti.client.iti_gp_client.screens.login.LoginActivity
+import app.iti.client.iti_gp_client.utilities.Constants
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.AVATAR_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.CURRENT_LANGUAGE_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.NAME_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.LocaleHelper
 import io.paperdb.Paper
 import kotlinx.android.synthetic.main.activity_profile.*
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
+import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
 import com.bumptech.glide.Glide
 
+/**
+ * created by Hesham
+ */
 
 class ProfileActivity : AppCompatActivity(), View {
     // reference to presenter
@@ -46,15 +54,15 @@ class ProfileActivity : AppCompatActivity(), View {
 
         // get user data from shared preferences
         val sharedPreferences = PreferenceHelper.defaultPrefs(this)
-        val name = sharedPreferences.get("name","user name")
-        val imageUrl = sharedPreferences.get("avatar","")
+        // get language from shared preferences if exists
+        currentLanguage = sharedPreferences.get(CURRENT_LANGUAGE_SHARED_PREFERENCE, resources.getString(R.string.english))
+        val name = sharedPreferences.get(NAME_SHARED_PREFERENCE,"user name")
+        val imageUrl = sharedPreferences.get(AVATAR_SHARED_PREFERENCE,"")
         if(imageUrl != "")
             Glide.with(this).load(imageUrl).into(profile_image)
         profile_name.text = name
 
-        // get language from shared preferences if exists
-        val pref:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        currentLanguage = pref.getString(CURRENT_LANGUAGE, resources.getString(R.string.english))
+
 
         // initializing presenter and call initPresenter to initialize view and model in presenter class
         mPresenter = ProfilePresenter()
@@ -80,27 +88,11 @@ class ProfileActivity : AppCompatActivity(), View {
 
         expand_list.setAdapter(expandAdapter)
 
-        // handle touch and scroll for list view
-        /*handleExpandableListHeight()
-        setListViewHeightBasedOnChildren(expand_list)*/
-
-//        handleExpandableListHeight()
-
-
-
         // this method is to handle on click on child list
         onChildClick()
 
         // this method is to handel on click on group list
         onHeaderClick()
-
-        /*expand_list.setOnTouchListener { v, event ->
-            v.parent.requestDisallowInterceptTouchEvent(true)
-            false
-        }*/
-
-
-
     }
 
     // handle on  child click listener
@@ -122,7 +114,7 @@ class ProfileActivity : AppCompatActivity(), View {
 
                 // savae current language in shared preferences
                 currentLanguage = resources.getString(R.string.english)
-                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE)
+                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE_SHARED_PREFERENCE)
 
                 // start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
@@ -142,9 +134,9 @@ class ProfileActivity : AppCompatActivity(), View {
                 profileOptionsArray!!.add(3,ProfileOption(resources.getString(R.string.language),
                         R.mipmap.ic_down_arrow,resources.getString(R.string.arabic)))
 
-                // savae current language in shared preferences
+                // save current language in shared preferences
                 currentLanguage = resources.getString(R.string.english)
-                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE)
+                saveInSharedPreferences(currentLanguage!!, CURRENT_LANGUAGE_SHARED_PREFERENCE)
 
                 // start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
@@ -162,69 +154,59 @@ class ProfileActivity : AppCompatActivity(), View {
         expand_list.setOnGroupClickListener { parent, v, groupPosition, id ->
             if(groupPosition == 0){
                 //go to edit profile activity
-                var myIntent = Intent(this , EditProfileActivity::class.java)
+                val myIntent = Intent(this , EditProfileActivity::class.java)
                 startActivity(myIntent)
             }else if(groupPosition == 1){
                 //go to change password activity
-                var myIntent = Intent(this , ChangePasswordActivity::class.java)
+                val myIntent = Intent(this , ChangePasswordActivity::class.java)
                 startActivity(myIntent)
             }else if(groupPosition == 2){
                 Toast.makeText(this , resources.getString(R.string.soonToast) , Toast.LENGTH_SHORT).show()
             }else if(groupPosition == 3){
                 if(expand_list.isGroupExpanded(groupPosition)){
+                    profileOptionsArray!!.removeAt(3)
+                    profileOptionsArray!!.add(3,ProfileOption(resources.getString(R.string.language),
+                            R.mipmap.ic_more,currentLanguage!!))
                     expand_list.collapseGroup(groupPosition)
                 }else {
+                    profileOptionsArray!!.removeAt(3)
+                    profileOptionsArray!!.add(3,ProfileOption(resources.getString(R.string.language),
+                            R.mipmap.ic_down_arrow,currentLanguage!!))
                     expand_list.expandGroup(groupPosition)
                 }
             }else if(groupPosition == 4){
-                Toast.makeText(this , resources.getString(R.string.logout), Toast.LENGTH_SHORT).show()
+                //logout
+                emptyUserData()
+                val myIntent = Intent(this , LoginActivity::class.java)
+                startActivity(myIntent)
+                finish()
+                Toast.makeText(this , resources.getString(R.string.logoutSuccessfully), Toast.LENGTH_SHORT).show()
             }
             true
         }
 
     }
 
-    /*private fun setListViewHeight(parent: ExpandableListView?, groupPosition: Int) {
-        val listAdapter = expand_list.getExpandableListAdapter() as ExpandableListAdapter
-        var totalHeight = 0
-        val desiredWidth = android.view.View.MeasureSpec.makeMeasureSpec(expand_list.getWidth(),
-                android.view.View.MeasureSpec.EXACTLY)
-        for (i in 0 until listAdapter.groupCount) {
-            val groupItem = listAdapter.getGroupView(i, false, null, expand_list)
-            groupItem.measure(desiredWidth, android.view.View.MeasureSpec.UNSPECIFIED)
-
-            totalHeight += groupItem.measuredHeight
-
-            if (expand_list.isGroupExpanded(i) && i != groupPosition || !expand_list.isGroupExpanded(i) && i == groupPosition) {
-                for (j in 0 until listAdapter.getChildrenCount(i)) {
-                    val listItem = listAdapter.getChildView(i, j, false, null,
-                            expand_list)
-                    listItem.measure(desiredWidth, android.view.View.MeasureSpec.UNSPECIFIED)
-
-                    totalHeight += listItem.measuredHeight
-
-                }
-            }
-        }
-
-        val params = expand_list.getLayoutParams()
-        var height = totalHeight + expand_list.getDividerHeight() * (listAdapter.getGroupCount() - 1)
-        if (height < 10)
-            height = 200
-        params.height = height
-        expand_list.setLayoutParams(params)
-        expand_list.requestLayout()
-
-    }*/
-
+    // this method is to empty user data from shared preferences
+    private fun emptyUserData(){
+        val defaultPref = PreferenceHelper.defaultPrefs(this)
+        defaultPref.setValue(Constants.TOKEN_SHARED_PREFERENCE,"")
+        defaultPref.setValue(Constants.EMAIL_SHARED_PREFERENCE,"")
+        defaultPref.setValue(Constants.PHONE_SHARED_PREFERENCE,"")
+        defaultPref.setValue(Constants.NAME_SHARED_PREFERENCE,"")
+        defaultPref.setValue(Constants.AVATAR_SHARED_PREFERENCE,"")
+        defaultPref.setValue(Constants.LOGIN_STATUS_SHARED_PREFERENCE,false)
+    }
 
     // creating options in list view in profile
     private fun createListOptions(resources: Resources): ArrayList<ProfileOption>{
+        val prefs = PreferenceHelper.defaultPrefs(this)
+        currentLanguage = prefs.get(CURRENT_LANGUAGE_SHARED_PREFERENCE,resources.getString(R.string.english))
         val options = ArrayList<ProfileOption>()
         options.add(ProfileOption(resources.getString(R.string.editProfile),R.mipmap.ic_more,""))
         options.add(ProfileOption(resources.getString(R.string.changePassword),R.mipmap.ic_more,""))
         options.add(ProfileOption(resources.getString(R.string.paymentMethod),R.mipmap.ic_more,""))
-        options.add(ProfileOption(resources.getString(R.string.language),R.mipmap.ic_down_arrow,currentLanguage!!))
+        options.add(ProfileOption(resources.getString(R.string.language),R.mipmap.ic_more,currentLanguage!!))
         options.add(ProfileOption(resources.getString(R.string.logout),R.mipmap.ic_down_arrow,""))
         return options
     }
@@ -258,10 +240,8 @@ class ProfileActivity : AppCompatActivity(), View {
     }
 
     private fun saveInSharedPreferences(data: String , key: String){
-        val shared:SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        val editor = shared.edit()
-        editor.putString(key,data)
-        editor.apply()
+        val prefs = PreferenceHelper.defaultPrefs(this)
+        prefs.setValue(key,data)
     }
 
 

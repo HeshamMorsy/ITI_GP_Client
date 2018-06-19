@@ -10,6 +10,9 @@ import android.widget.TextView
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.entities.ProfileOption
 
+/**
+ * created by Hesham
+ */
 
 class ExpandableListAdapter(val context: Context, val header: ArrayList<ProfileOption>,
                             private val subList: HashMap<String, ArrayList<String>> ) : BaseExpandableListAdapter() {

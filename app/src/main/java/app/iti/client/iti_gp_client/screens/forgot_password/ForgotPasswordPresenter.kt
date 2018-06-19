@@ -36,7 +36,7 @@ class ForgotPasswordPresenter : Presenter {
         if(check){
             checkEmail = true
         }else{
-            mView?.setEmailError("Invalid Email")
+            mView?.setEmailError((mView as Activity).resources.getString(R.string.invalidEmail))
             checkEmail = false
         }
     }
@@ -47,7 +47,7 @@ class ForgotPasswordPresenter : Presenter {
             mView?.startLoading((mView as Activity).resources.getString(R.string.wait))
             mModel?.resetPassword(email)
         }else{
-            mView?.setEmailError("Invalid Email")
+            mView?.setEmailError((mView as Activity).resources.getString(R.string.invalidEmail))
         }
     }
 
@@ -56,7 +56,7 @@ class ForgotPasswordPresenter : Presenter {
     }
 
     override fun errorResponse(error: String) {
-        if(error == (mView as Activity).resources.getString(R.string.notFound)) {
+        if(error == (mView as Activity).resources.getString(R.string.APINotFound)) {
             mView?.endLoading((mView as Activity).resources.getString(R.string.emailNotFound))
         }else{
             mView?.endLoading(error)

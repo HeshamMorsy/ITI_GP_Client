@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
@@ -59,6 +59,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:inputType="textEmailAddress"
                 android:layout_marginTop="10dp"
                 android:hint="@string/changeEmail"
                 android:textColor="@color/textColor"
@@ -70,6 +71,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:inputType="phone"
                 android:layout_marginTop="30dp"
                 android:hint="@string/changePhone"
                 android:textColor="@color/textColor"
@@ -81,6 +83,7 @@
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
+                android:inputType="textPersonName"
                 android:layout_marginTop="30dp"
                 android:hint="@string/changeName"
                 android:textColor="@color/textColor"

@@ -7,6 +7,10 @@ import app.iti.client.iti_gp_client.services.createNewPasswordRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
+/**
+ * created by Hesham
+ */
+
 class NewPasswordModel : Model {
     // reference to presenter
     lateinit var mPresenter: Presenter

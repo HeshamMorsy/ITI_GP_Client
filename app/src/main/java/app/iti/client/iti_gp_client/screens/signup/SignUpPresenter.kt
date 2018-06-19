@@ -1,8 +1,10 @@
 package app.iti.client.iti_gp_client.screens.signup
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.SignUpInt
 import app.iti.client.iti_gp_client.entities.ResendDetails
 import app.iti.client.iti_gp_client.entities.SignUpData
@@ -29,7 +31,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         if (isNetworkAvailable(view as Context)){
             Log.i("response","signup: "+ emailValidation+ phoneValidation+ passwordValidation + repasswordValidation )
             if (emailValidation && phoneValidation && passwordValidation && repasswordValidation){
-                view.startLoading("sending signup data!!")
+                view.startLoading((view as Activity).resources.getString(R.string.sendingData))
                 model.signUp(phone, email, pass)
             }else if (!emailValidation){
                 validateEmail(email)
@@ -41,7 +43,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
                 validateRePassword(pass, repass)
             }
         }else{
-            Toast.makeText(view as Context,"there is no internet connection", Toast.LENGTH_SHORT).show()
+            Toast.makeText(view as Context,(view as Activity).resources.getString(R.string.wrongMsg), Toast.LENGTH_SHORT).show()
         }
 
 
@@ -54,7 +56,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
         if (!phone.matches(phoneRegex.toRegex())){
             phoneValidation = false
-            view.phoneError("please enter a valid phone")
+            view.phoneError((view as Activity).resources.getString(R.string.phoneValidError))
         }else{
             phoneValidation = true
         }
@@ -65,7 +67,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         val emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         if (!email.matches(emailRegex.toRegex())){
             emailValidation = false
-            view.emailError("please enter a correct email")
+            view.emailError((view as Activity).resources.getString(R.string.emailValidError))
         }else{
             emailValidation = true
         }
@@ -76,7 +78,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
         val passWordRegex = "^((?!.*\\s)(?=.*[a-zA-Z])(?=.*\\d)).{6,12}$"
         if (!pass.matches(passWordRegex.toRegex())){
             passwordValidation = false
-            view.passwordError("please enter stronger password")
+            view.passwordError((view as Activity).resources.getString(R.string.passwordNotStrongError))
         }else{
             passwordValidation = true
         }
@@ -89,7 +91,7 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
             repasswordValidation = true
         }else{
             repasswordValidation = false
-            view.repasswordError("repassword doesnot match password")
+            view.repasswordError((view as Activity).resources.getString(R.string.passwordNotMatch))
         }
     }
 
@@ -110,13 +112,13 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
     override fun receiveErrorResponse(){
         view.endLoading()
-        view.errorResponse("server error")
+        view.errorResponse((view as Activity).resources.getString(R.string.serverError))
         Log.i("response", "presenter error response")
     }
 
 
     override fun verifyCode(pinCode: String,auth:String) {
-        view.startLoading("verifing code....")
+        view.startLoading((view as Activity).resources.getString(R.string.verifying))
         model.verify(pinCode,auth)
     }
 
@@ -133,10 +135,10 @@ class SignUpPresenter(var view:SignUpInt.View):SignUpInt.Presenter {
 
     override fun handleVerificationError(){
         view.endLoading()
-        view.errorResponse("server error")
+        view.errorResponse((view as Activity).resources.getString(R.string.serverError))
     }
     override fun resendCode(auth: String) {
-        view.startLoading("resending code....")
+        view.startLoading((view as Activity).resources.getString(R.string.resendingCode))
         model.resendCode(auth)
     }
 

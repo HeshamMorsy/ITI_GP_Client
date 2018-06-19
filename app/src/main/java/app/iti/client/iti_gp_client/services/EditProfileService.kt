@@ -1,7 +1,6 @@
 package app.iti.client.iti_gp_client.services
 
 import app.iti.client.iti_gp_client.entities.EditProfileResponse
-import app.iti.client.iti_gp_client.entities.Image
 import app.iti.client.iti_gp_client.utilities.RetrofitCreation
 import io.reactivex.Observable
 import okhttp3.MultipartBody
@@ -20,27 +19,3 @@ interface EditProfileService {
 fun createEditProfileRequest():EditProfileService{
     return RetrofitCreation.createRetrofit().create(EditProfileService::class.java)
 }
-
-/*
-@Multipart
-@POST("user/updateprofile")
-Observable<ResponseBody> updateProfile(@Part("user_id") RequestBody id,
-                                       @Part("full_name") RequestBody fullName,
-                                       @Part MultipartBody.Part image,
-                                       @Part("other") RequestBody other);
-
-//pass it like this
-File file = new File("/storage/emulated/0/Download/Corrections 6.jpg");
-RequestBody requestFile =
-        RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-// MultipartBody.Part is used to send also the actual file name
-MultipartBody.Part body =
-        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-
-// add another part within the multipart request
-RequestBody fullName =
-        RequestBody.create(MediaType.parse("multipart/form-data"), "Your Name");
-
-service.updateProfile(id, fullName, body, other);
- */

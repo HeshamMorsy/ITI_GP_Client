@@ -1,9 +1,7 @@
 package app.iti.client.iti_gp_client.screens.edit_profile
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -13,6 +11,10 @@ import app.iti.client.iti_gp_client.contracts.EditProfileContract.Presenter
 import app.iti.client.iti_gp_client.contracts.EditProfileContract.View
 import app.iti.client.iti_gp_client.entities.EditProfileResponse
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.AVATAR_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.EMAIL_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.NAME_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.PHONE_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
@@ -24,13 +26,14 @@ import java.io.File
 
 
 /**
+ * created by Hesham
  * Displays the edit profile screen
  */
 
 class EditProfileActivity : AppCompatActivity(), View {
     //reference to presenter
     private lateinit var mPresneter:Presenter
-    private var bitmap: Bitmap? = null
+    private lateinit var bitmap: Bitmap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,10 +43,10 @@ class EditProfileActivity : AppCompatActivity(), View {
         mPresneter.initPresenter(this)
         // set user values in the edit texts
         val defaultPref = PreferenceHelper.defaultPrefs(this)
-        val email = defaultPref.get("email","0")
-        val name = defaultPref.get("name","No name")
-        val phone = defaultPref.get("phone","0")
-        val imageUrl = defaultPref.get("avatar","")
+        val email = defaultPref.get(EMAIL_SHARED_PREFERENCE,"0")
+        val name = defaultPref.get(NAME_SHARED_PREFERENCE,"No name")
+        val phone = defaultPref.get(PHONE_SHARED_PREFERENCE,"0")
+        val imageUrl = defaultPref.get(AVATAR_SHARED_PREFERENCE,"")
         if(imageUrl != "")
         Glide.with(this).load(imageUrl).into(editProfile_image)
         editProfile_newEmail.setText(email)
@@ -55,10 +58,10 @@ class EditProfileActivity : AppCompatActivity(), View {
     override fun onRequestSuccess(response: EditProfileResponse) {
         // save authentication token in shared preferences
         val defaultPref = PreferenceHelper.defaultPrefs(this)
-        defaultPref.setValue("email",response.user.email)
-        defaultPref.setValue("phone",response.user.phone)
-        defaultPref.setValue("name",response.user.name)
-        defaultPref.setValue("avatar",response.user.avatar.url)
+        defaultPref.setValue(EMAIL_SHARED_PREFERENCE,response.user.email)
+        defaultPref.setValue(PHONE_SHARED_PREFERENCE,response.user.phone)
+        defaultPref.setValue(NAME_SHARED_PREFERENCE,response.user.name)
+        defaultPref.setValue(AVATAR_SHARED_PREFERENCE,response.user.avatar.url)
         val myIntent = Intent(this,ProfileActivity::class.java)
         startActivity(myIntent)
         finish()
@@ -95,7 +98,9 @@ class EditProfileActivity : AppCompatActivity(), View {
         Log.i("result",resultCode.toString())
         EasyImage.handleActivityResult(requestCode, resultCode, data, this, object : DefaultCallback() {
             override fun onImagesPicked(imageFiles: MutableList<File>, source: EasyImage.ImageSource?, type: Int) {
-                mPresneter.convertImageToBitmap(imageFiles)
+                bitmap = mPresneter.convertImageToBitmap(imageFiles)
+                editProfile_image.setImageBitmap(bitmap)
+
             }
 
             override fun onImagePickerError(e: Exception?, source: EasyImage.ImageSource?, type: Int) {
@@ -106,8 +111,16 @@ class EditProfileActivity : AppCompatActivity(), View {
     }
 
     // set user profile image after converting it to bitmap
-    override fun updateImageView(bitmap: Bitmap) {
+   /* override fun updateImageView(bitmap: Bitmap) {
         this.bitmap = bitmap
         editProfile_image.setImageBitmap(bitmap)
+    }*/
+
+    override fun onBackPressed() {
+//        super.onBackPressed()
+        val myIntent = Intent(this, ProfileActivity::class.java)
+        startActivity(myIntent)
+        finish()
     }
+
 }

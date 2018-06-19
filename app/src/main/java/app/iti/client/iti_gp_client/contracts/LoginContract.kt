@@ -25,7 +25,7 @@ interface LoginContract {
         fun initPresenter(view: View)
         fun login(email: String, password: String)
         fun receiveResponse(response:LoginResponse)
-        fun errorResponse()
+        fun errorResponse(error: String)
         fun isEmailValid(email: String)
         fun isPasswordValid(email: String)
 

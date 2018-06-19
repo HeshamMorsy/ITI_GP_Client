@@ -15,7 +15,6 @@ class PayListAdapter(val context: Context,val array: ArrayList<Payment>) : BaseA
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var view: View? = null
         var viewHolder: ViewHolder
-//        view = LayoutInflater.from(context).inflate(R.layout.payment_list_row,parent,null)
         if(convertView == null) {
             view = LayoutInflater.from(context).inflate(R.layout.payment_method_list_row,parent,false)
             viewHolder = ViewHolder(view)

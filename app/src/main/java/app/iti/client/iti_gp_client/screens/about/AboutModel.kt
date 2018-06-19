@@ -8,6 +8,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 /**
+ * created by Hesham 14/6/2018
  * Responsible for handling actions on the view [AboutActivity] and update UI with the data requested from the model [AboutModel]
  */
 

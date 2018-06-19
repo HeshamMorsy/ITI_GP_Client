@@ -22,13 +22,13 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             style="@style/header"
-            android:text="CreateRequest" />
+            android:text="@string/createRequest" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="location"
+            android:text="@string/location"
             style="@style/sub_header"
             android:textColor="@color/colorPrimary"
             />
@@ -86,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
                 style="@style/header"
-                android:text="Pick Up Location" />
+                android:text="@string/pickUpLocation" />
 
             <TextView
                 android:id="@+id/pickUpName"
@@ -95,7 +95,7 @@
                 android:layout_gravity="left"
                 android:singleLine="true"
                 style="@style/sub_header"
-                android:text="selected from past activity" />
+                android:text="@string/pickUpDescription" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -103,7 +103,7 @@
                 android:layout_gravity="left"
                 android:layout_marginTop="55dp"
                 style="@style/header"
-                android:text="DropOffLocation" />
+                android:text="@string/dropOffLocation" />
 
             <TextView
                 android:id="@+id/distName"
@@ -111,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:text="not selected yet"
+                android:text="@string/notSelected"
                 android:singleLine="true"/>
         </LinearLayout>
 

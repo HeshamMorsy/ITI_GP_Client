@@ -70,4 +70,64 @@
     <string name="changeImage">Change Image</string>
     <string name="english">الانجليزية</string>
     <string name="arabic">العربية</string>
+
+    <!---->
+
+        <string name="soonToast">This part will be in the future plan ..</string>
+        <string name="notVerified">This email is not verified</string>
+        <string name="APINotFound">HTTP 404 Not Found</string>
+        <string name="emailNotFound">this email not found!!</string>
+        <string name="wrongMsg">Something went wrong! please check internet connection..</string>
+        <string name="wrongPasswordConfirmation">wrong password confirmation !</string>
+        <string name="oldPasswordNotValid">old password is not Valid</string>
+        <string name="newPasswordNotValid">new password is not Valid</string>
+        <string name="confirmPasswordNotValid">confirm password is not Valid</string>
+        <string name="wrong">something went wrong !</string>
+        <string name="passwordNotMatch">passwords don\'t match !</string>
+        <string name="passwordNotValid">password is not valid</string>
+        <string name="resetPassword">Reset password</string>
+        <string name="changeName">Change Name</string>
+        <string name="weight">Weight</string>
+        <string name="pleaseEnterTitle">please enter title for your order</string>
+        <string name="pleaseEnterDescription">please enter description for your order</string>
+        <string name="pleaseEnterWeight">please enter the weight of your order</string>
+        <string name="pleaseEnterImage">please enter one image for your order at least</string>
+        <string name="selectDestination">please select destination location</string>
+        <string name="invalidEmail">Invalid Email</string>
+        <string name="maxImages">max number of images</string>
+        <string name="pleaseEnterValidWeight">order weight must be between 1 kg to 100 kg</string>
+        <string name="paymentSoon">payment will be enabled soon..</string>
+        <string name="loginSuccessful">Login Successfull</string>
+        <string name="logoutSuccessfully">logout successfully</string>
+        <string name="sendingData">sending signup data!!</string>
+        <string name="phoneValidError">please enter a valid phone</string>
+        <string name="emailValidError">please enter a correct email</string>
+        <string name="passwordNotStrongError">please enter stronger password</string>
+        <string name="serverError">server error</string>
+        <string name="verifying">verifying code....</string>
+        <string name="resendingCode">resending code....</string>
+        <string name="pickUpLocation">Pick Up Location</string>
+        <string name="pickUpDescription">selected from past activity</string>
+        <string name="dropOffLocation">Drop Off Location</string>
+        <string name="notSelected">not selected yet</string>
+        <string name="selectPickUp">select pick up</string>
+        <string name="orderNow">Order Now</string>
+        <string name="phone">Phone</string>
+        <string name="signUp">Sign Up</string>
+        <string name="haveAccount">already have an account?</string>
+        <string name="loginNow">login now</string>
+        <string name="userName">Wassal User</string>
+        <string name="emailAddress">user@wassal.com</string>
+        <string name="carriers">Carriers</string>
+        <string name="fedex">fedex</string>
+        <string name="selectCarrier">Select Carriers</string>
+        <string name="validationCode">Validation Code</string>
+        <string name="confirm">Confirm</string>
+        <string name="sendVerificationCode">Send Verification Code</string>
+        <string name="home">Home</string>
+        <string name="myOrders">My Orders</string>
+        <string name="profile">Profile</string>
+        <string name="aboutUs">About Us</string>
+
+
 </resources>

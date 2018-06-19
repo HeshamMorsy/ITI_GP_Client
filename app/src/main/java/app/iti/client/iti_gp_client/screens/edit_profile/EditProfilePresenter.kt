@@ -10,7 +10,6 @@ import app.iti.client.iti_gp_client.contracts.EditProfileContract.*
 import app.iti.client.iti_gp_client.entities.Avatar
 import app.iti.client.iti_gp_client.entities.EditProfileResponse
 import app.iti.client.iti_gp_client.entities.LoginedUser
-import app.iti.client.iti_gp_client.entities.User
 import app.iti.client.iti_gp_client.utilities.Permissions.checkAccessCameraPermission
 import app.iti.client.iti_gp_client.utilities.Permissions.checkReadGalleryPermission
 import app.iti.client.iti_gp_client.utilities.Permissions.checkWriteStoragePermission
@@ -23,6 +22,7 @@ import pl.aprilapps.easyphotopicker.EasyImage
 import java.io.File
 
 /**
+ * created by Hesham
  * Responsible for getting data from [EditProfileActivity] and send it to the model [EditProfileModel] to send it to backend
  * , handling actions in the screen and update UI if needed
  */
@@ -51,47 +51,25 @@ class EditProfilePresenter : Presenter {
     }
 
     override fun sendChangesToModel(email: String, phone: String ,name: String) {
+
         // get token from shared preferences
         val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)
         val auth = defaultPref.get("auth_token", "0")
-        // convert bitmap into multi body part
-        Toast.makeText(mView as Activity,multipartBody.toString(),Toast.LENGTH_SHORT).show()
+
         // add another part within the multipart request
         val reqName = RequestBody.create(MediaType.parse("text/plain"), name)
         val reqEmail = RequestBody.create(MediaType.parse("text/plain"), email)
         val reqPhone = RequestBody.create(MediaType.parse("text/plain"), phone)
+
         // create user object with basic data to send them as String if the user didn't change the image
         val userBasicData = LoginedUser(name,email,phone, Avatar(""))
 
+        // send data to model to connect to update api
         mModel.requestToApi(auth!! ,reqName , reqEmail, reqPhone , multipartBody, userBasicData)
-
-
-        /*
-@Multipart
-@POST("user/updateprofile")
-Observable<ResponseBody> updateProfile(@Part("user_id") RequestBody id,
-                                       @Part("full_name") RequestBody fullName,
-                                       @Part MultipartBody.Part image,
-                                       @Part("other") RequestBody other);
-
-//pass it like this
-File file = new File("/storage/emulated/0/Download/Corrections 6.jpg");
-RequestBody requestFile =
-        RequestBody.create(MediaType.parse("multipart/form-data"), file);
-
-// MultipartBody.Part is used to send also the actual file name
-MultipartBody.Part body =
-        MultipartBody.Part.createFormData("image", file.getName(), requestFile);
-
-// add another part within the multipart request
-RequestBody fullName =
-        RequestBody.create(MediaType.parse("multipart/form-data"), "Your Name");
-
-service.updateProfile(id, fullName, body, other);
- */
 
     }
 
+    // method called when change profile image button clicked to get image from gallery or camera
     override fun getNewImage() {
         Log.i("OrderPresenter","getImageAction()")
         // getAlertDialog method returns reference to alertDialog.Builder to use it easily
@@ -103,11 +81,11 @@ service.updateProfile(id, fullName, body, other);
     }
 
     // this method  is responsible for converting image file to bitmap
-    override fun convertImageToBitmap(imageFiles: MutableList<File>) {
+    override fun convertImageToBitmap(imageFiles: MutableList<File>) : Bitmap {
         val bitmap: Bitmap = BitmapFactory.decodeFile(imageFiles[0].path)
         multipartBody = createMultiPartBody(imageFiles[0].path)
-        Toast.makeText(mView as Activity, multipartBody.toString(),Toast.LENGTH_SHORT).show()
-        mView.updateImageView(bitmap)
+//        mView.updateImageView(bitmap)
+        return bitmap
     }
 
     // prepare image paths as MultiPartBody.Part to send it to the backend

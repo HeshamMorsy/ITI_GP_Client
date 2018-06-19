@@ -317,7 +317,8 @@ class HomeActivity : AppCompatActivity(),
         if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
             drawer_layout.closeDrawer(GravityCompat.START)
         } else {
-            super.onBackPressed()
+//            super.onBackPressed()
+            finishAffinity()
         }
     }
 
@@ -348,16 +349,19 @@ class HomeActivity : AppCompatActivity(),
                 val myOrdersIntent = Intent(this, TripActivity::class.java)
                 // start the orders history activity
                 startActivity(myOrdersIntent)
+                finish()
             }
             R.id.nav_profile -> {
                 val profileIntent = Intent(this, ProfileActivity::class.java)
                 // start profile activity
                 startActivity(profileIntent)
+                finish()
             }
             R.id.nav_about -> {
                 val aboutIntent = Intent(this, AboutActivity::class.java)
                 // start about activity
                 startActivity(aboutIntent)
+                finish()
             }
         }
 
@@ -637,5 +641,7 @@ class HomeActivity : AppCompatActivity(),
     override fun initRecyclerView(mAutoCompleteAdapter: PlacesAdapter) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
+
+
 
 }

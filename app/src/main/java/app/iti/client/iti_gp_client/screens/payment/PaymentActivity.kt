@@ -3,15 +3,14 @@ package app.iti.client.iti_gp_client.screens.payment
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.widget.AdapterView
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import app.iti.client.iti_gp_client.R
-import app.iti.client.iti_gp_client.contracts.PaymentContract.*
+import app.iti.client.iti_gp_client.contracts.PaymentContract.Presenter
+import app.iti.client.iti_gp_client.contracts.PaymentContract.View
 import app.iti.client.iti_gp_client.entities.Order
 import app.iti.client.iti_gp_client.entities.Payment
 import app.iti.client.iti_gp_client.screens.home.HomeActivity
@@ -45,7 +44,7 @@ class PaymentActivity : AppCompatActivity(), View {
         // handle on  item click listener to the list view
         paymentList.setOnItemClickListener { parent, view, position, id ->
             if(position != 0){
-        Toast.makeText(this, "${paymentMethodArray!![position].paymentMethod} payment will be enabled soon.."
+        Toast.makeText(this, "${paymentMethodArray!![position].paymentMethod} "+resources.getString(R.string.paymentSoon)
                         , Toast.LENGTH_SHORT).show()
             }
         }

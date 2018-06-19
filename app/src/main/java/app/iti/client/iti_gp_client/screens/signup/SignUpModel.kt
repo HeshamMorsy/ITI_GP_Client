@@ -33,7 +33,7 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
 
     private fun handleError(error: Throwable) {
-        Log.i("error", "error receiving data"+error.localizedMessage)
+        Log.i("error", "error receiving data "+error.localizedMessage)
         presenter.receiveErrorResponse()
 
 //        Toast.makeText(this, "Error ${error.localizedMessage}", Toast.LENGTH_SHORT).show()
@@ -50,11 +50,11 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
 
     private fun handleVerificationResponse(response: VerifyData) {
-        Log.i("response", "response verification data"+response)
+        Log.i("response", "response verification data "+response)
         presenter.handleVerificationResponse(response.message)
     }
     private fun handleVerificationError(error: Throwable) {
-        Log.i("error", "error receiving data"+error.localizedMessage)
+        Log.i("error", "error receiving data "+error.localizedMessage)
         presenter.handleVerificationError()
 
     }
@@ -68,11 +68,11 @@ class SignUpModel(var presenter: SignUpPresenter):SignUpInt.Model {
     }
 
     private fun handleResendResponse(response: ResendDetails) {
-        Log.i("response", "response resend data"+response)
+        Log.i("response", "response resend data "+response)
         presenter.handleResendResponse(response)
     }
     private fun handleResendError(error: Throwable) {
-        Log.i("error", "error receiving resend data"+error.localizedMessage)
+        Log.i("error", "error receiving resend data "+error.localizedMessage)
         presenter.handleVerificationError()
 
     }

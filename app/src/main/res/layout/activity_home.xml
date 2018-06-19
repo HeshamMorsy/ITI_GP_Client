@@ -59,7 +59,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:text="Driveo"
+                        android:text="@string/app_name"
                         style="@style/header"
                         tools:layout_editor_absoluteX="141dp"
                         tools:layout_editor_absoluteY="388dp" />
@@ -70,7 +70,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:gravity="center_horizontal"
-                        android:text="pickup location"
+                        android:text="@string/pickUpLocation"
                         style="@style/sub_header"
                         android:singleLine="true"
                         tools:layout_editor_absoluteX="271dp"
@@ -90,7 +90,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/edit_text_style"
                 android:drawableLeft="@drawable/drawable_left"
-                android:hint="select pickup"
+                android:hint="@string/selectPickUp"
                 android:paddingRight="100dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -180,7 +180,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_weight="4"
                         android:background="@drawable/btns_bg"
-                        android:text="Order Now"
+                        android:text="@string/orderNow"
                         android:textColor="@color/cardview_light_background" />
 
                     <ImageView

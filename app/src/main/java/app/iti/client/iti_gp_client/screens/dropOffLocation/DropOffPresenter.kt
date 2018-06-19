@@ -1,5 +1,7 @@
 package app.iti.client.iti_gp_client.screens.dropOffLocation
 
+import android.app.Activity
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.DropOff
 import app.iti.client.iti_gp_client.utilities.RequestCreation
 
@@ -36,7 +38,7 @@ class DropOffPresenter(var view:DropOff.View):DropOff.Presenter {
         if (validDestination ){
             view.startOrderDetails()
         }else if (!validDestination){
-            view.displayError("please select distination location")
+            view.displayError((view as Activity).resources.getString(R.string.selectDestination))
         }
     }
 }

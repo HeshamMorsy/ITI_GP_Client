@@ -4,9 +4,16 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.util.Log
+import android.widget.Toast
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.LoginContract.*
 import app.iti.client.iti_gp_client.entities.LoginResponse
+import app.iti.client.iti_gp_client.utilities.Constants
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.AVATAR_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.EMAIL_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.NAME_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.PHONE_SHARED_PREFERENCE
+import app.iti.client.iti_gp_client.utilities.Constants.Companion.TOKEN_SHARED_PREFERENCE
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.setValue
 import app.iti.client.iti_gp_client.utilities.getAlertDialog
@@ -59,7 +66,7 @@ class LoginPresenter : Presenter {
         if(check){
             checkEmail = true
         }else{
-            mView?.setEmailError("Invalid Email")
+            mView?.setEmailError((mView as Activity).resources.getString(R.string.invalidEmail))
             checkEmail = false
         }
     }
@@ -70,7 +77,7 @@ class LoginPresenter : Presenter {
         if(check){
             checkPassword = true
         }else{
-            mView?.setPasswordError("Invalid Password")
+            mView?.setPasswordError((mView as Activity).resources.getString(R.string.invalidEmail))
             checkPassword = false
         }
     }
@@ -81,11 +88,13 @@ class LoginPresenter : Presenter {
         if(response.message == "success") {
             // save authentication token in shared preferences
             val defaultPref = PreferenceHelper.defaultPrefs(mView as Context)
-            defaultPref.setValue("auth_token",response.auth_token)
-            defaultPref.setValue("email",response.user.email)
-            defaultPref.setValue("phone",response.user.phone)
-            defaultPref.setValue("name",response.user.name)
-            defaultPref.setValue("avatar",response.user.avatar.url)
+            defaultPref.setValue(Constants.LOGIN_STATUS_SHARED_PREFERENCE,true)
+            defaultPref.setValue(TOKEN_SHARED_PREFERENCE,response.auth_token)
+            defaultPref.setValue(EMAIL_SHARED_PREFERENCE,response.user.email)
+            defaultPref.setValue(PHONE_SHARED_PREFERENCE,response.user.phone)
+            defaultPref.setValue(NAME_SHARED_PREFERENCE,response.user.name)
+            defaultPref.setValue(AVATAR_SHARED_PREFERENCE,response.user.avatar.url)
+            Toast.makeText(mView as Context, (mView as Activity).resources.getString(R.string.loginSuccessful), Toast.LENGTH_SHORT).show()
 
             mView?.goToHomeScreen()
         }else if(response.message == "sorry this account is not yet verified"){
@@ -110,10 +119,10 @@ class LoginPresenter : Presenter {
         Log.i("LoginPresenter Response","message : "+response.message)
     }
 
-    override fun errorResponse() {
+    override fun errorResponse(error: String) {
         mView?.endLoading()
         val alert = getAlertDialog(mView!! as Activity, (mView as Activity).resources.getString(R.string.error)
-                ,(mView as Activity).resources.getString(R.string.invalid))
+                ,error)
                 alert.setPositiveButton((mView as Activity).resources.getString(R.string.ok)
                         , DialogInterface.OnClickListener{dialog, which ->
                     alert.setCancelable(true)

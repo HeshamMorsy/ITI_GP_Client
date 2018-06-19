@@ -2,7 +2,6 @@ package app.iti.client.iti_gp_client.screens.edit_profile
 
 import android.util.Log
 import app.iti.client.iti_gp_client.contracts.EditProfileContract.*
-import app.iti.client.iti_gp_client.entities.Avatar
 import app.iti.client.iti_gp_client.entities.EditProfileResponse
 import app.iti.client.iti_gp_client.entities.LoginedUser
 import app.iti.client.iti_gp_client.services.createEditProfileRequest
@@ -12,6 +11,7 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody
 
 /**
+ * created by Hesham
  * Responsible for sending edited data of the user from [EditProfilePresenter] to the backend
  */
 class EditProfileModel : Model {
@@ -26,7 +26,6 @@ class EditProfileModel : Model {
     override fun requestToApi(auth: String ,name: RequestBody, email: RequestBody, phone: RequestBody, avatar: MultipartBody.Part?, user: LoginedUser) {
         val editProfileRequest = createEditProfileRequest()
         // set user data in a map query
-//        val options:Map<String, RequestBody> = hashMapOf("email" to email, "phone" to phone, "name" to name)
         val stringOptions: Map<String, String> = hashMapOf("email" to user.email, "phone" to user.phone, "name" to user.name)
 
         if(avatar == null){
