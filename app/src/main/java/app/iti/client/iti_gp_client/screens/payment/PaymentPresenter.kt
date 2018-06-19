@@ -99,27 +99,33 @@ class PaymentPresenter : Presenter {
 
 
     // prepare image paths as MultiPartBody.Part to send it to the backend
-    private fun createMultiPartBody(paths: ArrayList<String>): HashMap<String,ArrayList<MultipartBody.Part>> {
+    private fun createMultiPartBody(paths: ArrayList<String>): MultipartBody.Part {
         // create
         val multipartBodyArr:ArrayList<MultipartBody.Part> = ArrayList()
-        for (path in paths){
+        // for future plan to send more than one image
+//        for (path in paths){
+//
+//            // create file from path
+//            val file = File(path)
+//
+//            // create RequestBody to parse the file into mutlipart/form-data
+//            val requestBody = RequestBody.create(MediaType.parse("image/*"),file)
+//            // create the MultiPartBody.Part as this type will be sent to the backEnd
+//            val multipartBody = MultipartBody.Part.createFormData("image", file.name, requestBody)
+//            multipartBodyArr.add(multipartBody)
+//
+//            Toast.makeText(mView as PaymentActivity, "file name:${file.name}",Toast.LENGTH_LONG).show()
+//            Toast.makeText(mView as PaymentActivity, "array index:${multipartBodyArr[0]}",Toast.LENGTH_LONG).show()
+//        }
+//        val map: HashMap<String,ArrayList<MultipartBody.Part>> =
+//                hashMapOf("images" to multipartBodyArr)
+        // create RequestBody to parse the file into mutlipart/form-data
+        val file = File(paths[0])
+        val requestBody = RequestBody.create(MediaType.parse("image/*"),file)
+        // create the MultiPartBody.Part as this type will be sent to the backEnd
+        val multipartBody = MultipartBody.Part.createFormData("images", file.name, requestBody)
 
-            // create file from path
-            val file = File(path)
-
-            // create RequestBody to parse the file into mutlipart/form-data
-            val requestBody = RequestBody.create(MediaType.parse("image/*"),file)
-            // create the MultiPartBody.Part as this type will be sent to the backEnd
-            val multipartBody = MultipartBody.Part.createFormData("file", file.name, requestBody)
-            multipartBodyArr.add(multipartBody)
-
-            Toast.makeText(mView as PaymentActivity, "file name:${file.name}",Toast.LENGTH_LONG).show()
-            Toast.makeText(mView as PaymentActivity, "array index:${multipartBodyArr[0]}",Toast.LENGTH_LONG).show()
-        }
-        val map: HashMap<String,ArrayList<MultipartBody.Part>> =
-                hashMapOf("images" to multipartBodyArr)
-
-        return map
+        return multipartBody
     }
 
     // convert paths to bitmaps
