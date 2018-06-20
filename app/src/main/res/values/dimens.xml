@@ -54,4 +54,13 @@
     <dimen name="registernow_maginright">70dp</dimen>
     <dimen name="signin_marginleft">13dp</dimen>
     <dimen name="already_margintop">30dp</dimen>
+    <dimen name="request_marginright" >60dp</dimen>
+    <dimen name="request_margintop">10dp</dimen>
+    <dimen name="mReqmargintop">10dp</dimen>
+    <dimen name="profile_margintop">30dp</dimen>
+    <dimen name="chpass_margintop">30dp</dimen>
+    <dimen name="chpass_padding">60dp</dimen>
+    <dimen name="chpass_margintop1">60dp</dimen>
+    <dimen name="chpass_margintop2">40dp</dimen>
+    <dimen name="newpass_margintop">30dp</dimen>
 </resources>

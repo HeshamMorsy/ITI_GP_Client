@@ -36,11 +36,13 @@ import android.widget.*
 import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.R.id.userImage
 import app.iti.client.iti_gp_client.contracts.HomeInt
+import app.iti.client.iti_gp_client.entities.CancelOrderResponse
 import app.iti.client.iti_gp_client.entities.Provider
 import app.iti.client.iti_gp_client.screens.about.AboutActivity
 import app.iti.client.iti_gp_client.screens.dropOffLocation.DropOffActivity
 import app.iti.client.iti_gp_client.screens.profile.ProfileActivity
 import app.iti.client.iti_gp_client.screens.trip_history.TripActivity
+import app.iti.client.iti_gp_client.services.createRegisterTokinRequest
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.formatDateTime
 import com.google.android.gms.common.ConnectionResult
@@ -58,6 +60,8 @@ import kotlinx.android.synthetic.main.activity_home.*
 import java.util.*
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import com.bumptech.glide.Glide
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class HomeActivity : AppCompatActivity(),
         NavigationView.OnNavigationItemSelectedListener,
@@ -107,7 +111,8 @@ class HomeActivity : AppCompatActivity(),
         initMap()
 
 
-
+        //register FCM tokin
+        registerTokin()
         Log.i("push",FirebaseInstanceId.getInstance().getToken())
         //initialize the presenter
         presenter = HomePresenter(this)
@@ -169,6 +174,23 @@ class HomeActivity : AppCompatActivity(),
 
     }
 
+    private fun registerTokin() {
+        val FCMTokin = FirebaseInstanceId.getInstance().getToken()
+        val FCMRequest = createRegisterTokinRequest()
+        val defaultPref = PreferenceHelper.defaultPrefs(this)
+        val auth = defaultPref.get("auth_token", "0")
+        FCMRequest.registerTokin(auth!!)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(this::handleTokinResponse, this::handleTokinError)
+    }
+
+    private fun handleTokinResponse(response: CancelOrderResponse){
+        Log.i("response","respons tokin" + response)
+    }
+    private fun handleTokinError(error: Throwable){
+        Log.i("response","respons error" + error)
+    }
     private fun loadInitialData() {
         //load image url from shared default
         var sharedPref = PreferenceHelper.defaultPrefs(this)
@@ -231,7 +253,6 @@ class HomeActivity : AppCompatActivity(),
                 placeResult.setResultCallback { places ->
                     if (places.count == 1) {
                         //Do the things here on Click.....
-                        Toast.makeText(applicationContext, places.get(0).latLng.toString(), Toast.LENGTH_SHORT).show()
                         updatePickUpLocation(places.get(0).latLng)
                         searchPlaces.setText("")
                         mAutoCompleteAdapter!!.clearPlacesData()
@@ -257,8 +278,6 @@ class HomeActivity : AppCompatActivity(),
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Toast.makeText(applicationContext, options[position].name, Toast.LENGTH_SHORT).show()
-
                 //update presenter with provider id
                 if (position !=0){
                     presenter.updateProvider(options[position].id)
@@ -277,8 +296,6 @@ class HomeActivity : AppCompatActivity(),
         val datePicker = DatePickerDialog(this, DatePickerDialog.OnDateSetListener {
 
             view, year, month, dayOfMonth ->
-            Toast.makeText(this, "year:" + year + "month:" + month + "day:" + dayOfMonth, Toast.LENGTH_SHORT).show()
-
             val timePicker = TimePickerDialog(this, TimePickerDialog.OnTimeSetListener {
 
                 view, hourOfDay, minute ->
@@ -286,7 +303,6 @@ class HomeActivity : AppCompatActivity(),
                         year.equals(now.get(Calendar.YEAR)) && month.equals(now.get(Calendar.MONTH)) && dayOfMonth.equals(now.get(Calendar.DAY_OF_MONTH)) && hourOfDay == now.get(Calendar.HOUR_OF_DAY) && minute < now.get(Calendar.MINUTE)){
                     displayError("please select a vaild time")
                 }else{
-                    Toast.makeText(this, "hour:" + hourOfDay + "minute:" + minute, Toast.LENGTH_SHORT).show()
                     mCalender.set(year,month,dayOfMonth,hourOfDay,minute)
                     Log.i("datetime","mcalender: " + mCalender.get(Calendar.YEAR))
                     formattedDateTime = mCalender.formatDateTime(mCalender)
@@ -364,7 +380,6 @@ class HomeActivity : AppCompatActivity(),
                 val myOrdersIntent = Intent(this, TripActivity::class.java)
                 // start the orders history activity
                 startActivity(myOrdersIntent)
-                finish()
             }
             R.id.nav_profile -> {
                 val profileIntent = Intent(this, ProfileActivity::class.java)
