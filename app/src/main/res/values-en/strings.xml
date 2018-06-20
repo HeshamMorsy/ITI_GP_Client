@@ -110,7 +110,7 @@
     <string name="selectPickUp">select pick up</string>
     <string name="orderNow">Order Now</string>
     <string name="phone">Phone</string>
-    <string name="signUp">Sign Up</string>
+    <string name="signUp">SignUp</string>
     <string name="haveAccount">already have an account?</string>
     <string name="loginNow">login now</string>
     <string name="userName">Wassal User</string>
@@ -133,5 +133,6 @@
     <string name="dummyAddress">945 Abagail Praire</string>
     <string name="pending">pending</string>
     <string name="dummyCost">34.00LE</string>
+    <string name="sending">sending ..</string>
 
 </resources>

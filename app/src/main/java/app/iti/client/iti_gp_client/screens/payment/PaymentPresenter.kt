@@ -3,6 +3,7 @@ package app.iti.client.iti_gp_client.screens.payment
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import app.iti.client.iti_gp_client.R
 import app.iti.client.iti_gp_client.contracts.PaymentContract.*
 import app.iti.client.iti_gp_client.entities.Order
 import app.iti.client.iti_gp_client.entities.OrderResponse
@@ -33,6 +34,7 @@ class PaymentPresenter : Presenter {
 
 
     override fun receiveResponse(response: OrderResponse) {
+        mView?.endLoading()
         Log.i("Response status","data sent")
         Log.i("Response status",response.message)
         Toast.makeText(mView as PaymentActivity, response.message ,Toast.LENGTH_SHORT).show()
@@ -40,11 +42,13 @@ class PaymentPresenter : Presenter {
     }
 
     override fun errorResponse(error: Throwable) {
+        mView?.endLoading()
         Log.i("Response status","error")
         Toast.makeText(mView as PaymentActivity, error.localizedMessage,Toast.LENGTH_LONG).show()
     }
 
     override fun prepareOrderAndSend(order: Order) {
+        mView?.startLoading((mView!! as Activity).resources.getString(R.string.sendingData))
         RequestCreation.images = createMultiPartBody(order.paths)
         RequestCreation.payment_method = "cash"
         RequestCreation.weight = order.weight.toDouble()

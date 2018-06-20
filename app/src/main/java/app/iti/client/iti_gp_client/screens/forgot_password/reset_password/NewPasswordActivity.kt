@@ -31,6 +31,7 @@ class NewPasswordActivity : AppCompatActivity(), View {
         // go to sign in activity
         val myIntent = Intent(this , LoginActivity::class.java)
         startActivity(myIntent)
+        finish()
     }
 
     override fun onRequestError(error: Throwable) {

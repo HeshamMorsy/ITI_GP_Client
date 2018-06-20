@@ -319,20 +319,23 @@ class OrderActivity : AppCompatActivity(), View {
         // check if the data not empty
         if(title == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterTitle),Toast.LENGTH_LONG).show()
         if(description == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterDescription),Toast.LENGTH_LONG).show()
-        if(weight == "") Toast.makeText(this,resources.getString(R.string.pleaseEnterWeight),Toast.LENGTH_LONG).show()
-        if(weight.toDouble() <= 0 && weight.toDouble() > 100) Toast.makeText(this,resources.getString(R.string.pleaseEnterValidWeight),Toast.LENGTH_LONG).show()
         if(imageArray.size ==0 ) Toast.makeText(this,resources.getString(R.string.pleaseEnterImage),Toast.LENGTH_LONG).show()
-
-        if(weight != "" && title != "" && description != "" && imageArray.size>0 && weight.toDouble()>0 && weight.toDouble() <= 100) {
-            // set data in order request singleton
-            RequestCreation.title = title
-            RequestCreation.description = description
-            // RequestCreation.description = description // this is when we add description in the backend
+        if(weight == "")
+            Toast.makeText(this,resources.getString(R.string.pleaseEnterWeight),Toast.LENGTH_LONG).show()
+        else if(weight.toDouble() <= 0.0 || weight.toDouble() > 100.0)
+            Toast.makeText(this,resources.getString(R.string.pleaseEnterValidWeight),Toast.LENGTH_LONG).show()
+        else {
+            if ( title != "" && description != "" && imageArray.size > 0 ) {
+                // set data in order request singleton
+                RequestCreation.title = title
+                RequestCreation.description = description
+                // RequestCreation.description = description // this is when we add description in the backend
 
                 // create order object to send it to the payment activity
-                val order = Order(title, description , weight , imagePaths)
+                val order = Order(title, description, weight, imagePaths)
                 intent.putExtra("Order", order as Serializable)
                 startActivity(intent)
+            }
         }
 
     }

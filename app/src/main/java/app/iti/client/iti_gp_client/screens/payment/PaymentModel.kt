@@ -23,7 +23,8 @@ class PaymentModel(val presenter: PaymentPresenter) : Model {
         orderRequest.uploadData(auth ,RequestCreation.title!!, RequestCreation.description!!,
                 RequestCreation.time!!,RequestCreation.provider_id!!,RequestCreation.images,RequestCreation.weight!!,
                 RequestCreation.payment_method!!,RequestCreation.src_latitude!!,RequestCreation.src_longitude!!,
-                RequestCreation.dest_latitude!!,RequestCreation.dest_longitude!!)
+                RequestCreation.dest_latitude!!,RequestCreation.dest_longitude!!,
+                RequestCreation.src_address!! , RequestCreation.dest_address!! )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(this::handleResponse, this::handleError)

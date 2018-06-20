@@ -117,9 +117,9 @@ class ProfileActivity : AppCompatActivity(), View {
                 currentLanguage = resources.getString(R.string.english)
                 saveInSharedPreferences(CURRENT_LANGUAGE_SHARED_PREFERENCE, currentLanguage!!)
 
-                // start activity again to handle rotation
+                /*// start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
-                finish()
+                finish()*/
 
             }else if(childPosition == 1){
                 // use paper library to change application language
@@ -139,9 +139,9 @@ class ProfileActivity : AppCompatActivity(), View {
                 currentLanguage = resources.getString(R.string.arabic)
                 saveInSharedPreferences(CURRENT_LANGUAGE_SHARED_PREFERENCE, currentLanguage!!)
 
-                // start activity again to handle rotation
+                /*// start activity again to handle rotation
                 startActivity(Intent(this,ProfileActivity::class.java))
-                finish()
+                finish()*/
 
             }
             expandAdapter!!.notifyDataSetChanged()
