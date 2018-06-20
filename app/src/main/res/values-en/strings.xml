@@ -133,5 +133,6 @@
     <string name="dummyAddress">945 Abagail Praire</string>
     <string name="pending">pending</string>
     <string name="dummyCost">34.00LE</string>
+    <string name="sending">sending ..</string>
 
 </resources>

@@ -136,6 +136,7 @@
     <string name="dummyAddress">العنوان</string>
     <string name="pending">قيد الانتظار</string>
     <string name="dummyCost">34.00 جم</string>
+    <string name="sending">جاري الارسال ..</string>
 
 
 

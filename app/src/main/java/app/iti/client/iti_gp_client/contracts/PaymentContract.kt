@@ -22,6 +22,7 @@ interface PaymentContract {
         fun startLoading(mes:String)
         fun endLoading()
         fun goToHomeScreen()
+
     }
 
     interface Presenter {
