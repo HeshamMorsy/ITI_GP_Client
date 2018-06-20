@@ -14,7 +14,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/profile_margintop">
 
             <TextView
                 android:id="@+id/changePass_header"
@@ -42,25 +43,27 @@
 
 
             <Button
-                android:layout_width="120dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/btn_height"
                 android:background="@drawable/btn_dark_blue_bg"
                 android:text="@string/changeImage"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@android:color/background_light"
                 android:textStyle="bold"
+                android:textSize="@dimen/sub_header"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:onClick="changeProfileImage"
+                android:padding="3dp"
                 />
 
             <EditText
                 android:id="@+id/editProfile_newEmail"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/edit_width"
+                android:layout_height="@dimen/edit_height"
                 android:layout_gravity="center_horizontal"
                 android:inputType="textEmailAddress"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/profile_margintop"
                 android:hint="@string/changeEmail"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -68,11 +71,11 @@
 
             <EditText
                 android:id="@+id/editProfile_newPhone"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/edit_width"
+                android:layout_height="@dimen/edit_height"
                 android:layout_gravity="center_horizontal"
                 android:inputType="phone"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/profile_margintop"
                 android:hint="@string/changePhone"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -80,11 +83,11 @@
 
             <EditText
                 android:id="@+id/editProfile_newName"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/edit_width"
+                android:layout_height="@dimen/edit_height"
                 android:layout_gravity="center_horizontal"
                 android:inputType="textPersonName"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="@dimen/profile_margintop"
                 android:hint="@string/changeName"
                 android:textColor="@color/textColor"
                 android:textColorHint="@color/textColor"
@@ -92,18 +95,17 @@
 
             <Button
                 android:id="@+id/editProfile_saveBtn"
-                android:layout_width="256dp"
-                android:layout_height="53dp"
+                android:layout_width="@dimen/btn_width"
+                android:layout_height="@dimen/btn_height"
                 android:layout_marginBottom="22dp"
-                android:layout_marginEnd="60dp"
-                android:layout_marginStart="60dp"
+                android:layout_gravity="center"
                 android:background="@drawable/btn_dark_blue_bg"
                 android:text="@string/save"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@android:color/background_light"
-                android:textSize="22sp"
+                android:textSize="@dimen/btn_text_size"
                 android:textStyle="bold"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="@dimen/profile_margintop"
                 android:onClick="saveChangesEvent"
                 />
 

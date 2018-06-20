@@ -16,7 +16,10 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/request_margintop"
             android:orientation="vertical"
+            android:layout_marginRight="@dimen/request_marginright"
+            android:layout_marginLeft="@dimen/request_marginright"
             >
 
             <TextView
@@ -49,11 +52,11 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout9"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/mReqmargintop"
                 android:layout_gravity="center"
                 >
 
@@ -68,11 +71,11 @@
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/textInputLayout10"
-                android:layout_width="300dp"
+                android:layout_width="match_parent"
                 android:layout_height="51dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="@dimen/mReqmargintop"
                 android:layout_gravity="center"
                 >
 
@@ -91,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginStart="55dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/description"
                 android:textColor="@color/textColor"
@@ -100,11 +103,12 @@
 
             <EditText
                 android:id="@+id/order_descriptionEditText"
-                android:layout_width="288dp"
+                android:layout_width="match_parent"
                 android:layout_height="116dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/mReqmargintop"
                 android:background="@drawable/edittext_bg"
                 android:ems="10"
                 android:gravity="start"
@@ -217,17 +221,16 @@
 
             <Button
                 android:id="@+id/order_nextBtn"
-                android:layout_width="256dp"
-                android:layout_height="53dp"
+                android:layout_height="@dimen/btn_height"
+                android:layout_width="match_parent"
                 android:layout_marginEnd="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="30dp"
                 android:background="@drawable/btns_bg"
                 android:textAppearance="@style/TextAppearance.AppCompat"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="22sp"
+                android:textSize="@dimen/btn_text_size"
                 android:textStyle="bold"
-                android:layout_margin="30dp"
                 android:layout_gravity="center"
                 android:text="@string/next"
                 android:onClick="goToPayment"/>

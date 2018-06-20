@@ -19,6 +19,7 @@ import app.iti.client.iti_gp_client.utilities.Constants.Companion.TOKEN_SHARED_P
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper
 import app.iti.client.iti_gp_client.utilities.PreferenceHelper.get
 import kotlinx.android.synthetic.main.fragment_history.*
+import java.io.Serializable
 
 
 /**
@@ -98,6 +99,7 @@ class HistoryFragment : Fragment(),OrderHistory.View {
             override fun onItemClick(view: View, position: Int) {
                 Log.i("click","clicked: " + position)
                 val trackingIntent = Intent(context,TrackingActivity::class.java)
+                trackingIntent.putExtra("order",activeOrders.get(position) as Serializable)
                 startActivity(trackingIntent)
             }
         })
