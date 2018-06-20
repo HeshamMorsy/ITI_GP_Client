@@ -29,7 +29,9 @@ class ChangePasswordActivity : AppCompatActivity(), View {
     }
 
     override fun onRequestSuccess(response: ChangePasswordResponse) {
-
+        val myIntent = Intent(this,ProfileActivity::class.java)
+        startActivity(myIntent)
+        finish()
     }
 
     override fun onRequestError(error: Throwable) {

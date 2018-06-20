@@ -27,6 +27,7 @@ class ChangePasswordPresenter : Presenter {
 
     override fun receiveResponse(response: ChangePasswordResponse) {
         mView.showMessage(response.message)
+        mView.onRequestSuccess(response)
     }
 
     override fun errorResponse(error: Throwable) {
