@@ -48,7 +48,7 @@ class PaymentPresenter : Presenter {
     }
 
     override fun prepareOrderAndSend(order: Order) {
-        mView?.startLoading((mView!! as Activity).resources.getString(R.string.sendingData))
+        mView?.startLoading((mView!! as Activity).resources.getString(R.string.sending))
         RequestCreation.images = createMultiPartBody(order.paths)
         RequestCreation.payment_method = "cash"
         RequestCreation.weight = order.weight.toDouble()
